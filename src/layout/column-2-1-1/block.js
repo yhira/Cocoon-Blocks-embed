@@ -35,8 +35,8 @@ registerBlockType( 'cocoon-blocks/column-2-1-1', {
         <div className={"column-wrap column-2" + LAYOUT_BLOCK_CLASS}>
           <InnerBlocks
           template={[
-              [ 'cocoon-blocks/column-left', { placeholder: __( '左カラム', THEME_NAME ) } ],
-              [ 'cocoon-blocks/column-right', { placeholder: __( '右カラム', THEME_NAME ) } ]
+              [ 'cocoon-blocks/column-left', { placeholder: __( '左側に入力する内容', THEME_NAME ) } ],
+              [ 'cocoon-blocks/column-right', { placeholder: __( '右側に入力する内容', THEME_NAME ) } ]
           ]}
           templateLock="all"
           allowedBlocks={ ALLOWED_BLOCKS }
