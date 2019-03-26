@@ -36,7 +36,7 @@ import './old/micro-balloon/block.js';
 
 
 //レイアウト
-// import './layout/column-2-1-1/block.js';
+import './layout/column-2-1-1/block.js';
 
 //文字色変更など
 import './toolbutton/bold.js';
