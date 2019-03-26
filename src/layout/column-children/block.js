@@ -43,7 +43,7 @@ registerBlockType( 'cocoon-blocks/column-left', {
 registerBlockType( 'cocoon-blocks/column-center', {
 
   title: __( '中央カラム', THEME_NAME ),
-  parent: [ 'cocoon-blocks/column-2-1-1' ],
+  parent: [ 'cocoon-blocks/column-2-2-1-1' ],
   icon: 'grid-view',
   category: THEME_NAME + '-layout',
 
@@ -71,7 +71,7 @@ registerBlockType( 'cocoon-blocks/column-center', {
 registerBlockType( 'cocoon-blocks/column-right', {
 
   title: __( '右カラム', THEME_NAME ),
-  parent: [ 'cocoon-blocks/column-2-1-1' ],
+  parent: [ 'cocoon-blocks/column-2-2-1-1' ],
   icon: 'grid-view',
   category: THEME_NAME + '-layout',
 
