@@ -12,7 +12,7 @@ const { registerBlockType } = wp.blocks;
 const { InnerBlocks } = wp.editor;
 const { Fragment } = wp.element;
 
-
+//左カラム
 registerBlockType( 'cocoon-blocks/column-left', {
 
   title: __( '左カラム', THEME_NAME ),
@@ -39,6 +39,35 @@ registerBlockType( 'cocoon-blocks/column-left', {
   }
 } );
 
+//中央カラム
+registerBlockType( 'cocoon-blocks/column-center', {
+
+  title: __( '中央カラム', THEME_NAME ),
+  parent: [ 'cocoon-blocks/column-2-1-1' ],
+  icon: 'grid-view',
+  category: THEME_NAME + '-layout',
+
+  edit( { attributes, setAttributes } ) {
+    return (
+      <Fragment>
+        <div className="column-center">
+          <InnerBlocks templateLock={ false } />
+        </div>
+      </Fragment>
+    );
+  },
+
+  save( { attributes } ) {
+    return (
+      <div className="column-center">
+        <InnerBlocks.Content />
+      </div>
+    );
+  }
+} );
+
+
+//右カラム
 registerBlockType( 'cocoon-blocks/column-right', {
 
   title: __( '右カラム', THEME_NAME ),
