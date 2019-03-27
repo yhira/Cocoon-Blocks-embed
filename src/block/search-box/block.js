@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -17,7 +18,7 @@ const DEFAULT_MSG = __( 'キーワード', THEME_NAME );
 registerBlockType( 'cocoon-blocks/search-box', {
 
   title: __( '検索案内', THEME_NAME ),
-  icon: 'search',
+  icon: <FontAwesomeIcon icon={['fas', 'search']} />,
   category: THEME_NAME + '-block',
   description: __( '訪問者に検索を促すためのボックスです。検索をクリックすることで検索結果へ跳びます（※AMPページ以外）。', THEME_NAME ),
 
