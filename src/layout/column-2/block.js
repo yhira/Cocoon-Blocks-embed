@@ -28,6 +28,7 @@ registerBlockType( 'cocoon-blocks/column-2', {
   title: __( '2カラム', THEME_NAME ),
   icon: 'grid-view',
   category: THEME_NAME + '-layout',
+  description: __( '本文を左右カラムに分けます。オプションでカラム比率を変更できます。', THEME_NAME ),
 
   attributes: {
     ratio: {

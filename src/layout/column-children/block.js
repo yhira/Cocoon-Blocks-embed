@@ -17,15 +17,12 @@ registerBlockType( 'cocoon-blocks/column-left', {
 
   title: __( '左カラム', THEME_NAME ),
   parent: [
-    'cocoon-blocks/column-2-2-1-1',
-    'cocoon-blocks/column-2-3-1-2',
-    'cocoon-blocks/column-2-3-2-1',
-    'cocoon-blocks/column-2-4-1-3',
-    'cocoon-blocks/column-2-4-3-1',
-    'cocoon-blocks/column-3-3-1-1-1',
+    'cocoon-blocks/column-2',
+    'cocoon-blocks/column-3',
   ],
   icon: 'grid-view',
   category: THEME_NAME + '-layout',
+  description: __( 'カラム左側に表示される内容内容を入力。', THEME_NAME ),
 
   edit( { attributes, setAttributes } ) {
     return (
@@ -51,15 +48,12 @@ registerBlockType( 'cocoon-blocks/column-center', {
 
   title: __( '中央カラム', THEME_NAME ),
   parent: [
-    'cocoon-blocks/column-2-2-1-1',
-    'cocoon-blocks/column-2-3-1-2',
-    'cocoon-blocks/column-2-3-2-1',
-    'cocoon-blocks/column-2-4-1-3',
-    'cocoon-blocks/column-2-4-3-1',
-    'cocoon-blocks/column-3-3-1-1-1',
+    'cocoon-blocks/column-2',
+    'cocoon-blocks/column-3',
   ],
   icon: 'grid-view',
   category: THEME_NAME + '-layout',
+  description: __( 'カラム中央に表示される内容内容を入力。', THEME_NAME ),
 
   edit( { attributes, setAttributes } ) {
     return (
@@ -86,15 +80,12 @@ registerBlockType( 'cocoon-blocks/column-right', {
 
   title: __( '右カラム', THEME_NAME ),
   parent: [
-    'cocoon-blocks/column-2-2-1-1',
-    'cocoon-blocks/column-2-3-1-2',
-    'cocoon-blocks/column-2-3-2-1',
-    'cocoon-blocks/column-2-4-1-3',
-    'cocoon-blocks/column-2-4-3-1',
-    'cocoon-blocks/column-3-3-1-1-1',
+    'cocoon-blocks/column-2',
+    'cocoon-blocks/column-3',
   ],
   icon: 'grid-view',
   category: THEME_NAME + '-layout',
+  description: __( 'カラム右側に表示される内容内容を入力。', THEME_NAME ),
 
   edit( { attributes, setAttributes } ) {
     return (

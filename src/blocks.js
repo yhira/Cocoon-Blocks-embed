@@ -38,6 +38,7 @@ import './old/micro-balloon/block.js';
 //レイアウト
 import './layout/column-children/block.js';
 import './layout/column-2/block.js';
+import './layout/column-3/block.js';
 
 //文字色変更など
 import './toolbutton/bold.js';
