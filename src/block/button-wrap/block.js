@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -17,7 +18,7 @@ const BUTTON_BLOCK = ' button-block';
 registerBlockType( 'cocoon-blocks/button-wrap', {
 
   title: __( '囲みボタン', THEME_NAME ),
-  icon: 'embed-generic',
+  icon: <FontAwesomeIcon icon={['fas', 'ticket-alt']} />,
   category: THEME_NAME + '-block',
   description: __( 'アスリートタグ等のタグを変更できないリンクをボタン化します。', THEME_NAME ),
 

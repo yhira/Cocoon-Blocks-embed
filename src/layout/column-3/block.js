@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, LAYOUT_BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -18,7 +19,7 @@ const ALLOWED_BLOCKS = [ 'cocoon-blocks/column-left', 'cocoon-blocks/column-cent
 registerBlockType( 'cocoon-blocks/column-3', {
 
   title: __( '3カラム', THEME_NAME ),
-  icon: 'grid-view',
+  icon: <FontAwesomeIcon icon={['fas', 'solar-panel']} />,
   category: THEME_NAME + '-layout',
   description: __( '本文を左・中央・右カラムに分けます。', THEME_NAME ),
 

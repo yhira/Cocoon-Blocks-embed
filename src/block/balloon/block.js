@@ -13,11 +13,12 @@ const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_NAME = __( '未入力', THEME_NAME );
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 registerBlockType( 'cocoon-blocks/balloon-box', {
 
   title: __( '吹き出し', THEME_NAME ),
-  icon: 'admin-comments',
+  icon: <FontAwesomeIcon icon={['far', 'comment']} />,
   category: THEME_NAME + '-block',
   description: __( '登録されている吹き出しを挿入できます。', THEME_NAME ),
 

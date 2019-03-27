@@ -14,6 +14,7 @@ const { PanelBody, SelectControl, BaseControl, ToggleControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'マイクロコピーバルーン', THEME_NAME );
 const MICRO_COPY_CLASS = ' micro-copy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function getCircleClass(isCircle) {
   return isCircle ? ' mc-circle' : '';

@@ -12,11 +12,12 @@ const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 registerBlockType( 'cocoon-blocks/blogcard', {
 
   title: __( 'ブログカード', THEME_NAME ),
-  //icon: 'tablet',
+  icon: <FontAwesomeIcon icon={['far', 'address-card']} />,
   category: THEME_NAME + '-block',
   description: __( 'ブログカード表示用の入力ブロックを表示します。URLは複数入力可能です。', THEME_NAME ),
 

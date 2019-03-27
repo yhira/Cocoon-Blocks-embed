@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, BLOCK_CLASS, ICONS, getIconClass} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { times } = lodash;
 const { __ } = wp.i18n;
@@ -19,7 +20,7 @@ const DEFAULT_MSG = __( '見出し', THEME_NAME );
 registerBlockType( 'cocoon-blocks/caption-box', {
 
   title: __( '見出しボックス', THEME_NAME ),
-  icon: 'feedback',
+  icon: <FontAwesomeIcon icon={['far', 'window-maximize']} />,
   category: THEME_NAME + '-universal-block',
   description: __( 'ボックス「見出し」を入力できる汎用ボックスです。', THEME_NAME ),
 

@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -17,7 +18,7 @@ const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入�
 registerBlockType( 'cocoon-blocks/icon-box', {
 
   title: __( 'アイコンボックス', THEME_NAME ),
-  icon: 'warning',
+  icon: <FontAwesomeIcon icon={['fas', 'exclamation-circle']} />,
   category: THEME_NAME + '-block',
   description: __( 'アイコンを用いて直感的にメッセージ内容を伝えるためのボックスです。', THEME_NAME ),
 

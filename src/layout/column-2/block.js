@@ -12,6 +12,7 @@ const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl } = wp.components;
 const { Fragment } = wp.element;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // const THEME_NAME = 'cocoon';
 // //const DEFAULT_MSG = __( 'キーワード', THEME_NAME );
 // const BLOCK_CLASS = ' layout-box';
@@ -26,7 +27,7 @@ const ALLOWED_BLOCKS = [ 'cocoon-blocks/column-left', 'cocoon-blocks/column-righ
 registerBlockType( 'cocoon-blocks/column-2', {
 
   title: __( '2カラム', THEME_NAME ),
-  icon: 'grid-view',
+  icon: <FontAwesomeIcon icon="columns" />,
   category: THEME_NAME + '-layout',
   description: __( '本文を左右カラムに分けます。オプションでカラム比率を変更できます。', THEME_NAME ),
 

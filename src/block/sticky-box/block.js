@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -17,7 +18,7 @@ const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入�
 registerBlockType( 'cocoon-blocks/sticky-box', {
 
   title: __( '付箋風ボックス', THEME_NAME ),
-  icon: 'editor-removeformatting',
+  icon: <FontAwesomeIcon icon={['far', 'sticky-note']} />,
   category: THEME_NAME + '-block',
   description: __( '目立つ濃いめの色で付箋風にメッセージを伝えるためのボックスです。', THEME_NAME ),
 
