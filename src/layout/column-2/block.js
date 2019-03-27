@@ -88,6 +88,7 @@ registerBlockType( 'cocoon-blocks/column-2', {
   },
 
   save( { attributes } ) {
+    const { ratio } = attributes;
     return (
       <div className={"column-wrap column-2" + ratio + LAYOUT_BLOCK_CLASS}>
         <InnerBlocks.Content />
