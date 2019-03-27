@@ -41,7 +41,7 @@ import './layout/column-2/block.js';
 import './layout/column-3/block.js';
 
 //ショートコード
-import './shortcode/affi/block.js';
+// import './shortcode/affi/block.js';
 
 //文字色変更など
 import './toolbutton/bold.js';
