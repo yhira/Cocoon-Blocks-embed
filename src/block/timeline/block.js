@@ -155,11 +155,17 @@ registerBlockType( 'cocoon-blocks/timeline', {
     const { title, items } = attributes;
     return (
       <div className={"timeline-box cf" + BLOCK_CLASS}>
-        <div class="timeline-title">
-          <RichText.Content
-              value={ title }
-          />
-        </div>
+        {(() => {
+          if (title) {
+            return (
+              <div class="timeline-title">
+                <RichText.Content
+                    value={ title }
+                />
+              </div>
+            );
+          }
+        })()}
         <ul className="timeline">
           <InnerBlocks.Content />
         </ul>
