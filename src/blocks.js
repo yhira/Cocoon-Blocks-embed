@@ -21,10 +21,13 @@ import './block/button/block.js';
 import './block/button-wrap/block.js';
 import './block/toggle-box/block.js';
 import './block/search-box/block.js';
+import './block/timeline/block.js';
 
+//マイクロコピー
 import './micro/micro-text/block.js';
 import './micro/micro-balloon/block.js';
 
+//旧バージョン
 import './old/micro-balloon/block.js';
 
 // import './demo/test/block.js';

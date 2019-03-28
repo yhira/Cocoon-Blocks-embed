@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, LAYOUT_BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -20,7 +21,7 @@ registerBlockType( 'cocoon-blocks/column-left', {
     'cocoon-blocks/column-2',
     'cocoon-blocks/column-3',
   ],
-  icon: 'grid-view',
+  icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-layout',
   description: __( 'カラム左側に表示される内容内容を入力。', THEME_NAME ),
 
@@ -51,7 +52,7 @@ registerBlockType( 'cocoon-blocks/column-center', {
     'cocoon-blocks/column-2',
     'cocoon-blocks/column-3',
   ],
-  icon: 'grid-view',
+  icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-layout',
   description: __( 'カラム中央に表示される内容内容を入力。', THEME_NAME ),
 
@@ -83,7 +84,7 @@ registerBlockType( 'cocoon-blocks/column-right', {
     'cocoon-blocks/column-2',
     'cocoon-blocks/column-3',
   ],
-  icon: 'grid-view',
+  icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-layout',
   description: __( 'カラム右側に表示される内容内容を入力。', THEME_NAME ),
 
