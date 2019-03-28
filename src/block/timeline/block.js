@@ -15,12 +15,16 @@ const { PanelBody, RangeControl } = wp.components;
 const { Fragment } = wp.element;
 import memoize from 'memize';
 import { times } from 'lodash';
+//lodashの不具合対応
+//TypeError: _.contains is not a function対策
+//https://github.com/mgonto/restangular/issues/1294
+_.contains = _.includes;
+
+//this.activateMode is not a function対策
+//https://wpdevelopment.courses/how-to-fix-activatemode-is-not-a-function-error-in-gutenberg/
+window.lodash = _.noConflict();
 
 const ALLOWED_BLOCKS = [ 'cocoon-blocks/timeline-item' ];
-
-const getItemsTemplate = memoize( ( items ) => {
-  return times( items, () => [ 'cocoon-blocks/timeline-item' ] );
-} );
 
 
 //左カラム
@@ -31,7 +35,7 @@ registerBlockType( 'cocoon-blocks/timeline-item', {
     'cocoon-blocks/timeline',
   ],
   icon: <FontAwesomeIcon icon={['far', 'square']} />,
-  category: THEME_NAME + '-layout',
+  category: THEME_NAME + '-block',
   description: __( 'カラム左側に表示される内容内容を入力。', THEME_NAME ),
 
   attributes: {
@@ -98,11 +102,17 @@ registerBlockType( 'cocoon-blocks/timeline-item', {
   }
 } );
 
+
+const getItemsTemplate = memoize( ( items ) => {
+  return times( items, () => [ 'cocoon-blocks/timeline-item' ] );
+} );
+
+//タイムライン
 registerBlockType( 'cocoon-blocks/timeline', {
 
   title: __( 'タイムライン', THEME_NAME ),
   icon: <FontAwesomeIcon icon={['far', 'clock']} />,
-  category: THEME_NAME + '-layout',
+  category: THEME_NAME + '-block',
   description: __( '時系列を表現するためのブロックです。', THEME_NAME ),
 
   attributes: {
@@ -155,17 +165,11 @@ registerBlockType( 'cocoon-blocks/timeline', {
     const { title, items } = attributes;
     return (
       <div className={"timeline-box cf" + BLOCK_CLASS}>
-        {(() => {
-          if (title) {
-            return (
-              <div class="timeline-title">
-                <RichText.Content
-                    value={ title }
-                />
-              </div>
-            );
-          }
-        })()}
+        <div class="timeline-title">
+          <RichText.Content
+              value={ title }
+          />
+        </div>
         <ul className="timeline">
           <InnerBlocks.Content />
         </ul>
