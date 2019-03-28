@@ -49,7 +49,7 @@ registerBlockType( 'cocoon-blocks/timeline-item', {
     const { title, label } = attributes;
     return (
       <Fragment>
-        <li className="timeline-item">
+        <li className="timeline-item cf">
           <div className="timeline-item-label">
             <RichText
               value={ label }
@@ -57,7 +57,7 @@ registerBlockType( 'cocoon-blocks/timeline-item', {
               placeholder={ __( 'ラベル', THEME_NAME ) }
             />
           </div>
-          <div className="timeline-item-content">
+          <div className="timeline-item-content cf">
             <div className="timeline-item-title">
               <RichText
                 value={ title }
@@ -77,13 +77,13 @@ registerBlockType( 'cocoon-blocks/timeline-item', {
   save( { attributes } ) {
     const { title, label } = attributes;
     return (
-      <li className="timeline-item">
+      <li className="timeline-item cf">
         <div className="timeline-item-label">
           <RichText.Content
             value={ label }
           />
         </div>
-        <div className="timeline-item-content">
+        <div className="timeline-item-content cf">
           <div className="timeline-item-title">
             <RichText.Content
               value={ title }
@@ -131,7 +131,7 @@ registerBlockType( 'cocoon-blocks/timeline', {
           />
           </PanelBody>
         </InspectorControls>
-        <div className={"timeline-box" + BLOCK_CLASS}>
+        <div className={"timeline-box cf" + BLOCK_CLASS}>
           <div class="timeline-title">
             <RichText
               value={ title }
@@ -154,7 +154,7 @@ registerBlockType( 'cocoon-blocks/timeline', {
   save( { attributes } ) {
     const { title, items } = attributes;
     return (
-      <div className={"timeline-box" + BLOCK_CLASS}>
+      <div className={"timeline-box cf" + BLOCK_CLASS}>
         <div class="timeline-title">
           <RichText.Content
               value={ title }
