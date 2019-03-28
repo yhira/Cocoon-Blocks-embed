@@ -123,7 +123,7 @@ registerBlockType( 'cocoon-blocks/timeline', {
         <InspectorControls>
           <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
           <RangeControl
-            label={ __( 'Columns' ) }
+            label={ __( 'アイテム数' ) }
             value={ items }
             onChange={ ( value ) => setAttributes( { items: value } ) }
             min={ 1 }
