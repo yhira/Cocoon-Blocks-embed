@@ -106,6 +106,10 @@ registerBlockType( 'cocoon-blocks/timeline', {
   description: __( '時系列を表現するためのブロックです。', THEME_NAME ),
 
   attributes: {
+    title: {
+      type: 'string',
+      default: __( 'タイムラインのタイトル', THEME_NAME ),
+    },
     items: {
       type: 'integer',
       default: 1,
@@ -113,7 +117,7 @@ registerBlockType( 'cocoon-blocks/timeline', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { items } = attributes;
+    const { title, items } = attributes;
     return (
       <Fragment>
         <InspectorControls>
@@ -121,15 +125,20 @@ registerBlockType( 'cocoon-blocks/timeline', {
           <RangeControl
             label={ __( 'Columns' ) }
             value={ items }
-            onChange={ ( value ) => setAttributes(
-              { items: toNumber( value, 1, 30 ) }
-            ) }
-            min={ 2 }
+            onChange={ ( value ) => setAttributes( { items: value } ) }
+            min={ 1 }
             max={ 30 }
           />
           </PanelBody>
         </InspectorControls>
         <div className={"timeline-box" + BLOCK_CLASS}>
+          <div class="timeline-title">
+            <RichText
+              value={ title }
+              onChange={ ( value ) => setAttributes( { title: value } ) }
+              placeholder={ __( 'タイトル', THEME_NAME ) }
+            />
+          </div>
           <ul className="timeline">
             <InnerBlocks
               template={ getItemsTemplate( items ) }
@@ -143,9 +152,14 @@ registerBlockType( 'cocoon-blocks/timeline', {
   },
 
   save( { attributes } ) {
-    const { items } = attributes;
+    const { title, items } = attributes;
     return (
       <div className={"timeline-box" + BLOCK_CLASS}>
+        <div class="timeline-title">
+          <RichText.Content
+              value={ title }
+          />
+        </div>
         <ul className="timeline">
           <InnerBlocks.Content />
         </ul>
