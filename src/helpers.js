@@ -111,7 +111,7 @@ export const ICONS = [
   },
   {
     value: 'fab-book',
-    label: __( 'fab-bookmark', THEME_NAME ),
+    label: __( 'fab-book', THEME_NAME ),
   },
   {
     value: 'fab-download',
