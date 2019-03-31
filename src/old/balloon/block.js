@@ -15,11 +15,11 @@ const { Fragment } = wp.element;
 const DEFAULT_NAME = __( '未入力', THEME_NAME );
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-registerBlockType( 'cocoon-blocks/balloon-box-1', {
+registerBlockType( 'cocoon-blocks/balloon-box', {
 
   title: __( '吹き出し', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'comment']} />,
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( '登録されている吹き出しを挿入できます。', THEME_NAME ),
 
   attributes: {
@@ -71,7 +71,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
             "speech-wrap sb-id-" + speechBaloons[index].id +
             " sbs-" + speechBaloons[index].style +
             " sbp-" + speechBaloons[index].position +
-            " sbis-" + speechBaloons[index].iconstyle +
+            " sbis-" + speechBaloons[index].iconindex +
             " cf" +
             BLOCK_CLASS
           }>
@@ -108,7 +108,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
             "speech-wrap sb-id-" + speechBaloons[index].id +
             " sbs-" + speechBaloons[index].style +
             " sbp-" + speechBaloons[index].position +
-            " sbis-" + speechBaloons[index].iconstyle +
+            " sbis-" + speechBaloons[index].iconindex +
             " cf" +
             BLOCK_CLASS
           }>
