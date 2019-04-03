@@ -23,7 +23,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
   description: __( '登録されている吹き出しのオプションを変更できます。', THEME_NAME ),
 
   attributes: {
-    name: {
+    content: {
       type: 'string',
       selector: 'div',
       default: '',
@@ -34,20 +34,20 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
     },
     style: {
       type: 'string',
-      default: '',
+      default: 'stn',
     },
     position: {
       type: 'string',
-      default: '',
+      default: 'l',
     },
     iconstyle: {
       type: 'string',
-      default: '',
+      default: 'cb',
     },
   },
 
   edit( { attributes, setAttributes } ) {
-    const { name, index, style, position, iconstyle } = attributes;
+    const { content, index, style, position, iconstyle } = attributes;
 
     //console.log(speechBaloons);
     var balloons = [];
@@ -70,14 +70,14 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
             <SelectControl
               label={ __( '人物', THEME_NAME ) }
-              value={ index ? index : speechBaloons[index].index }
+              value={ index }
               onChange={ ( value ) => setAttributes( { index: value } ) }
               options={ balloons }
             />
 
             <SelectControl
               label={ __( '吹き出しスタイル', THEME_NAME ) }
-              value={ style ? style : speechBaloons[index].style }
+              value={ style }
               onChange={ ( value ) => setAttributes( { style: value } ) }
               options={ [
                 {
@@ -101,7 +101,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
             <SelectControl
               label={ __( '人物位置', THEME_NAME ) }
-              value={ position ? position : speechBaloons[index].position }
+              value={ position }
               onChange={ ( value ) => setAttributes( { position: value } ) }
               options={ [
                 {
@@ -117,7 +117,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
             <SelectControl
               label={ __( 'アイコンスタイル', THEME_NAME ) }
-              value={ iconstyle ? iconstyle : speechBaloons[index].iconstyle }
+              value={ iconstyle }
               onChange={ ( value ) => setAttributes( { iconstyle: value } ) }
               options={ [
                 {
@@ -161,9 +161,9 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
             </figure>
             <div className="speech-name">
               <RichText
-                value={ name ? name : speechBaloons[index].name }
+                value={ content ? content : speechBaloons[index].name }
                 placeholder={DEFAULT_NAME}
-                onChange={ ( value ) => setAttributes( { name: value } ) }
+                onChange={ ( value ) => setAttributes( { content: value } ) }
               />
             </div>
           </div>
@@ -177,7 +177,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
   },
 
   save( { attributes } ) {
-    const { name, index, style, position, iconstyle } = attributes;
+    const { content, index, style, position, iconstyle } = attributes;
     return (
         <div
           className={
@@ -198,7 +198,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
             </figure>
             <div className="speech-name">
               <RichText.Content
-                value={ name ? name : speechBaloons[index].name }
+                value={ content ? content : speechBaloons[index].name }
               />
             </div>
           </div>
