@@ -246,3 +246,181 @@ export const ICONS = [
     label: __( 'fab-wordpress', THEME_NAME ),
   },
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const LIST_ICONS = [
+  {
+    value: '',
+    label: 'fab-none',
+  },
+  {
+    value: 'fab-check',
+    label: __( 'fab-check', THEME_NAME ),
+  },
+  {
+    value: 'fab-check-circle',
+    label: __( 'fab-check-circle', THEME_NAME ),
+  },
+  {
+    value: 'fab-check-circle-o',
+    label: __( 'fab-check-circle-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-check-square',
+    label: __( 'fab-check-square', THEME_NAME ),
+  },
+  {
+    value: 'fab-check-square-o',
+    label: __( 'fab-check-square-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-caret-right',
+    label: __( 'fab-caret-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-caret-square-o-right',
+    label: __( 'fab-caret-square-o-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-arrow-right',
+    label: __( 'fab-arrow-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-angle-right ',
+    label: __( 'fab-angle-right ', THEME_NAME ),
+  },
+  {
+    value: 'fab-angle-double-right',
+    label: __( 'fab-angle-double-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-arrow-circle-right',
+    label: __( 'fab-arrow-circle-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-arrow-circle-o-right',
+    label: __( 'fab-arrow-circle-o-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-play-circle',
+    label: __( 'fab-play-circle', THEME_NAME ),
+  },
+  {
+    value: 'fab-play-circle-o',
+    label: __( 'fab-play-circle-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-chevron-right',
+    label: __( 'fab-chevron-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-chevron-circle-right',
+    label: __( 'fab-chevron-circle-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-hand-o-right',
+    label: __( 'fab-hand-o-right', THEME_NAME ),
+  },
+  {
+    value: 'fab-star',
+    label: __( 'fab-star', THEME_NAME ),
+  },
+  {
+    value: 'fab-star-o',
+    label: __( 'fab-star-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-heart',
+    label: __( 'fab-heart', THEME_NAME ),
+  },
+  {
+    value: 'fab-heart-o',
+    label: __( 'fab-heart-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-square',
+    label: __( 'fab-square', THEME_NAME ),
+  },
+  {
+    value: 'fab-square-o',
+    label: __( 'fab-square-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-circle',
+    label: __( 'fab-circle', THEME_NAME ),
+  },
+  {
+    value: 'fab-circle-o',
+    label: __( 'fab-circle-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-dot-circle-o',
+    label: __( 'fab-dot-circle-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-plus',
+    label: __( 'fab-plus', THEME_NAME ),
+  },
+  {
+    value: 'fab-plus-circle',
+    label: __( 'fab-plus-circle', THEME_NAME ),
+  },
+  {
+    value: 'fab-plus-square',
+    label: __( 'fab-plus-square', THEME_NAME ),
+  },
+  {
+    value: 'fab-plus-square-o',
+    label: __( 'fab-plus-square-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-minus',
+    label: __( 'fab-minus', THEME_NAME ),
+  },
+  {
+    value: 'fab-minus-circle',
+    label: __( 'fab-minus-circle', THEME_NAME ),
+  },
+  {
+    value: 'fab-minus-square',
+    label: __( 'fab-minus-square', THEME_NAME ),
+  },
+  {
+    value: 'fab-minus-square-o',
+    label: __( 'fab-minus-square-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-times',
+    label: __( 'fab-times', THEME_NAME ),
+  },
+  {
+    value: 'fab-times-circle',
+    label: __( 'fab-times-circle', THEME_NAME ),
+  },
+  {
+    value: 'fab-times-circle-o',
+    label: __( 'fab-times-circle-o', THEME_NAME ),
+  },
+  {
+    value: 'fab-window-close',
+    label: __( 'fab-window-close', THEME_NAME ),
+  },
+  {
+    value: 'fab-window-close-o',
+    label: __( 'fab-window-close-o', THEME_NAME ),
+  },
+];
