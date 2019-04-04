@@ -265,162 +265,162 @@ export const ICONS = [
 export const LIST_ICONS = [
   {
     value: '',
-    label: 'fab-none',
+    label: __( 'fab-none', THEME_NAME ),
   },
   {
-    value: 'fab-check',
+    value: 'list-check',
     label: __( 'fab-check', THEME_NAME ),
   },
   {
-    value: 'fab-check-circle',
+    value: 'list-check-circle',
     label: __( 'fab-check-circle', THEME_NAME ),
   },
   {
-    value: 'fab-check-circle-o',
+    value: 'list-check-circle-o',
     label: __( 'fab-check-circle-o', THEME_NAME ),
   },
   {
-    value: 'fab-check-square',
+    value: 'list-check-square',
     label: __( 'fab-check-square', THEME_NAME ),
   },
   {
-    value: 'fab-check-square-o',
+    value: 'list-check-square-o',
     label: __( 'fab-check-square-o', THEME_NAME ),
   },
   {
-    value: 'fab-caret-right',
+    value: 'list-caret-right',
     label: __( 'fab-caret-right', THEME_NAME ),
   },
   {
-    value: 'fab-caret-square-o-right',
+    value: 'list-caret-square-o-right',
     label: __( 'fab-caret-square-o-right', THEME_NAME ),
   },
   {
-    value: 'fab-arrow-right',
+    value: 'list-arrow-right',
     label: __( 'fab-arrow-right', THEME_NAME ),
   },
   {
-    value: 'fab-angle-right',
+    value: 'list-angle-right',
     label: __( 'fab-angle-right', THEME_NAME ),
   },
   {
-    value: 'fab-angle-double-right',
+    value: 'list-angle-double-right',
     label: __( 'fab-angle-double-right', THEME_NAME ),
   },
   {
-    value: 'fab-arrow-circle-right',
+    value: 'list-arrow-circle-right',
     label: __( 'fab-arrow-circle-right', THEME_NAME ),
   },
   {
-    value: 'fab-arrow-circle-o-right',
+    value: 'list-arrow-circle-o-right',
     label: __( 'fab-arrow-circle-o-right', THEME_NAME ),
   },
   {
-    value: 'fab-play-circle',
+    value: 'list-play-circle',
     label: __( 'fab-play-circle', THEME_NAME ),
   },
   {
-    value: 'fab-play-circle-o',
+    value: 'list-play-circle-o',
     label: __( 'fab-play-circle-o', THEME_NAME ),
   },
   {
-    value: 'fab-chevron-right',
+    value: 'list-chevron-right',
     label: __( 'fab-chevron-right', THEME_NAME ),
   },
   {
-    value: 'fab-chevron-circle-right',
+    value: 'list-chevron-circle-right',
     label: __( 'fab-chevron-circle-right', THEME_NAME ),
   },
   {
-    value: 'fab-hand-o-right',
+    value: 'list-hand-o-right',
     label: __( 'fab-hand-o-right', THEME_NAME ),
   },
   {
-    value: 'fab-star',
+    value: 'list-star',
     label: __( 'fab-star', THEME_NAME ),
   },
   {
-    value: 'fab-star-o',
+    value: 'list-star-o',
     label: __( 'fab-star-o', THEME_NAME ),
   },
   {
-    value: 'fab-heart',
+    value: 'list-heart',
     label: __( 'fab-heart', THEME_NAME ),
   },
   {
-    value: 'fab-heart-o',
+    value: 'list-heart-o',
     label: __( 'fab-heart-o', THEME_NAME ),
   },
   {
-    value: 'fab-square',
+    value: 'list-square',
     label: __( 'fab-square', THEME_NAME ),
   },
   {
-    value: 'fab-square-o',
+    value: 'list-square-o',
     label: __( 'fab-square-o', THEME_NAME ),
   },
   {
-    value: 'fab-circle',
+    value: 'list-circle',
     label: __( 'fab-circle', THEME_NAME ),
   },
   {
-    value: 'fab-circle-o',
+    value: 'list-circle-o',
     label: __( 'fab-circle-o', THEME_NAME ),
   },
   {
-    value: 'fab-dot-circle-o',
+    value: 'list-dot-circle-o',
     label: __( 'fab-dot-circle-o', THEME_NAME ),
   },
   {
-    value: 'fab-plus',
+    value: 'list-plus',
     label: __( 'fab-plus', THEME_NAME ),
   },
   {
-    value: 'fab-plus-circle',
+    value: 'list-plus-circle',
     label: __( 'fab-plus-circle', THEME_NAME ),
   },
   {
-    value: 'fab-plus-square',
+    value: 'list-plus-square',
     label: __( 'fab-plus-square', THEME_NAME ),
   },
   {
-    value: 'fab-plus-square-o',
+    value: 'list-plus-square-o',
     label: __( 'fab-plus-square-o', THEME_NAME ),
   },
   {
-    value: 'fab-minus',
+    value: 'list-minus',
     label: __( 'fab-minus', THEME_NAME ),
   },
   {
-    value: 'fab-minus-circle',
+    value: 'list-minus-circle',
     label: __( 'fab-minus-circle', THEME_NAME ),
   },
   {
-    value: 'fab-minus-square',
+    value: 'list-minus-square',
     label: __( 'fab-minus-square', THEME_NAME ),
   },
   {
-    value: 'fab-minus-square-o',
+    value: 'list-minus-square-o',
     label: __( 'fab-minus-square-o', THEME_NAME ),
   },
   {
-    value: 'fab-times',
+    value: 'list-times',
     label: __( 'fab-times', THEME_NAME ),
   },
   {
-    value: 'fab-times-circle',
+    value: 'list-times-circle',
     label: __( 'fab-times-circle', THEME_NAME ),
   },
   {
-    value: 'fab-times-circle-o',
+    value: 'list-times-circle-o',
     label: __( 'fab-times-circle-o', THEME_NAME ),
   },
   {
-    value: 'fab-window-close',
+    value: 'list-window-close',
     label: __( 'fab-window-close', THEME_NAME ),
   },
   {
-    value: 'fab-window-close-o',
+    value: 'list-window-close-o',
     label: __( 'fab-window-close-o', THEME_NAME ),
   },
 ];
