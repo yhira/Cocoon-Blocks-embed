@@ -11,9 +11,6 @@ import './block/info-box/block.js';
 import './block/blank-box/block.js';
 import './block/sticky-box/block.js';
 import './block/tab-box/block.js';
-import './block/caption-box/block.js';
-import './block/tab-caption-box/block.js';
-import './block/label-box/block.js';
 import './block/balloon/block.js';
 import './block/balloon-ex/block.js';
 import './block/blogcard/block.js';
@@ -22,6 +19,11 @@ import './block/button-wrap/block.js';
 import './block/toggle-box/block.js';
 import './block/search-box/block.js';
 import './block/timeline/block.js';
+
+//汎用ブロック
+import './block-multi/caption-box/block.js';
+import './block-multi/tab-caption-box/block.js';
+import './block-multi/label-box/block.js';
 
 //マイクロコピー
 import './micro/micro-text/block.js';
