@@ -300,8 +300,8 @@ export const LIST_ICONS = [
     label: __( 'fab-arrow-right', THEME_NAME ),
   },
   {
-    value: 'fab-angle-right ',
-    label: __( 'fab-angle-right ', THEME_NAME ),
+    value: 'fab-angle-right',
+    label: __( 'fab-angle-right', THEME_NAME ),
   },
   {
     value: 'fab-angle-double-right',
