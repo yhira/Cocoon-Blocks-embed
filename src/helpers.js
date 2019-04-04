@@ -264,7 +264,7 @@ export const ICONS = [
 
 export const LIST_ICONS = [
   {
-    value: '',
+    value: 'list-none',
     label: __( 'fab-none', THEME_NAME ),
   },
   {
