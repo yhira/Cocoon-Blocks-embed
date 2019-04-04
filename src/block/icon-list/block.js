@@ -17,6 +17,17 @@ const { PanelBody, SelectControl, BaseControl, Button } = wp.components;
 const { Fragment } = wp.element;
 const ALLOWED_BLOCKS = [ 'core/list' ];
 
+//classの取得
+function getClasses(icon) {
+  const classes = classnames(
+      {
+        'iconlist-box': true,
+        [ icon ]: !! icon,
+      }
+    );
+  return classes;
+}
+
 registerBlockType( 'cocoon-blocks/iconlist-box', {
 
   title: __( 'アイコンリスト', THEME_NAME ),
@@ -42,12 +53,12 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
   edit( { attributes, setAttributes } ) {
     const { title, color, icon } = attributes;
 
-    const classes = classnames(
-      {
-        'iconlist-box': true,
-        [ icon ]: !! icon,
-      }
-    );
+    // const classes = classnames(
+    //   {
+    //     'iconlist-box': true,
+    //     [ icon ]: !! icon,
+    //   }
+    // );
 
     return (
       <Fragment>
@@ -102,7 +113,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
 
           </PanelBody>
         </InspectorControls>
-        <div className={ classes }>
+        <div className={ getClasses(icon) }>
           <div className="iconlist-title">
             <RichText
                 value={ title }
@@ -125,15 +136,15 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
   save( { attributes } ) {
     const { title, color, icon } = attributes;
 
-    const classes = classnames(
-      {
-        'iconlist-box': true,
-        [ icon ]: !! icon,
-      }
-    );
+    // const classes = classnames(
+    //   {
+    //     'iconlist-box': true,
+    //     [ icon ]: !! icon,
+    //   }
+    // );
 
     return (
-      <div className={ classes }>
+      <div className={ getClasses(icon) }>
         <div className="iconlist-title">
           <RichText.Content
             value={ title }
