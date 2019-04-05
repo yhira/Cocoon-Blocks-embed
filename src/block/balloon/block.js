@@ -23,9 +23,8 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
   description: __( '登録されている吹き出しを挿入できます。', THEME_NAME ),
 
   attributes: {
-    content: {
+    name: {
       type: 'string',
-      selector: 'div',
       default: '',
     },
     index: {
@@ -35,7 +34,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, index } = attributes;
+    const { name, index } = attributes;
 
     //console.log(speechBaloons);
     var balloons = [];
@@ -85,9 +84,9 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
             </figure>
             <div className="speech-name">
               <RichText
-                value={ content ? content : speechBaloons[index].name }
+                value={ name ? name : speechBaloons[index].name }
                 placeholder={DEFAULT_NAME}
-                onChange={ ( value ) => setAttributes( { content: value } ) }
+                onChange={ ( value ) => setAttributes( { name: value } ) }
               />
             </div>
           </div>
@@ -101,7 +100,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
   },
 
   save( { attributes } ) {
-    const { content, index } = attributes;
+    const { name, index } = attributes;
     return (
         <div
           className={
@@ -122,7 +121,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
             </figure>
             <div className="speech-name">
               <RichText.Content
-                value={ content ? content : speechBaloons[index].name }
+                value={ name ? name : speechBaloons[index].name }
               />
             </div>
           </div>

@@ -33,6 +33,9 @@ registerBlockType( 'cocoon-blocks/balloon-box', {
       default: '0',
     },
   },
+  supports: {
+    inserter: false,
+  },
 
   edit( { attributes, setAttributes } ) {
     const { content, index } = attributes;

@@ -20,11 +20,11 @@ const ALLOWED_BLOCKS = [ 'core/list' ];
 //classの取得
 function getClasses(icon) {
   const classes = classnames(
-      {
-        'iconlist-box': true,
-        [ icon ]: !! icon,
-      }
-    );
+    {
+      'iconlist-box': true,
+      [ icon ]: !! icon,
+    }
+  );
   return classes;
 }
 

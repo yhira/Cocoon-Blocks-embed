@@ -48,6 +48,7 @@ registerBlockType( 'cocoon-blocks/micro-balloon', {
   supports: {
     align: [ 'left', 'center', 'right' ],
     customClassName: true,
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {
