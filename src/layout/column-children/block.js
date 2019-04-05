@@ -24,6 +24,9 @@ registerBlockType( 'cocoon-blocks/column-left', {
   icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-layout',
   description: __( 'カラム左側に表示される内容内容を入力。', THEME_NAME ),
+  supports: {
+    inserter: false,
+  },
 
   edit( { attributes, setAttributes } ) {
     return (
@@ -55,6 +58,9 @@ registerBlockType( 'cocoon-blocks/column-center', {
   icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-layout',
   description: __( 'カラム中央に表示される内容内容を入力。', THEME_NAME ),
+  supports: {
+    inserter: false,
+  },
 
   edit( { attributes, setAttributes } ) {
     return (
@@ -87,6 +93,9 @@ registerBlockType( 'cocoon-blocks/column-right', {
   icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-layout',
   description: __( 'カラム右側に表示される内容内容を入力。', THEME_NAME ),
+  supports: {
+    inserter: false,
+  },
 
   edit( { attributes, setAttributes } ) {
     return (

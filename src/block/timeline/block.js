@@ -48,6 +48,9 @@ registerBlockType( 'cocoon-blocks/timeline-item', {
       default: __( 'タイトル', THEME_NAME ),
     },
   },
+  supports: {
+    inserter: false,
+  },
 
   edit( { attributes, setAttributes } ) {
     const { title, label } = attributes;
