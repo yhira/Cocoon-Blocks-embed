@@ -12,7 +12,7 @@ import classnames from 'classnames';
 const { times } = lodash;
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls } = wp.editor;
+const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, Button } = wp.components;
 const { Fragment } = wp.element;
 const ALLOWED_BLOCKS = [ 'core/list' ];
@@ -51,7 +51,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { title, color, icon } = attributes;
+    const { title, color, icon, iconColor, borderColor } = attributes;
 
     // const classes = classnames(
     //   {
@@ -110,8 +110,26 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
                 } ) }
               </div>
             </BaseControl>
-
           </PanelBody>
+
+          <PanelColorSettings
+            title={ __( '色設定', THEME_NAME ) }
+            initialOpen={ true }
+            colorSettings={ [
+              {
+                value: iconColor,
+                onChange: ( value ) => setAttributes( { iconColor: value } ),
+                label: __( 'アイコン色', THEME_NAME ),
+              },
+              {
+                value: borderColor,
+                onChange: ( value ) => setAttributes( { borderColor: value } ),
+                label: __( 'ボーダー色', THEME_NAME ),
+              },
+            ] }
+          >
+          </PanelColorSettings>
+
         </InspectorControls>
         <div className={ getClasses(icon) }>
           <div className="iconlist-title">
@@ -134,7 +152,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
   },
 
   save( { attributes } ) {
-    const { title, color, icon } = attributes;
+    const { title, color, icon, iconColor, borderColor } = attributes;
 
     // const classes = classnames(
     //   {
