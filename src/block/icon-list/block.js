@@ -5,24 +5,28 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, LIST_ICONS} from '../../helpers.js';
+import {THEME_NAME, BLOCK_CLASS, LIST_ICONS, colorValueToSlug} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
 const { times } = lodash;
 const { __ } = wp.i18n;
+//const { applyFormat, removeFormat, getActiveFormat } = window.wp.richText;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
+const { InnerBlocks, RichText, InspectorControls, PanelColorSettings/*, getColorObjectByColorValue*/ } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, Button } = wp.components;
+//const { select } = wp.data;
 const { Fragment } = wp.element;
 const ALLOWED_BLOCKS = [ 'core/list' ];
 
 //classの取得
-function getClasses(icon) {
+function getClasses(icon, iconColor, borderColor) {
   const classes = classnames(
     {
       'iconlist-box': true,
       [ icon ]: !! icon,
+      [ `iic-${ colorValueToSlug(iconColor) }` ]: !! iconColor,
+      [ `ibc-${ colorValueToSlug(borderColor) }` ]: !! borderColor,
     }
   );
   return classes;
@@ -51,47 +55,12 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { title, color, icon, iconColor, borderColor } = attributes;
-
-    // const classes = classnames(
-    //   {
-    //     'iconlist-box': true,
-    //     [ icon ]: !! icon,
-    //   }
-    // );
+    const { title, icon, iconColor, borderColor } = attributes;
 
     return (
       <Fragment>
         <InspectorControls>
           <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
-
-            <SelectControl
-              label={ __( '色', THEME_NAME ) }
-              value={ color }
-              onChange={ ( value ) => setAttributes( { color: value } ) }
-              options={ [
-                {
-                  value: '',
-                  label: __( 'デフォルト', THEME_NAME ),
-                },
-                {
-                  value: ' cb-yellow',
-                  label: __( '黄色', THEME_NAME ),
-                },
-                {
-                  value: ' cb-red',
-                  label: __( '赤色', THEME_NAME ),
-                },
-                {
-                  value: ' cb-blue',
-                  label: __( '青色', THEME_NAME ),
-                },
-                {
-                  value: ' cb-green',
-                  label: __( '緑色', THEME_NAME ),
-                },
-              ] }
-            />
 
             <BaseControl label={ __( 'アイコン', THEME_NAME ) }>
               <div className="icon-setting-buttons">
@@ -131,7 +100,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
           </PanelColorSettings>
 
         </InspectorControls>
-        <div className={ getClasses(icon) }>
+        <div className={ getClasses(icon, iconColor, borderColor) }>
           <div className="iconlist-title">
             <RichText
                 value={ title }
@@ -152,17 +121,10 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
   },
 
   save( { attributes } ) {
-    const { title, color, icon, iconColor, borderColor } = attributes;
-
-    // const classes = classnames(
-    //   {
-    //     'iconlist-box': true,
-    //     [ icon ]: !! icon,
-    //   }
-    // );
+    const { title, icon, iconColor, borderColor } = attributes;
 
     return (
-      <div className={ getClasses(icon) }>
+      <div className={ getClasses(icon, iconColor, borderColor) }>
         <div className="iconlist-title">
           <RichText.Content
             value={ title }

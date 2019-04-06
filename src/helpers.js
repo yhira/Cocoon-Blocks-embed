@@ -32,6 +32,42 @@ export function getIconClass(icon){
   return icon ? (' ' + icon) : '';
 }
 
+//色からスラッグを取得
+export function colorValueToSlug(color){
+  switch (color) {
+    case '#e60033':
+      return 'red';
+      break;
+    case '#e95295':
+      return 'pink';
+      break;
+    case '#884898':
+      return 'purple';
+      break;
+    case '#0095d9':
+      return 'blue';
+      break;
+    case '#3eb370':
+      return 'green';
+      break;
+    case '#f39800':
+      return 'orange';
+      break;
+    case '#ffd900':
+      return 'yellow';
+      break;
+    case '#954e2a':
+      return 'brown';
+      break;
+    case '#949495':
+      return 'gray';
+      break;
+    case '#333':
+      return 'black';
+      break;
+  }
+}
+
 export const ICONS = [
   {
     value: '',
