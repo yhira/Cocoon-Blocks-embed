@@ -7,6 +7,7 @@
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -20,7 +21,7 @@ registerBlockType( 'cocoon-blocks/blank-box', {
   title: __( '白抜きボックス', THEME_NAME ),
   icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-block',
-  description: __( 'コンテンツを囲むだけのブラックボックスを表示します。', THEME_NAME ),
+  description: __( 'コンテンツを囲むだけのブランクボックスを表示します。', THEME_NAME ),
 
   attributes: {
     content: {

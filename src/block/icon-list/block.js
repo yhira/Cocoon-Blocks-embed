@@ -27,6 +27,7 @@ function getClasses(icon, iconColor, borderColor) {
       [ icon ]: !! icon,
       [ `iic-${ colorValueToSlug(iconColor) }` ]: !! iconColor,
       [ `blank-box bb-${ colorValueToSlug(borderColor) }` ]: !! borderColor,
+      [ BLOCK_CLASS ]: true,
     }
   );
   return classes;
