@@ -35,6 +35,9 @@ export function getIconClass(icon){
 //色からスラッグを取得
 export function colorValueToSlug(color){
   switch (color) {
+    case keyColor:
+      return 'key-color';
+      break;
     case '#e60033':
       return 'red';
       break;
@@ -64,6 +67,9 @@ export function colorValueToSlug(color){
       break;
     case '#333':
       return 'black';
+      break;
+    default:
+      return 'key-color';
       break;
   }
 }
@@ -99,6 +105,9 @@ export function slugToColorValue(slug){
       break;
     case 'black':
       return '#333';
+      break;
+    default:
+      return keyColor;
       break;
   }
 }

@@ -20,7 +20,7 @@ const { Fragment } = wp.element;
 const ALLOWED_BLOCKS = [ 'core/list' ];
 
 //classの取得
-function getClasses(className, icon, iconColor, borderColor) {
+function getClasses(icon, iconColor, borderColor) {
   const classes = classnames(
     {
       'iconlist-box': true,
@@ -58,7 +58,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
     },
   },
 
-  edit( { attributes, setAttributes, className } ) {
+  edit( { attributes, setAttributes } ) {
     const { title, icon, iconColor, borderColor } = attributes;
     //console.log(borderColor);
 
@@ -113,7 +113,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
 
         </InspectorControls>
         <div
-          className={ getClasses(className, icon, iconColor, borderColor) }
+          className={ getClasses(icon, iconColor, borderColor) }
           //style={ borderColorStyles }
         >
           <div className="iconlist-title">
@@ -135,11 +135,11 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
     );
   },
 
-  save( { attributes, className } ) {
+  save( { attributes } ) {
     const { title, icon, iconColor, borderColor } = attributes;
 
     return (
-      <div className={ getClasses(className, icon, iconColor, borderColor) }>
+      <div className={ getClasses(icon, iconColor, borderColor) }>
         <div className="iconlist-title">
           <RichText.Content
             value={ title }
