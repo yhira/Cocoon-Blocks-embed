@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, LIST_ICONS, colorValueToSlug} from '../../helpers.js';
+import { THEME_NAME, BLOCK_CLASS, LIST_ICONS, colorValueToSlug } from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
@@ -13,20 +13,20 @@ const { times } = lodash;
 const { __ } = wp.i18n;
 //const { applyFormat, removeFormat, getActiveFormat } = window.wp.richText;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls, PanelColorSettings/*, getColorObjectByColorValue*/ } = wp.editor;
+const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker/*, getColorObjectByColorValue*/ } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, Button } = wp.components;
 //const { select } = wp.data;
 const { Fragment } = wp.element;
 const ALLOWED_BLOCKS = [ 'core/list' ];
 
 //classの取得
-function getClasses(icon, iconColor, borderColor) {
+function getClasses(className, icon, iconColor, borderColor) {
   const classes = classnames(
     {
       'iconlist-box': true,
       [ icon ]: !! icon,
       [ `iic-${ colorValueToSlug(iconColor) }` ]: !! iconColor,
-      [ `ibc-${ colorValueToSlug(borderColor) }` ]: !! borderColor,
+      [ `blank-box bb-${ colorValueToSlug(borderColor) }` ]: !! borderColor,
     }
   );
   return classes;
@@ -44,7 +44,11 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
       type: 'string',
       default: '',
     },
-    color: {
+    iconColor: {
+      type: 'string',
+      default: '',
+    },
+    borderColor: {
       type: 'string',
       default: '',
     },
@@ -54,9 +58,13 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
     },
   },
 
-  edit( { attributes, setAttributes } ) {
+  edit( { attributes, setAttributes, className } ) {
     const { title, icon, iconColor, borderColor } = attributes;
+    //console.log(borderColor);
 
+    // const borderColorStyles = {
+    //   borderColor: borderColor || undefined,
+    // };
     return (
       <Fragment>
         <InspectorControls>
@@ -97,10 +105,17 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
               },
             ] }
           >
+          <ContrastChecker
+            iconColor={ iconColor }
+            borderColor={ borderColor }
+          />
           </PanelColorSettings>
 
         </InspectorControls>
-        <div className={ getClasses(icon, iconColor, borderColor) }>
+        <div
+          className={ getClasses(className, icon, iconColor, borderColor) }
+          //style={ borderColorStyles }
+        >
           <div className="iconlist-title">
             <RichText
                 value={ title }
@@ -120,11 +135,11 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
     );
   },
 
-  save( { attributes } ) {
+  save( { attributes, className } ) {
     const { title, icon, iconColor, borderColor } = attributes;
 
     return (
-      <div className={ getClasses(icon, iconColor, borderColor) }>
+      <div className={ getClasses(className, icon, iconColor, borderColor) }>
         <div className="iconlist-title">
           <RichText.Content
             value={ title }

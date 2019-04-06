@@ -67,6 +67,41 @@ export function colorValueToSlug(color){
       break;
   }
 }
+//スラッグから色を取得
+export function slugToColorValue(slug){
+  switch (slug) {
+    case 'red':
+      return '#e60033';
+      break;
+    case 'pink':
+      return '#e95295';
+      break;
+    case 'purple':
+      return '#884898';
+      break;
+    case 'blue':
+      return '#0095d9';
+      break;
+    case 'green':
+      return '#3eb370';
+      break;
+    case 'orange':
+      return '#f39800';
+      break;
+    case 'yellow':
+      return '#ffd900';
+      break;
+    case 'brown':
+      return '#954e2a';
+      break;
+    case 'gray':
+      return '#949495';
+      break;
+    case 'black':
+      return '#333';
+      break;
+  }
+}
 
 export const ICONS = [
   {
