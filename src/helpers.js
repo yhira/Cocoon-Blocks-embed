@@ -264,8 +264,8 @@ export const ICONS = [
 
 export const LIST_ICONS = [
   {
-    value: 'list-none',
-    label: __( 'fab-none', THEME_NAME ),
+    value: 'list-caret-right',
+    label: __( 'fab-caret-right', THEME_NAME ),
   },
   {
     value: 'list-check',
@@ -286,10 +286,6 @@ export const LIST_ICONS = [
   {
     value: 'list-check-square-o',
     label: __( 'fab-check-square-o', THEME_NAME ),
-  },
-  {
-    value: 'list-caret-right',
-    label: __( 'fab-caret-right', THEME_NAME ),
   },
   {
     value: 'list-caret-square-o-right',

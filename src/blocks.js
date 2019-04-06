@@ -19,7 +19,7 @@ import './block/button-wrap/block.js';
 import './block/toggle-box/block.js';
 import './block/search-box/block.js';
 import './block/timeline/block.js';
-//import './block/icon-list/block.js';
+import './block/icon-list/block.js';
 
 //汎用ブロック
 import './block-multi/caption-box/block.js';

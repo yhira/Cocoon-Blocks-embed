@@ -46,7 +46,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
     },
     icon: {
       type: 'string',
-      default: '',
+      default: 'list-caret-right',
     },
   },
 
