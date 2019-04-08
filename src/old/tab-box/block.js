@@ -5,54 +5,56 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, colorValueToSlug} from '../../helpers.js';
-import classnames from 'classnames';
+import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
+const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入力は公開ページで反映されません。', THEME_NAME );
 
-//classの取得
-function getClasses(style, color) {
-  const classes = classnames(
-    {
-      'blank-box': true,
-      'bb-tab': true,
-      [ style ]: !! style,
-      [ `bb-${ colorValueToSlug(color) }` ]: !! color,
-      [ BLOCK_CLASS ]: true,
-    }
-  );
-  return classes;
-}
-
-registerBlockType( 'cocoon-blocks/tab-box-1', {
+registerBlockType( 'cocoon-blocks/tab-box', {
 
   title: __( 'タブボックス', THEME_NAME ),
-  icon: 'category',
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( 'タブにメッセージ内容を伝えるための文字が書かれているボックスです。', THEME_NAME ),
 
   attributes: {
     content: {
       type: 'string',
+      source: 'html',
+      selector: 'div',
       default: DEFAULT_MSG,
     },
     style: {
       type: 'string',
-      default: 'bb-check',
+      default: 'blank-box bb-tab bb-check',
     },
     color: {
       type: 'string',
       default: '',
     },
   },
+  supports: {
+    inserter: false,
+  },
 
   edit( { attributes, setAttributes } ) {
     const { content, style, color } = attributes;
+
+    // function onChange(event){
+    //   setAttributes({style: event.target.value});
+    // }
+
+    // function onChangeColor(event){
+    //   setAttributes({color: event.target.value});
+    // }
+
+    // function onChangeContent(newContent){
+    //   setAttributes( { content: newContent } );
+    // }
 
     return (
       <Fragment>
@@ -65,91 +67,104 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
               onChange={ ( value ) => setAttributes( { style: value } ) }
               options={ [
                 {
-                  value: 'bb-check',
+                  value: 'blank-box bb-tab bb-check',
                   label: __( 'チェック', THEME_NAME ),
                 },
                 {
-                  value: 'bb-comment',
+                  value: 'blank-box bb-tab bb-comment',
                   label: __( 'コメント', THEME_NAME ),
                 },
                 {
-                  value: 'bb-point',
+                  value: 'blank-box bb-tab bb-point',
                   label: __( 'ポイント', THEME_NAME ),
                 },
                 {
-                  value: 'bb-tips',
+                  value: 'blank-box bb-tab bb-tips',
                   label: __( 'ティップス', THEME_NAME ),
                 },
                 {
-                  value: 'bb-hint',
+                  value: 'blank-box bb-tab bb-hint',
                   label: __( 'ヒント', THEME_NAME ),
                 },
                 {
-                  value: 'bb-pickup',
+                  value: 'blank-box bb-tab bb-pickup',
                   label: __( 'ピックアップ', THEME_NAME ),
                 },
                 {
-                  value: 'bb-bookmark',
+                  value: 'blank-box bb-tab bb-bookmark',
                   label: __( 'ブックマーク', THEME_NAME ),
                 },
                 {
-                  value: 'bb-memo',
+                  value: 'blank-box bb-tab bb-memo',
                   label: __( 'メモ', THEME_NAME ),
                 },
                 {
-                  value: 'bb-download',
+                  value: 'blank-box bb-tab bb-download',
                   label: __( 'ダウンロード', THEME_NAME ),
                 },
                 {
-                  value: 'bb-break',
+                  value: 'blank-box bb-tab bb-break',
                   label: __( 'ブレイク', THEME_NAME ),
                 },
                 {
-                  value: 'bb-amazon',
+                  value: 'blank-box bb-tab bb-amazon',
                   label: __( 'Amazon', THEME_NAME ),
                 },
                 {
-                  value: 'bb-ok',
+                  value: 'blank-box bb-tab bb-ok',
                   label: __( 'OK', THEME_NAME ),
                 },
                 {
-                  value: 'bb-ng',
+                  value: 'blank-box bb-tab bb-ng',
                   label: __( 'NG', THEME_NAME ),
                 },
                 {
-                  value: 'bb-good',
+                  value: 'blank-box bb-tab bb-good',
                   label: __( 'GOOD', THEME_NAME ),
                 },
                 {
-                  value: 'bb-bad',
+                  value: 'blank-box bb-tab bb-bad',
                   label: __( 'BAD', THEME_NAME ),
                 },
                 {
-                  value: 'bb-profile',
+                  value: 'blank-box bb-tab bb-profile',
                   label: __( 'プロフィール', THEME_NAME ),
                 },
               ] }
             />
-          </PanelBody>
 
-          <PanelColorSettings
-            title={ __( '色設定', THEME_NAME ) }
-            initialOpen={ true }
-            colorSettings={ [
-              {
-                value: color,
-                onChange: ( value ) => setAttributes( { color: value } ),
-                label: __( '色', THEME_NAME ),
-              },
-            ] }
-          >
-          <ContrastChecker
-            color={ color }
-          />
-          </PanelColorSettings>
+            <SelectControl
+              label={ __( '色', THEME_NAME ) }
+              value={ color }
+              onChange={ ( value ) => setAttributes( { color: value } ) }
+              options={ [
+                {
+                  value: '',
+                  label: __( '灰色', THEME_NAME ),
+                },
+                {
+                  value: ' bb-yellow',
+                  label: __( '黄色', THEME_NAME ),
+                },
+                {
+                  value: ' bb-red',
+                  label: __( '赤色', THEME_NAME ),
+                },
+                {
+                  value: ' bb-blue',
+                  label: __( '青色', THEME_NAME ),
+                },
+                {
+                  value: ' bb-green',
+                  label: __( '緑色', THEME_NAME ),
+                },
+              ] }
+            />
+
+          </PanelBody>
         </InspectorControls>
 
-        <div className={ getClasses(style, color) }>
+        <div className={attributes.style + attributes.color + BLOCK_CLASS}>
           <span className={'box-block-msg'}>
             <RichText
               value={ content }
@@ -163,9 +178,9 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
   },
 
   save( { attributes } ) {
-    const { content, style, color } = attributes;
+    const { content } = attributes;
     return (
-      <div className={ getClasses(style, color) }>
+      <div className={attributes.style + attributes.color + BLOCK_CLASS}>
         <InnerBlocks.Content />
       </div>
     );
