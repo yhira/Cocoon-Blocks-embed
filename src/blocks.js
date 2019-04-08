@@ -22,9 +22,9 @@ import './block/timeline/block.js';
 import './block/icon-list/block.js';
 
 //汎用ブロック
-import './block-multi/caption-box/block.js';
-import './block-multi/tab-caption-box/block.js';
-import './block-multi/label-box/block.js';
+import './block-universal/caption-box/block.js';
+import './block-universal/tab-caption-box/block.js';
+import './block-universal/label-box/block.js';
 
 //マイクロコピー
 import './micro/micro-text/block.js';
