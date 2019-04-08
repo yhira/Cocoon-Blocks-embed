@@ -63,7 +63,7 @@ export function colorValueToSlug(color){
       return 'brown';
       break;
     case '#949495':
-      return 'gray';
+      return 'grey';
       break;
     case '#333':
       return 'black';
@@ -100,7 +100,7 @@ export function slugToColorValue(slug){
     case 'brown':
       return '#954e2a';
       break;
-    case 'gray':
+    case 'grey':
       return '#949495';
       break;
     case 'black':

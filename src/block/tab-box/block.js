@@ -147,6 +147,7 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
             color={ color }
           />
           </PanelColorSettings>
+
         </InspectorControls>
 
         <div className={ getClasses(style, color) }>

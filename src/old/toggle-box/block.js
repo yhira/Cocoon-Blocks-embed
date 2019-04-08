@@ -5,33 +5,20 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, getDateID, colorValueToSlug} from '../../helpers.js';
-import classnames from 'classnames';
+import {THEME_NAME, BLOCK_CLASS, getDateID} from '../../helpers.js';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
+const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'トグルボックス見出し', THEME_NAME );
 
-//classの取得
-function getClasses(color) {
-  const classes = classnames(
-    {
-      'toggle-wrap': true,
-      [ `tb-${ colorValueToSlug(color) }` ]: !! color,
-      [ BLOCK_CLASS ]: true,
-    }
-  );
-  return classes;
-}
-
-registerBlockType( 'cocoon-blocks/toggle-box-1', {
+registerBlockType( 'cocoon-blocks/toggle-box', {
 
   title: __( 'トグルボックス', THEME_NAME ),
-  icon: 'randomize',
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( 'クリックすることでコンテンツ内容の表示を切り替えることができるボックスです。', THEME_NAME ),
 
   attributes: {
@@ -42,12 +29,15 @@ registerBlockType( 'cocoon-blocks/toggle-box-1', {
     },
     color: {
       type: 'string',
-      default: '',
+      default: 'toggle-wrap',
     },
     dateID: {
       type: 'string',
       default: '',
     },
+  },
+  supports: {
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {
@@ -62,25 +52,40 @@ registerBlockType( 'cocoon-blocks/toggle-box-1', {
     return (
       <Fragment>
         <InspectorControls>
+          <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
 
-          <PanelColorSettings
-            title={ __( '色設定', THEME_NAME ) }
-            initialOpen={ true }
-            colorSettings={ [
-              {
-                value: color,
-                onChange: ( value ) => setAttributes( { color: value } ),
-                label: __( '色', THEME_NAME ),
-              },
-            ] }
-          >
-            <ContrastChecker
-              color={ color }
+            <SelectControl
+              label={ __( '色', THEME_NAME ) }
+              value={ color }
+              onChange={ ( value ) => setAttributes( { color: value } ) }
+              options={ [
+                {
+                  value: 'toggle-wrap',
+                  label: __( 'デフォルト', THEME_NAME ),
+                },
+                {
+                  value: 'toggle-wrap tb-yellow',
+                  label: __( '黄色', THEME_NAME ),
+                },
+                {
+                  value: 'toggle-wrap tb-red',
+                  label: __( '赤色', THEME_NAME ),
+                },
+                {
+                  value: 'toggle-wrap tb-blue',
+                  label: __( '青色', THEME_NAME ),
+                },
+                {
+                  value: 'toggle-wrap tb-green',
+                  label: __( '緑色', THEME_NAME ),
+                },
+              ] }
             />
-          </PanelColorSettings>
+
+          </PanelBody>
         </InspectorControls>
 
-        <div className={ getClasses(color) }>
+        <div className={color + BLOCK_CLASS}>
           <input id={"toggle-checkbox-" + dateID} className="toggle-checkbox" type="checkbox" />
           <label className="toggle-button" for={"toggle-checkbox-" + dateID}>
             <RichText
@@ -100,7 +105,7 @@ registerBlockType( 'cocoon-blocks/toggle-box-1', {
   save( { attributes } ) {
     const { content, color, dateID } = attributes;
     return (
-      <div className={ getClasses(color) }>
+      <div className={color + BLOCK_CLASS}>
         <input id={"toggle-checkbox-" + dateID} className="toggle-checkbox" type="checkbox" />
         <label className="toggle-button" for={"toggle-checkbox-" + dateID}>
           <RichText.Content
