@@ -33,6 +33,7 @@ import './micro/micro-balloon/block.js';
 //旧バージョン
 import './old/micro-balloon/block.js';
 import './old/balloon/block.js';
+import './old/blank-box/block.js';
 
 // import './demo/test/block.js';
 // import './demo/info-box-drop/block.js';

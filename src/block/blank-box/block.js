@@ -5,18 +5,30 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import {THEME_NAME, BLOCK_CLASS, colorValueToSlug} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls } = wp.editor;
-const { PanelBody, SelectControl, BaseControl } = wp.components;
+const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
+//const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入力は公開ページで反映されません。', THEME_NAME );
 
-registerBlockType( 'cocoon-blocks/blank-box', {
+//classの取得
+function getClasses(borderColor) {
+  const classes = classnames(
+    {
+      'blank-box': true,
+      [ `bb-${ colorValueToSlug(borderColor) }` ]: !! borderColor,
+      [ BLOCK_CLASS ]: true,
+    }
+  );
+  return classes;
+}
+
+registerBlockType( 'cocoon-blocks/blank-box-1', {
 
   title: __( '白抜きボックス', THEME_NAME ),
   icon: <FontAwesomeIcon icon={['far', 'square']} />,
@@ -26,63 +38,39 @@ registerBlockType( 'cocoon-blocks/blank-box', {
   attributes: {
     content: {
       type: 'string',
-      selector: 'div',
       default: DEFAULT_MSG,
     },
-    style: {
+    borderColor: {
       type: 'string',
-      default: 'blank-box',
+      default: '',
     },
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, style, alignment } = attributes;
-
-    function onChange(event){
-      setAttributes({style: event.target.value});
-    }
-
-    function onChangeContent(newContent){
-      setAttributes( { content: newContent } );
-    }
+    const { content, borderColor } = attributes;
 
     return (
       <Fragment>
         <InspectorControls>
-          <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
 
-            <SelectControl
-              label={ __( 'タイプ', THEME_NAME ) }
-              value={ style }
-              onChange={ ( value ) => setAttributes( { style: value } ) }
-              options={ [
-                {
-                  value: 'blank-box',
-                  label: __( 'デフォルト', THEME_NAME ),
-                },
-                {
-                  value: 'blank-box bb-yellow',
-                  label: __( '黄色', THEME_NAME ),
-                },
-                {
-                  value: 'blank-box bb-red',
-                  label: __( '赤色', THEME_NAME ),
-                },
-                {
-                  value: 'blank-box bb-blue',
-                  label: __( '青色', THEME_NAME ),
-                },
-                {
-                  value: 'blank-box bb-green',
-                  label: __( '緑色', THEME_NAME ),
-                },
-              ] }
-            />
-
-          </PanelBody>
+          <PanelColorSettings
+            title={ __( '色設定', THEME_NAME ) }
+            initialOpen={ true }
+            colorSettings={ [
+              {
+                value: borderColor,
+                onChange: ( value ) => setAttributes( { borderColor: value } ),
+                label: __( 'ボーダー色', THEME_NAME ),
+              },
+            ] }
+          >
+          <ContrastChecker
+            borderColor={ borderColor }
+          />
+          </PanelColorSettings>
         </InspectorControls>
 
-        <div className={attributes.style + BLOCK_CLASS}>
+        <div className={ getClasses(borderColor) }>
           <span className={'box-block-msg'}>
             <RichText
               value={ content }
@@ -96,9 +84,9 @@ registerBlockType( 'cocoon-blocks/blank-box', {
   },
 
   save( { attributes } ) {
-    const { content } = attributes;
+    const { content, borderColor } = attributes;
     return (
-      <div className={attributes.style + BLOCK_CLASS}>
+      <div className={ getClasses(borderColor) }>
         <InnerBlocks.Content />
       </div>
     );

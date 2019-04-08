@@ -19,8 +19,8 @@ const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入�
 registerBlockType( 'cocoon-blocks/blank-box', {
 
   title: __( '白抜きボックス', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'square']} />,
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( 'コンテンツを囲むだけのブランクボックスを表示します。', THEME_NAME ),
 
   attributes: {
@@ -33,6 +33,9 @@ registerBlockType( 'cocoon-blocks/blank-box', {
       type: 'string',
       default: 'blank-box',
     },
+  },
+  supports: {
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {
