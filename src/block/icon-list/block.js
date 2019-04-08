@@ -36,7 +36,7 @@ function getClasses(icon, iconColor, borderColor) {
 registerBlockType( 'cocoon-blocks/iconlist-box', {
 
   title: __( 'アイコンリスト', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['fas', 'list-ul']} />,
+  icon: <FontAwesomeIcon icon={['far', 'list-alt']} />,
   category: THEME_NAME + '-block',
   description: __( 'リストポイントにアイコンを適用した非順序リストです。', THEME_NAME ),
 
