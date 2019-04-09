@@ -7,6 +7,7 @@
 
 import {THEME_NAME, LAYOUT_BLOCK_CLASS} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -15,6 +16,18 @@ const { PanelBody, SelectControl, Path, SVG } = wp.components;
 const { Fragment } = wp.element;
 
 const ALLOWED_BLOCKS = [ 'cocoon-blocks/column-left', 'cocoon-blocks/column-center', 'cocoon-blocks/column-right' ];
+
+//classの取得
+function getClasses() {
+  const classes = classnames(
+    {
+      [ 'column-wrap' ]: true,
+      [ 'column-3' ]: true,
+      [ 'layout-box' ]: true,
+    }
+  );
+  return classes;
+}
 
 registerBlockType( 'cocoon-blocks/column-3', {
 
@@ -27,7 +40,7 @@ registerBlockType( 'cocoon-blocks/column-3', {
   edit( { attributes, setAttributes } ) {
     return (
       <Fragment>
-        <div className={"column-wrap column-3" + LAYOUT_BLOCK_CLASS}>
+        <div className={ getClasses() }>
           <InnerBlocks
           template={[
               [ 'cocoon-blocks/column-left', { placeholder: __( '左側に入力する内容', THEME_NAME ) } ],
@@ -44,7 +57,7 @@ registerBlockType( 'cocoon-blocks/column-3', {
 
   save( { attributes } ) {
     return (
-      <div className={"column-wrap column-3" + LAYOUT_BLOCK_CLASS}>
+      <div className={ getClasses() }>
         <InnerBlocks.Content />
       </div>
     );

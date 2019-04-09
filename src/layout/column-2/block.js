@@ -30,8 +30,6 @@ function getClasses(ratio) {
   return classes;
 }
 
-
-
 registerBlockType( 'cocoon-blocks/column-2', {
 
   title: __( '2カラム', THEME_NAME ),
