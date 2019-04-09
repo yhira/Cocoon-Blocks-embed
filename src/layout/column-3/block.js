@@ -23,7 +23,7 @@ function getClasses() {
     {
       [ 'column-wrap' ]: true,
       [ 'column-3' ]: true,
-      [ 'layout-box' ]: true,
+      [ LAYOUT_BLOCK_CLASS ]: true,
     }
   );
   return classes;

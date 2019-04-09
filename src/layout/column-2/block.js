@@ -24,7 +24,7 @@ function getClasses(ratio) {
       [ 'column-wrap' ]: true,
       [ 'column-2' ]: true,
       [ ratio ]: !! ratio,
-      [ 'layout-box' ]: true,
+      [ LAYOUT_BLOCK_CLASS ]: true,
     }
   );
   return classes;
