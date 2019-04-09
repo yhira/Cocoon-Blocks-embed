@@ -37,6 +37,7 @@ import './old/blank-box/block.js';
 import './old/tab-box/block.js';
 import './old/toggle-box/block.js';
 import './old/caption-box/block.js';
+import './old/tab-caption-box/block.js';
 
 // import './demo/test/block.js';
 // import './demo/info-box-drop/block.js';
