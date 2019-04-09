@@ -48,17 +48,44 @@ export function colorValueToSlug(color){
     case '#884898':
       return 'purple';
       break;
+    case '#55295b':
+      return 'deep';
+      break;
+    case '#1e50a2':
+      return 'indigo';
+      break;
     case '#0095d9':
       return 'blue';
+      break;
+    case '#2ca9e1':
+      return 'light-blue';
+      break;
+    case '#00a3af':
+      return 'cyan';
+      break;
+    case '#007b43':
+      return 'teal';
       break;
     case '#3eb370':
       return 'green';
       break;
-    case '#f39800':
-      return 'orange';
+    case '#8bc34a':
+      return 'light-green';
+      break;
+    case '#c3d825':
+      return 'lime';
       break;
     case '#ffd900':
       return 'yellow';
+      break;
+    case '#ffc107':
+      return 'amber';
+      break;
+    case '#f39800':
+      return 'orange';
+      break;
+    case '#ea5506':
+      return 'deep-orange';
       break;
     case '#954e2a':
       return 'brown';
