@@ -7,6 +7,7 @@
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -14,6 +15,17 @@ const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入力は公開ページで反映されません。', THEME_NAME );
+
+//classの取得
+function getClasses(style) {
+  const classes = classnames(
+    {
+      [ style ]: !! style,
+      [ 'block-box' ]: true,
+    }
+  );
+  return classes;
+}
 
 registerBlockType( 'cocoon-blocks/info-box', {
 
@@ -25,8 +37,6 @@ registerBlockType( 'cocoon-blocks/info-box', {
   attributes: {
     content: {
       type: 'string',
-      source: 'html',
-      selector: 'div',
       default: DEFAULT_MSG,
     },
     style: {
@@ -36,15 +46,7 @@ registerBlockType( 'cocoon-blocks/info-box', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, style, alignment } = attributes;
-
-    function onChange(event){
-      setAttributes({style: event.target.value});
-    }
-
-    function onChangeContent(newContent){
-      setAttributes( { content: newContent } );
-    }
+    const { content, style } = attributes;
 
     return (
       <Fragment>
@@ -94,7 +96,7 @@ registerBlockType( 'cocoon-blocks/info-box', {
           </PanelBody>
         </InspectorControls>
 
-        <div className={attributes.style + BLOCK_CLASS}>
+        <div className={ getClasses(style) }>
           <span className={'box-block-msg'}>
             <RichText
               value={ content }
@@ -108,9 +110,9 @@ registerBlockType( 'cocoon-blocks/info-box', {
   },
 
   save( { attributes } ) {
-    const { content } = attributes;
+    const { content, style } = attributes;
     return (
-      <div className={attributes.style + BLOCK_CLASS}>
+      <div className={ getClasses(style) }>
         <InnerBlocks.Content />
       </div>
     );
