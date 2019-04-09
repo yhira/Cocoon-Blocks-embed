@@ -32,6 +32,7 @@ import './micro/micro-balloon/block.js';
 
 //旧バージョン
 import './old/micro-balloon/block.js';
+import './old/micro-balloon-1/block.js';
 import './old/balloon/block.js';
 import './old/blank-box/block.js';
 import './old/tab-box/block.js';

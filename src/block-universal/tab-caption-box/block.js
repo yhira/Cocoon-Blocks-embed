@@ -78,7 +78,7 @@ registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
               </div>
             </BaseControl>
 
-          </PanelBody>>
+          </PanelBody>
 
           <PanelColorSettings
             title={ __( '色設定', THEME_NAME ) }

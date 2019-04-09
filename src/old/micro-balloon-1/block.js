@@ -5,52 +5,37 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, colorValueToSlug} from '../../helpers.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from 'classnames';
+import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
+const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, ToggleControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'マイクロコピーバルーン', THEME_NAME );
-const MICRO_COPY_CLASS = 'micro-copy';
+const MICRO_COPY_CLASS = ' micro-copy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-//classの取得
-function getClasses(style, isCircle, color) {
-  const classes = classnames(
-    {
-      [ 'micro-balloon' ]: true,
-      [ style ]: !! style,
-      [ `mc-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
-      [ 'mc-circle' ]: !! isCircle,
-      [ MICRO_COPY_CLASS ]: true,
-      [ 'block-box' ]: true,
-    }
-  );
-  return classes;
+function getCircleClass(isCircle) {
+  return isCircle ? ' mc-circle' : '';
 }
 
-// function getCircleClass(isCircle) {
-//   return isCircle ? ' mc-circle' : '';
-// }
-
-registerBlockType( 'cocoon-blocks/micro-balloon-2', {
+registerBlockType( 'cocoon-blocks/micro-balloon-1', {
 
   title: __( 'マイクロバルーン', THEME_NAME ),
-  icon: 'admin-comments',
-  category: THEME_NAME + '-micro',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( 'コンバージョンリンク（ボタン）の直上もしくは直下にテキストバルーン表示して、コンバージョン率アップを図るためのマイクロコピーです。', THEME_NAME ),
 
   attributes: {
     content: {
       type: 'string',
+      selector: 'div',
       default: DEFAULT_MSG,
     },
     style: {
       type: 'string',
-      default: 'micro-top',
+      default: ' micro-top',
     },
     color: {
       type: 'string',
@@ -64,6 +49,7 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
   supports: {
     align: [ 'left', 'center', 'right' ],
     customClassName: true,
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {
@@ -80,12 +66,40 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
               onChange={ ( value ) => setAttributes( { style: value } ) }
               options={ [
                 {
-                  value: 'micro-top',
+                  value: ' micro-top',
                   label: __( '下寄り', THEME_NAME ),
                 },
                 {
-                  value: 'micro-bottom',
+                  value: ' micro-bottom',
                   label: __( '上寄り', THEME_NAME ),
+                },
+              ] }
+            />
+
+            <SelectControl
+              label={ __( '色', THEME_NAME ) }
+              value={ color }
+              onChange={ ( value ) => setAttributes( { color: value } ) }
+              options={ [
+                {
+                  value: '',
+                  label: __( 'デフォルト', THEME_NAME ),
+                },
+                {
+                  value: ' mc-yellow',
+                  label: __( '黄色', THEME_NAME ),
+                },
+                {
+                  value: ' mc-red',
+                  label: __( '赤色', THEME_NAME ),
+                },
+                {
+                  value: ' mc-blue',
+                  label: __( '青色', THEME_NAME ),
+                },
+                {
+                  value: ' mc-green',
+                  label: __( '緑色', THEME_NAME ),
                 },
               ] }
             />
@@ -97,26 +111,9 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
             />
 
           </PanelBody>
-
-          <PanelColorSettings
-            title={ __( '色設定', THEME_NAME ) }
-            initialOpen={ true }
-            colorSettings={ [
-              {
-                value: color,
-                onChange: ( value ) => setAttributes( { color: value } ),
-                label: __( '色', THEME_NAME ),
-              },
-            ] }
-          >
-            <ContrastChecker
-              color={ color }
-            />
-          </PanelColorSettings>
-
         </InspectorControls>
 
-        <div className={ getClasses(style, isCircle, color) }>
+        <div className={'micro-balloon' + style + color + getCircleClass(isCircle) + MICRO_COPY_CLASS + BLOCK_CLASS}>
           <RichText
             value={ content }
             onChange={ ( value ) => setAttributes( { content: value } ) }
@@ -128,8 +125,9 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
 
   save( { attributes } ) {
     const { content, style, isCircle, color } = attributes;
+    //let circleClass = isCircle ? ' mc-circle' : '';
     return (
-      <div className={ getClasses(style, isCircle, color) }>
+      <div className={'micro-balloon' + style + color + getCircleClass(isCircle) + MICRO_COPY_CLASS + BLOCK_CLASS}>
         <RichText.Content
           value={ content }
         />
