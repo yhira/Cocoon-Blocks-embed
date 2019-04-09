@@ -22,8 +22,8 @@ function getClasses(style, color) {
       'blank-box': true,
       'bb-tab': true,
       [ style ]: !! style,
-      [ `bb-${ colorValueToSlug(color) }` ]: !! color,
-      [ BLOCK_CLASS ]: true,
+      [ `bb-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
+      [ 'block-box' ]: true,
     }
   );
   return classes;

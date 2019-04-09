@@ -20,8 +20,8 @@ function getClasses(color) {
   const classes = classnames(
     {
       'toggle-wrap': true,
-      [ `tb-${ colorValueToSlug(color) }` ]: !! color,
-      [ BLOCK_CLASS ]: true,
+      [ `tb-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
+      [ 'block-box' ]: true,
     }
   );
   return classes;

@@ -21,8 +21,8 @@ function getClasses(borderColor) {
   const classes = classnames(
     {
       'blank-box': true,
-      [ `bb-${ colorValueToSlug(borderColor) }` ]: !! borderColor,
-      [ BLOCK_CLASS ]: true,
+      [ `bb-${ colorValueToSlug(borderColor) }` ]: !! colorValueToSlug(borderColor),
+      [ 'block-box' ]: true,
     }
   );
   return classes;
