@@ -7,6 +7,7 @@
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -14,6 +15,17 @@ const { RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'キーワード', THEME_NAME );
+
+//classの取得
+function getClasses() {
+  const classes = classnames(
+    {
+      [ 'search-form' ]: true,
+      [ 'block-box' ]: true,
+    }
+  );
+  return classes;
+}
 
 registerBlockType( 'cocoon-blocks/search-box', {
 
@@ -32,13 +44,9 @@ registerBlockType( 'cocoon-blocks/search-box', {
   edit( { attributes, setAttributes } ) {
     const { content } = attributes;
 
-    function onChange(event){
-      setAttributes({content: event.target.value});
-    }
-
     return (
       <Fragment>
-        <div className={"search-form" + BLOCK_CLASS}>
+        <div className={ getClasses() }>
           <div className="sform">
             <RichText
               value={ content }
@@ -46,7 +54,9 @@ registerBlockType( 'cocoon-blocks/search-box', {
               placeholder={ DEFAULT_MSG }
             />
           </div>
-          <div className="sbtn">検索</div>
+          <div className="sbtn">
+            { __( '検索', THEME_NAME ) }
+          </div>
         </div>
       </Fragment>
     );
@@ -56,7 +66,7 @@ registerBlockType( 'cocoon-blocks/search-box', {
     const { content } = attributes;
     return (
 
-      <div className={"search-form" + BLOCK_CLASS}>
+      <div className={ getClasses() }>
         <div className="sform">
           <RichText.Content
             value={ content }
