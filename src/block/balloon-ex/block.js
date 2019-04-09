@@ -16,6 +16,22 @@ const { Button, PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_NAME = __( '未入力', THEME_NAME );
 
+//classの取得
+function getClasses(index, style, position, iconstyle) {
+  const classes = classnames(
+    {
+      [ 'speech-wrap' ]: true,
+      [ `sb-id-${ speechBaloons[index].id }` ]: !! speechBaloons[index].id,
+      [ `sbs-${ style  }` ]: !! style ,
+      [ `sbp-${ position  }` ]: !! position ,
+      [ `sbis-${ iconstyle  }` ]: !! iconstyle ,
+      [ 'cf' ]: true,
+      [ 'block-box' ]: true,
+    }
+  );
+  return classes;
+}
+
 registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
   title: __( '吹き出しEX', THEME_NAME ),
@@ -161,14 +177,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
         </InspectorControls>
 
         <div
-          className={
-            "speech-wrap sb-id-" + speechBaloons[index].id +
-            " sbs-" + style +
-            " sbp-" + position +
-            " sbis-" + iconstyle +
-            " cf" +
-            BLOCK_CLASS
-          }>
+          className={ getClasses(index, style, position, iconstyle) }>
           <div className="speech-person">
             <figure className="speech-icon">
               <MediaUpload
@@ -203,14 +212,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
     const { name, index, style, position, iconstyle, icon } = attributes;
     return (
         <div
-          className={
-            "speech-wrap sb-id-" + speechBaloons[index].id +
-            " sbs-" + style +
-            " sbp-" + position +
-            " sbis-" + iconstyle +
-            " cf" +
-            BLOCK_CLASS
-          }>
+          className={ getClasses(index, style, position, iconstyle) }>
           <div className="speech-person">
             <figure className="speech-icon">
               <img
