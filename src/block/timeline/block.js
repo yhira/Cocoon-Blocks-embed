@@ -7,6 +7,7 @@
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -110,6 +111,18 @@ const getItemsTemplate = memoize( ( items ) => {
   return times( items, () => [ 'cocoon-blocks/timeline-item' ] );
 } );
 
+//classの取得
+function getClasses() {
+  const classes = classnames(
+    {
+      [ 'timeline-box' ]: true,
+      [ 'cf' ]: true,
+      [ 'block-box' ]: true,
+    }
+  );
+  return classes;
+}
+
 //タイムライン
 registerBlockType( 'cocoon-blocks/timeline', {
 
@@ -144,7 +157,7 @@ registerBlockType( 'cocoon-blocks/timeline', {
           />
           </PanelBody>
         </InspectorControls>
-        <div className={"timeline-box cf" + BLOCK_CLASS}>
+        <div className={ getClasses() }>
           <div class="timeline-title">
             <RichText
               value={ title }
@@ -167,7 +180,7 @@ registerBlockType( 'cocoon-blocks/timeline', {
   save( { attributes } ) {
     const { title, items } = attributes;
     return (
-      <div className={"timeline-box cf" + BLOCK_CLASS}>
+      <div className={ getClasses() }>
         <div class="timeline-title">
           <RichText.Content
               value={ title }
