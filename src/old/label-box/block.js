@@ -19,7 +19,7 @@ const DEFAULT_MSG = __( '見出し', THEME_NAME );
 registerBlockType( 'cocoon-blocks/label-box', {
 
   title: __( 'ラベルボックス', THEME_NAME ),
-  icon: 'tag',
+  icon: 'dismiss',
   category: THEME_NAME + '-universal-block',
   description: __( 'ボックスに「ラベル見出し」入力できる汎用ボックスです。', THEME_NAME ),
 
@@ -37,6 +37,9 @@ registerBlockType( 'cocoon-blocks/label-box', {
       type: 'string',
       default: '',
     },
+  },
+  supports: {
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {
