@@ -14,7 +14,7 @@ const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, TextareaControl } = wp.components;
 const { Fragment } = wp.element;
-const BUTTON_BLOCK = ' button-block';
+const BUTTON_BLOCK = 'button-block';
 
 registerBlockType( 'cocoon-blocks/button-wrap', {
 

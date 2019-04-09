@@ -5,17 +5,29 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import {THEME_NAME, BLOCK_CLASS, colorValueToSlug} from '../../helpers.js';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { RichText, InspectorControls } = wp.editor;
+const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, TextControl } = wp.components;
 const { Fragment } = wp.element;
-const BUTTON_BLOCK = ' button-block';
+const BUTTON_BLOCK = 'button-block';
 
-registerBlockType( 'cocoon-blocks/button', {
+//classの取得
+function getClasses(color, size) {
+  const classes = classnames(
+    {
+      'btn': true,
+      [ `btn-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
+      [ size ]: size,
+    }
+  );
+  return classes;
+}
+
+registerBlockType( 'cocoon-blocks/button-1', {
 
   title: __( 'ボタン', THEME_NAME ),
   icon: 'embed-generic',
@@ -37,7 +49,7 @@ registerBlockType( 'cocoon-blocks/button', {
     },
     color: {
       type: 'string',
-      default: 'btn btn-red',
+      default: keyColor,
     },
     size: {
       type: 'string',
@@ -51,14 +63,6 @@ registerBlockType( 'cocoon-blocks/button', {
 
   edit( { attributes, setAttributes } ) {
     const { content, color, size, url, target } = attributes;
-
-    // function onChange(event){
-    //   setAttributes({color: event.target.value});
-    // }
-
-    // function onChangeContent(newContent){
-    //   setAttributes( { content: newContent } );
-    // }
 
     return (
       <Fragment>
@@ -88,111 +92,48 @@ registerBlockType( 'cocoon-blocks/button', {
             />
 
             <SelectControl
-              label={ __( '色', THEME_NAME ) }
-              value={ color }
-              onChange={ ( value ) => setAttributes( { color: value } ) }
-              options={ [
-                {
-                  value: 'btn btn-red',
-                  label: __( 'レッド', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-pink',
-                  label: __( 'ピンク', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-purple',
-                  label: __( 'パープル', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-deep',
-                  label: __( 'ディープパープル', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-indigo',
-                  label: __( 'インディゴ[紺色]', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-blue',
-                  label: __( 'ブルー', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-blue',
-                  label: __( 'ライトブルー', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-cyan',
-                  label: __( 'シアン', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-teal',
-                  label: __( 'ティール[緑色がかった青]', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-green',
-                  label: __( 'グリーン', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-light-green',
-                  label: __( 'ライトグリーン', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-lime',
-                  label: __( 'ライム', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-yellow',
-                  label: __( 'イエロー', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-amber',
-                  label: __( 'アンバー[琥珀色]', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-orange',
-                  label: __( 'オレンジ', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-deep-orange',
-                  label: __( 'ディープオレンジ', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-brown',
-                  label: __( 'ブラウン', THEME_NAME ),
-                },
-                {
-                  value: 'btn btn-grey',
-                  label: __( 'グレー', THEME_NAME ),
-                },
-              ] }
-            />
-
-            <SelectControl
               label={ __( 'サイズ', THEME_NAME ) }
               value={ size }
               onChange={ ( value ) => setAttributes( { size: value } ) }
               options={ [
                 {
-                  value: '',
+                  value: 'btn-s',
                   label: __( '小', THEME_NAME ),
                 },
                 {
-                  value: ' btn-m',
+                  value: 'btn-m',
                   label: __( '中', THEME_NAME ),
                 },
                 {
-                  value: ' btn-l',
+                  value: 'btn-l',
                   label: __( '大', THEME_NAME ),
                 },
               ] }
             />
 
           </PanelBody>
+
+          <PanelColorSettings
+            title={ __( '色設定', THEME_NAME ) }
+            initialOpen={ true }
+            colorSettings={ [
+              {
+                value: color,
+                onChange: ( value ) => setAttributes( { color: value } ),
+                label: __( 'ボーダー色', THEME_NAME ),
+              },
+            ] }
+          >
+            <ContrastChecker
+              color={ color }
+            />
+          </PanelColorSettings>
+
         </InspectorControls>
 
         <div className={BUTTON_BLOCK}>
           <span
-            className={color + size}
+            className={ getClasses(color, size) }
             href={ url }
             target={ target }
           >
@@ -213,7 +154,7 @@ registerBlockType( 'cocoon-blocks/button', {
       <div className={BUTTON_BLOCK}>
         <a
           href={ url }
-          className={color + size}
+          className={ getClasses(color, size) }
           target={ target }
         >
           <RichText.Content

@@ -64,10 +64,11 @@ registerBlockType( 'cocoon-blocks/blank-box-1', {
               },
             ] }
           >
-          <ContrastChecker
-            borderColor={ borderColor }
-          />
+            <ContrastChecker
+              borderColor={ borderColor }
+            />
           </PanelColorSettings>
+
         </InspectorControls>
 
         <div className={ getClasses(borderColor) }>

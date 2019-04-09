@@ -18,7 +18,7 @@ const BUTTON_BLOCK = ' button-block';
 registerBlockType( 'cocoon-blocks/button', {
 
   title: __( 'ボタン', THEME_NAME ),
-  icon: 'embed-generic',
+  icon: 'dismiss',
   category: THEME_NAME + '-block',
   description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
 
@@ -47,6 +47,7 @@ registerBlockType( 'cocoon-blocks/button', {
   supports: {
     align: [ 'left', 'center', 'right' ],
     customClassName: true,
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {
