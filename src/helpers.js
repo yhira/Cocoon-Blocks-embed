@@ -9,6 +9,7 @@ const { __ } = wp.i18n;
 
 export const THEME_NAME = 'cocoon';
 export const BLOCK_CLASS = ' block-box';
+export const BUTTON_BLOCK = 'button-block';
 export const LAYOUT_BLOCK_CLASS = 'layout-box';
 export const PARAGRAPH_CLASS = ' paragraph';
 

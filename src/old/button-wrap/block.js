@@ -19,8 +19,8 @@ const BUTTON_BLOCK = ' button-block';
 registerBlockType( 'cocoon-blocks/button-wrap', {
 
   title: __( '囲みボタン', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['fas', 'ticket-alt']} />,
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( 'アスリートタグ等のタグを変更できないリンクをボタン化します。', THEME_NAME ),
 
   attributes: {
@@ -43,6 +43,7 @@ registerBlockType( 'cocoon-blocks/button-wrap', {
   },
   supports: {
     align: [ 'left', 'center', 'right' ],
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {

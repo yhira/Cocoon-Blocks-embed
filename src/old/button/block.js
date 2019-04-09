@@ -19,7 +19,7 @@ registerBlockType( 'cocoon-blocks/button', {
 
   title: __( 'ボタン', THEME_NAME ),
   icon: 'dismiss',
-  category: THEME_NAME + '-block',
+  category: THEME_NAME + '-old',
   description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
 
   attributes: {

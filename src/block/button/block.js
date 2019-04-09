@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, colorValueToSlug} from '../../helpers.js';
+import { THEME_NAME, BUTTON_BLOCK, colorValueToSlug } from '../../helpers.js';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
@@ -13,7 +13,6 @@ const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, TextControl } = wp.components;
 const { Fragment } = wp.element;
-const BUTTON_BLOCK = 'button-block';
 
 //classの取得
 function getClasses(color, size) {
@@ -120,7 +119,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
               {
                 value: color,
                 onChange: ( value ) => setAttributes( { color: value } ),
-                label: __( 'ボーダー色', THEME_NAME ),
+                label: __( '色', THEME_NAME ),
               },
             ] }
           >

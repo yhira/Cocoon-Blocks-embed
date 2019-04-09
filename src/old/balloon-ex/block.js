@@ -18,8 +18,8 @@ const DEFAULT_NAME = __( '未入力', THEME_NAME );
 registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
   title: __( '吹き出しEX', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'comments']} />,
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( '登録されている吹き出しのオプションを変更できます。', THEME_NAME ),
 
   attributes: {
