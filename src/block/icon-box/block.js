@@ -16,6 +16,18 @@ const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入力は公開ページで反映されません。', THEME_NAME );
 
+//classの取得
+function getClasses(style) {
+  const classes = classnames(
+    {
+      [ style ]: !! style,
+      'common-icon-box': true,
+      [ 'block-box' ]: true,
+    }
+  );
+  return classes;
+}
+
 registerBlockType( 'cocoon-blocks/icon-box', {
 
   title: __( 'アイコンボックス', THEME_NAME ),
@@ -26,26 +38,16 @@ registerBlockType( 'cocoon-blocks/icon-box', {
   attributes: {
     content: {
       type: 'string',
-      source: 'html',
-      selector: 'div',
       default: DEFAULT_MSG,
     },
     style: {
       type: 'string',
-      default: 'information-box common-icon-box'
+      default: 'information-box'
     },
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, style, alignment } = attributes;
-
-    function onChange(event){
-      setAttributes({style: event.target.value});
-    }
-
-    function onChangeContent(newContent){
-      setAttributes( { content: newContent } );
-    }
+    const { content, style } = attributes;
 
     return (
       <Fragment>
@@ -58,43 +60,43 @@ registerBlockType( 'cocoon-blocks/icon-box', {
               onChange={ ( value ) => setAttributes( { style: value } ) }
               options={ [
                 {
-                  value: 'information-box common-icon-box',
+                  value: 'information-box',
                   label: __( '補足情報(i)', THEME_NAME ),
                 },
                 {
-                  value: 'question-box common-icon-box',
+                  value: 'question-box',
                   label: __( '補足情報(?)', THEME_NAME ),
                 },
                 {
-                  value: 'alert-box common-icon-box',
+                  value: 'alert-box',
                   label: __( '補足情報(!)', THEME_NAME ),
                 },
                 {
-                  value: 'memo-box common-icon-box',
+                  value: 'memo-box',
                   label: __( 'メモ', THEME_NAME ),
                 },
                 {
-                  value: 'comment-box common-icon-box',
+                  value: 'comment-box',
                   label: __( 'コメント', THEME_NAME ),
                 },
                 {
-                  value: 'ok-box common-icon-box',
+                  value: 'ok-box',
                   label: __( 'OK', THEME_NAME ),
                 },
                 {
-                  value: 'ng-box common-icon-box',
+                  value: 'ng-box',
                   label: __( 'NG', THEME_NAME ),
                 },
                 {
-                  value: 'good-box common-icon-box',
+                  value: 'good-box',
                   label: __( 'GOOD', THEME_NAME ),
                 },
                 {
-                  value: 'bad-box common-icon-box',
+                  value: 'bad-box',
                   label: __( 'BAD', THEME_NAME ),
                 },
                 {
-                  value: 'profile-box common-icon-box',
+                  value: 'profile-box',
                   label: __( 'プロフィール', THEME_NAME ),
                 },
               ] }
@@ -103,7 +105,7 @@ registerBlockType( 'cocoon-blocks/icon-box', {
           </PanelBody>
         </InspectorControls>
 
-        <div className={attributes.style + BLOCK_CLASS}>
+        <div className={ getClasses(style) }>
           <span className={'box-block-msg'}>
             <RichText
               value={ content }
@@ -117,9 +119,9 @@ registerBlockType( 'cocoon-blocks/icon-box', {
   },
 
   save( { attributes } ) {
-    const { content } = attributes;
+    const { content, style } = attributes;
     return (
-      <div className={attributes.style + BLOCK_CLASS}>
+      <div className={ getClasses(style) }>
         <InnerBlocks.Content />
       </div>
     );
