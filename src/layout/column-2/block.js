@@ -6,23 +6,31 @@
  */
 
 import {THEME_NAME, LAYOUT_BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl } = wp.components;
 const { Fragment } = wp.element;
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// const THEME_NAME = 'cocoon';
-// //const DEFAULT_MSG = __( 'キーワード', THEME_NAME );
-// const BLOCK_CLASS = ' layout-box';
-// import memoize from 'memize';
-// import { times } from 'lodash';
 
 const ALLOWED_BLOCKS = [ 'cocoon-blocks/column-left', 'cocoon-blocks/column-right' ];
-// const getColumnsTemplate = memoize( ( columns ) => {
-//   return times( columns, () => [ 'cocoon-blocks/column-left' ] );
-// } );
+
+//classの取得
+function getClasses(ratio) {
+  const classes = classnames(
+    {
+      [ 'column-wrap' ]: true,
+      [ 'column-2' ]: true,
+      [ ratio ]: !! ratio,
+      [ 'layout-box' ]: true,
+    }
+  );
+  return classes;
+}
+
+
 
 registerBlockType( 'cocoon-blocks/column-2', {
 
@@ -34,7 +42,7 @@ registerBlockType( 'cocoon-blocks/column-2', {
   attributes: {
     ratio: {
       type: 'string',
-      default: ' column-2-2-1-1',
+      default: 'column-2-2-1-1',
     },
   },
 
@@ -51,23 +59,23 @@ registerBlockType( 'cocoon-blocks/column-2', {
               onChange={ ( value ) => setAttributes( { ratio: value } ) }
               options={ [
                 {
-                  value: ' column-2-2-1-1',
+                  value: 'column-2-2-1-1',
                   label: __( '1:1（｜□｜□｜）', THEME_NAME ),
                 },
                 {
-                  value: ' column-2-3-1-2',
+                  value: 'column-2-3-1-2',
                   label: __( '1:2（｜□｜□□｜）', THEME_NAME ),
                 },
                 {
-                  value: ' column-2-3-2-1',
+                  value: 'column-2-3-2-1',
                   label: __( '2:1（｜□□｜□｜）', THEME_NAME ),
                 },
                 {
-                  value: ' column-2-4-1-3',
+                  value: 'column-2-4-1-3',
                   label: __( '1:3（｜□｜□□□｜））', THEME_NAME ),
                 },
                 {
-                  value: ' column-2-4-3-1',
+                  value: 'column-2-4-3-1',
                   label: __( '3:1,（｜□□□｜□｜）', THEME_NAME ),
                 },
               ] }
@@ -75,7 +83,7 @@ registerBlockType( 'cocoon-blocks/column-2', {
 
           </PanelBody>
         </InspectorControls>
-        <div className={"column-wrap column-2" + ratio + LAYOUT_BLOCK_CLASS}>
+        <div className={ getClasses(ratio) }>
           <InnerBlocks
           template={[
               [ 'cocoon-blocks/column-left', { placeholder: __( '左側に入力する内容', THEME_NAME ) } ],
@@ -92,7 +100,7 @@ registerBlockType( 'cocoon-blocks/column-2', {
   save( { attributes } ) {
     const { ratio } = attributes;
     return (
-      <div className={"column-wrap column-2" + ratio + LAYOUT_BLOCK_CLASS}>
+      <div className={ getClasses(ratio) }>
         <InnerBlocks.Content />
       </div>
     );
