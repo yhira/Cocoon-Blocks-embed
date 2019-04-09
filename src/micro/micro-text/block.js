@@ -6,6 +6,7 @@
  */
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -13,8 +14,20 @@ const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_MSG = __( 'マイクロコピーテキスト', THEME_NAME );
-const MICRO_COPY_CLASS = ' micro-copy';
-  description: __( 'コンバージョンリンク（ボタン）の直上もしくは直下に小さくテキスト表示して、コンバージョン率アップを図るためのマイクロコピーです。', THEME_NAME ),
+const MICRO_COPY_CLASS = 'micro-copy';
+  description: __( 'コンバージョンリンク（ボタン）の直上もしくは直下に小さくテキスト表示して、コンバージョン率アップを図るためのマイクロコピーです。', THEME_NAME );
+
+//classの取得
+function getClasses(style) {
+  const classes = classnames(
+    {
+      [ MICRO_COPY_CLASS ]: true,
+      [ style ]: !! style,
+      [ 'block-box' ]: true,
+    }
+  );
+  return classes;
+}
 
 registerBlockType( 'cocoon-blocks/micro-text', {
 
@@ -65,7 +78,7 @@ registerBlockType( 'cocoon-blocks/micro-text', {
           </PanelBody>
         </InspectorControls>
 
-        <div className={style + MICRO_COPY_CLASS + BLOCK_CLASS}>
+        <div className={ getClasses(style) }>
           <RichText
             value={ content }
             onChange={ ( value ) => setAttributes( { content: value } ) }
@@ -78,7 +91,7 @@ registerBlockType( 'cocoon-blocks/micro-text', {
   save( { attributes } ) {
     const { content, style } = attributes;
     return (
-      <div className={style + MICRO_COPY_CLASS + BLOCK_CLASS}>
+      <div className={ getClasses(style) }>
         <RichText.Content
           value={ content }
         />

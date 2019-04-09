@@ -23,7 +23,7 @@ function getClasses(color) {
     {
       [ CAPTION_BOX_CLASS ]: true,
       [ `lb-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
-      [ BLOCK_CLASS ]: true,
+      [ 'block-box' ]: true,
     }
   );
   return classes;
