@@ -6,6 +6,8 @@
  */
 
 import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -13,36 +15,37 @@ const { RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 
+//classの取得
+function getClasses(style) {
+  const classes = classnames(
+    {
+      'blogcard-type': true,
+      [ style ]: !! style,
+    }
+  );
+  return classes;
+}
+
 registerBlockType( 'cocoon-blocks/blogcard', {
 
   title: __( 'ブログカード', THEME_NAME ),
-  //icon: 'tablet',
+  icon: <FontAwesomeIcon icon={['far', 'address-card']} />,
   category: THEME_NAME + '-block',
   description: __( 'ブログカード表示用の入力ブロックを表示します。URLは複数入力可能です。', THEME_NAME ),
 
   attributes: {
     content: {
       type: 'string',
-      source: 'html',
-      selector: 'div',
       default: '',
     },
     style: {
       type: 'string',
-      default: 'blogcard-type bct-none',
+      default: 'bct-none',
     },
   },
 
   edit( { attributes, setAttributes } ) {
     const { content, style } = attributes;
-
-    function onChange(event){
-      setAttributes({style: event.target.value});
-    }
-
-    function onChangeContent(newContent){
-      setAttributes( { content: newContent } );
-    }
 
     return (
       <Fragment>
@@ -55,39 +58,39 @@ registerBlockType( 'cocoon-blocks/blogcard', {
               onChange={ ( value ) => setAttributes( { style: value } ) }
               options={ [
                 {
-                  value: 'blogcard-type bct-none',
+                  value: 'bct-none',
                   label: __( 'なし', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-related',
+                  value: 'bct-related',
                   label: __( '関連記事', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-reference',
+                  value: 'bct-reference',
                   label: __( '参考記事', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-popular',
+                  value: 'bct-popular',
                   label: __( '人気記事', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-together',
+                  value: 'bct-together',
                   label: __( 'あわせて読みたい', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-detail',
+                  value: 'bct-detail',
                   label: __( '詳細はこちら', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-check',
+                  value: 'bct-check',
                   label: __( 'チェック', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-pickup',
+                  value: 'bct-pickup',
                   label: __( 'ピックアップ', THEME_NAME ),
                 },
                 {
-                  value: 'blogcard-type bct-official',
+                  value: 'bct-official',
                   label: __( '公式サイト', THEME_NAME ),
                 },
               ] }
@@ -96,9 +99,9 @@ registerBlockType( 'cocoon-blocks/blogcard', {
           </PanelBody>
         </InspectorControls>
 
-        <div className={style}>
+        <div className={ getClasses(style) }>
           <RichText
-            onChange={ onChangeContent }
+            onChange={ ( value ) => setAttributes( { content: value } ) }
             value={ content }
             multiline="p"
           />
@@ -108,13 +111,13 @@ registerBlockType( 'cocoon-blocks/blogcard', {
   },
 
   save( { attributes } ) {
-    const { content } = attributes;
+    const { content, style } = attributes;
     return (
-      <div className={attributes.style}>
-          {"\n"}<RichText.Content
-            value={ content.replace(/<\/p><p>/, '</p>\n<p>') }
+      <div className={ getClasses(style) }>
+          <RichText.Content
+            value={ content }
             multiline={"p"}
-          />{"\n"}
+          />
       </div>
     );
   }
