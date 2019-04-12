@@ -35,6 +35,7 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
   icon: 'category',
   category: THEME_NAME + '-block',
   description: __( 'タブにメッセージ内容を伝えるための文字が書かれているボックスです。', THEME_NAME ),
+  keywords: [ 'tab', 'box' ],
 
   attributes: {
     content: {

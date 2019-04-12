@@ -39,6 +39,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
   icon: <FontAwesomeIcon icon={['far', 'list-alt']} />,
   category: THEME_NAME + '-block',
   description: __( 'リストポイントにアイコンを適用した非順序リストです。', THEME_NAME ),
+  keywords: [ 'icon', 'list', 'box' ],
 
   attributes: {
     title: {

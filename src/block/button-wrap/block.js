@@ -34,6 +34,7 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
   icon: <FontAwesomeIcon icon={['fas', 'ticket-alt']} />,
   category: THEME_NAME + '-block',
   description: __( 'アスリートタグ等のタグを変更できないリンクをボタン化します。', THEME_NAME ),
+  keywords: [ 'button', 'btn', 'wrap' ],
 
   attributes: {
     content: {

@@ -130,6 +130,7 @@ registerBlockType( 'cocoon-blocks/timeline', {
   icon: <FontAwesomeIcon icon={['far', 'clock']} />,
   category: THEME_NAME + '-block',
   description: __( '時系列を表現するためのブロックです。', THEME_NAME ),
+  keywords: [ 'timeline', 'box' ],
 
   attributes: {
     title: {

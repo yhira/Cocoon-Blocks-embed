@@ -36,6 +36,7 @@ registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
   icon: <FontAwesomeIcon icon={['fas', 'folder']} />,
   category: THEME_NAME + '-universal-block',
   description: __( 'ボックスに「タブ見出し」を入力できる汎用ボックスです。', THEME_NAME ),
+  keywords: [ 'tab', 'caption', 'box' ],
 
   attributes: {
     content: {

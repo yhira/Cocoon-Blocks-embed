@@ -34,6 +34,7 @@ registerBlockType( 'cocoon-blocks/blank-box-1', {
   icon: <FontAwesomeIcon icon={['far', 'square']} />,
   category: THEME_NAME + '-block',
   description: __( 'コンテンツを囲むだけのブランクボックスを表示します。', THEME_NAME ),
+  keywords: [ 'blank', 'box' ],
 
   attributes: {
     content: {

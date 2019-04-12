@@ -35,6 +35,7 @@ registerBlockType( 'cocoon-blocks/column-3', {
   icon: <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path fill="none" d="M0 0h24v24H0V0z"></path><g><path d="M21 4H3L2 5v14l1 1h18l1-1V5l-1-1zM8 18H4V6h4v12zm6 0h-4V6h4v12zm6 0h-4V6h4v12z"></path></g></svg>,
   category: THEME_NAME + '-layout',
   description: __( '本文を左・中央・右カラムに分けます。', THEME_NAME ),
+  keywords: [ 'column', '3' ],
 
 
   edit( { attributes, setAttributes } ) {

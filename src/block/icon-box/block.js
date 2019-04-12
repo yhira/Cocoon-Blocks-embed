@@ -34,6 +34,7 @@ registerBlockType( 'cocoon-blocks/icon-box', {
   icon: <FontAwesomeIcon icon={['fas', 'exclamation-circle']} />,
   category: THEME_NAME + '-block',
   description: __( 'アイコンを用いて直感的にメッセージ内容を伝えるためのボックスです。', THEME_NAME ),
+  keywords: [ 'icon', 'box' ],
 
   attributes: {
     content: {

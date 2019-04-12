@@ -36,6 +36,7 @@ registerBlockType( 'cocoon-blocks/caption-box-1', {
   icon: <FontAwesomeIcon icon={['far', 'window-maximize']} />,
   category: THEME_NAME + '-universal-block',
   description: __( 'ボックス「見出し」を入力できる汎用ボックスです。', THEME_NAME ),
+  keywords: [ 'caption', 'box' ],
 
   attributes: {
     content: {

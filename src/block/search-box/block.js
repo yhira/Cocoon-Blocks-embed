@@ -33,6 +33,7 @@ registerBlockType( 'cocoon-blocks/search-box', {
   icon: <FontAwesomeIcon icon={['fas', 'search']} />,
   category: THEME_NAME + '-block',
   description: __( '訪問者に検索を促すためのボックスです。検索をクリックすることで検索結果へ跳びます（※AMPページ以外）。', THEME_NAME ),
+  keywords: [ 'search', 'box' ],
 
   attributes: {
     content: {

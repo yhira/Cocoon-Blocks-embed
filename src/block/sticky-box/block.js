@@ -35,6 +35,7 @@ registerBlockType( 'cocoon-blocks/sticky-box', {
   icon: <FontAwesomeIcon icon={['far', 'sticky-note']} />,
   category: THEME_NAME + '-block',
   description: __( '目立つ濃いめの色で付箋風にメッセージを伝えるためのボックスです。', THEME_NAME ),
+  keywords: [ 'sticky', 'box' ],
 
   attributes: {
     content: {

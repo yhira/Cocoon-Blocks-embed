@@ -34,6 +34,7 @@ registerBlockType( 'cocoon-blocks/micro-text', {
   title: __( 'マイクロテキスト', THEME_NAME ),
   icon: 'editor-textcolor',
   category: THEME_NAME + '-micro',
+  keywords: [ 'micro', 'copy', 'text' ],
 
   attributes: {
     content: {

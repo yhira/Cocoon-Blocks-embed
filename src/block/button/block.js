@@ -32,6 +32,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   icon: 'embed-generic',
   category: THEME_NAME + '-block',
   description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
+  keywords: [ 'button', 'btn' ],
 
   attributes: {
     content: {

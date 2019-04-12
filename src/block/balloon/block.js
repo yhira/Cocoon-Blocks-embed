@@ -38,6 +38,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
   icon: <FontAwesomeIcon icon={['far', 'comment']} />,
   category: THEME_NAME + '-block',
   description: __( '登録されている吹き出しを挿入できます。', THEME_NAME ),
+  keywords: [ 'balloon', 'box' ],
 
   attributes: {
     name: {

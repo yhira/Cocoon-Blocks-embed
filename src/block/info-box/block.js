@@ -33,6 +33,7 @@ registerBlockType( 'cocoon-blocks/info-box', {
   icon: <FontAwesomeIcon icon={['fas', 'info-circle']} />,
   category: THEME_NAME + '-block',
   description: __( 'ボックスの背景色により、直感的にメッセージ内容を伝えるためのボックスです。', THEME_NAME ),
+  keywords: [ 'info', 'box' ],
 
   attributes: {
     content: {

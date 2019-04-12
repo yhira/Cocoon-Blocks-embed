@@ -33,6 +33,7 @@ registerBlockType( 'cocoon-blocks/toggle-box-1', {
   icon: 'randomize',
   category: THEME_NAME + '-block',
   description: __( 'クリックすることでコンテンツ内容の表示を切り替えることができるボックスです。', THEME_NAME ),
+  keywords: [ 'toggle', 'box' ],
 
   attributes: {
     content: {
