@@ -19,7 +19,7 @@ registerBlockType( 'cocoon-blocks/blogcard', {
   //icon: 'tablet',
   category: THEME_NAME + '-block',
   description: __( 'ブログカード表示用の入力ブロックを表示します。URLは複数入力可能です。', THEME_NAME ),
-  keywords: [ 'blogcard', 'box' ],
+  keywords: [ 'blogcard', 'box', 'wrap' ],
 
   attributes: {
     content: {

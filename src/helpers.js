@@ -96,6 +96,9 @@ export function colorValueToSlug(color){
     case '#333':
       return 'black';
       break;
+    case '#fff':
+      return 'white';
+      break;
     default:
       return '';
       break;
