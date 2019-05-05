@@ -10,7 +10,7 @@ import classnames from 'classnames';
 
 const { times } = lodash;
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, createBlock } = wp.blocks;
 const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, Button } = wp.components;
 const { Fragment } = wp.element;
@@ -50,6 +50,24 @@ registerBlockType( 'cocoon-blocks/label-box-1', {
       type: 'string',
       default: '',
     },
+  },
+  transforms: {
+    to: [
+      {
+        type: 'block',
+        blocks: [ 'cocoon-blocks/caption-box-1' ],
+        transform: ( attributes ) => {
+          return createBlock( 'cocoon-blocks/caption-box-1', attributes );
+        },
+      },
+      {
+        type: 'block',
+        blocks: [ 'cocoon-blocks/tab-caption-box-1' ],
+        transform: ( attributes ) => {
+          return createBlock( 'cocoon-blocks/tab-caption-box-1', attributes );
+        },
+      },
+    ],
   },
 
   edit( { attributes, setAttributes } ) {
