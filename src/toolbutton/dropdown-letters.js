@@ -25,7 +25,7 @@ registerFormatType( FORMAT_TYPE_NAME, {
       <BlockFormatControls>
         <div className="editor-format-toolbar block-editor-format-toolbar">
           <Toolbar>
-            <Slot name="Cocoon.ToolbarControls">
+            <Slot name="Letter.ToolbarControls">
               { ( fills ) => fills.length !== 0 &&
                 <DropdownMenu
                   icon="editor-textcolor"

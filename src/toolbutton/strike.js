@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, CocoonToolbarButton } from '../helpers.js';
+import {THEME_NAME, LetterToolbarButton } from '../helpers.js';
 const { Fragment } = wp.element;
 const { __ } = wp.i18n;
 const { registerFormatType, toggleFormat } = wp.richText;
@@ -23,7 +23,7 @@ registerFormatType( FORMAT_TYPE_NAME, {
 
     return (
       <Fragment>
-        <CocoonToolbarButton
+        <LetterToolbarButton
           icon={<FontAwesomeIcon icon="strikethrough" />}
           title={<s>{TITLE}</s>}
           onClick={ onToggle }

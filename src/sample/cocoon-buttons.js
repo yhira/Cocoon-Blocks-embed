@@ -3,7 +3,7 @@ const {RichText} = wp.editor;
 const {registerFormatType,toggleFormat}=wp.richText;
 const {__}=wp.i18n;
 
-import { CocoonToolbarButton } from '../helpers.js';
+import { LetterToolbarButton } from '../helpers.js';
 
 registerFormatType('cocoon/small',{
     title:'small',
@@ -14,7 +14,7 @@ registerFormatType('cocoon/small',{
 
         return (
             <Fragment>
-              <CocoonToolbarButton
+              <LetterToolbarButton
                     icon={'admin-tools'}
                     title={'small'}
                     onClick={onToggle}
@@ -34,7 +34,7 @@ registerFormatType('cocoon/large',{
 
         return (
             <Fragment>
-              <CocoonToolbarButton
+              <LetterToolbarButton
                     icon={'admin-network'}
                     title={'large'}
                     onClick={onToggle}

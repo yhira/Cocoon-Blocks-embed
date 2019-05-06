@@ -496,9 +496,9 @@ export const LIST_ICONS = [
   },
 ];
 
-export function CocoonToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+export function LetterToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
   let shortcut;
-  let fillName = 'Cocoon.ToolbarControls';
+  let fillName = 'Letter.ToolbarControls';
 
   if ( name ) {
     fillName += `.${ name }`;
@@ -517,4 +517,27 @@ export function CocoonToolbarButton( { name, shortcutType, shortcutCharacter, ..
     </Fill>
   );
 }
+
+export function FontSizeToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'FontSize.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
 
