@@ -5,36 +5,30 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
+import {THEME_NAME, CocoonToolbarButton } from '../helpers.js';
 const { Fragment } = wp.element;
 const { __ } = wp.i18n;
 const { registerFormatType, toggleFormat } = wp.richText;
 const { RichTextShortcut, RichTextToolbarButton } = wp.editor;
-const THEME_NAME = 'cocoon';
 const FORMAT_TYPE_NAME = 'cocoon-blocks/green';
+const TITLE = __( '緑色', THEME_NAME );
 
 registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( '緑色', THEME_NAME ),
+  title: TITLE,
   tagName: 'span',
   className: 'green',
-  // edit( { isActive, value, onChange } ) {
-  //   const onToggle = () => onChange( toggleFormat( value, { type: FORMAT_TYPE_NAME } ) );
+  edit({isActive, value, onChange}){
+    const onToggle = () => onChange(toggleFormat(value,{type:FORMAT_TYPE_NAME}));
 
-  //   return (
-  //     <Fragment>
-  //       <RichTextShortcut
-  //         type='primary'
-  //         character=''
-  //         onUse={ onToggle }
-  //       />
-  //       <RichTextToolbarButton
-  //         title={ __( '緑字', THEME_NAME ) }
-  //         icon='editor-textcolor'
-  //         onClick={ onToggle }
-  //         isActive={ isActive }
-  //         shortcutType='primary'
-  //         shortcutCharacter=''
-  //       />
-  //     </Fragment>
-  //   );
-  // },
+    return (
+      <Fragment>
+        <CocoonToolbarButton
+          icon={'editor-textcolor'}
+          title={<span className="green">{TITLE}</span>}
+          onClick={ onToggle }
+          isActive={ isActive }
+        />
+      </Fragment>
+    );
+  }
 } );

@@ -67,8 +67,8 @@ import './toolbutton/blue.js';
 import './toolbutton/bold-blue.js';
 import './toolbutton/green.js';
 import './toolbutton/bold-green.js';
-import './toolbutton/strike.js';
 import './toolbutton/keyboard-key.js';
+import './toolbutton/strike.js';
 
 //マーカー
 import './toolbutton/marker-yellow.js';
@@ -94,3 +94,7 @@ import './toolbutton/dropdown-letters.js';
 import './toolbutton/dropdown-markers.js';
 import './toolbutton/dropdown-badges.js';
 import './toolbutton/dropdown-font-sizes.js';
+
+// //サンプル
+// import './sample/cocoon-buttons.js';
+// import './sample/cocoon-dropdown.js';
