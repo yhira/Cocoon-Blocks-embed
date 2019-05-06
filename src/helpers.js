@@ -518,6 +518,51 @@ export function LetterToolbarButton( { name, shortcutType, shortcutCharacter, ..
   );
 }
 
+export function MarkerToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'Marker.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
+export function BadgeToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'Badge.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
+
 export function FontSizeToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
   let shortcut;
   let fillName = 'FontSize.ToolbarControls';
