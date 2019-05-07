@@ -6,6 +6,8 @@
  */
 
 const { __ } = wp.i18n;
+const { Fill, ToolbarButton } = wp.components;
+const { displayShortcut } = wp.keycodes;
 
 export const THEME_NAME = 'cocoon';
 export const BLOCK_CLASS = ' block-box';
@@ -493,3 +495,94 @@ export const LIST_ICONS = [
     label: __( 'fab-window-close-o', THEME_NAME ),
   },
 ];
+
+export function LetterToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'Letter.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
+export function MarkerToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'Marker.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
+export function BadgeToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'Badge.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
+
+export function FontSizeToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'FontSize.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
+

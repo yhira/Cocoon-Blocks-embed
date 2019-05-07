@@ -5,74 +5,39 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
+import { THEME_NAME } from '../helpers.js';
 const { Fragment } = wp.element;
 const { __ } = wp.i18n;
 const { registerFormatType, toggleFormat } = wp.richText;
-const { BlockControls, RichTextShortcut, RichTextToolbarButton } = wp.editor;
-const { Toolbar, DropdownMenu } = wp.components;
-const THEME_NAME = 'cocoon';
+const { BlockFormatControls } = wp.editor;
+const { Slot, Toolbar, DropdownMenu } = wp.components;
 const FORMAT_TYPE_NAME = 'cocoon-blocks/markers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { orderBy } from 'lodash';
 
 registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( '文字', THEME_NAME ),
+  title: __( 'マーカー', THEME_NAME ),
   tagName: 'span',
   className: 'markers',
-  edit( { isActive, value, onChange } ) {
-
-    var cursolPositionObject = value.formats[value.start];
-    var type = cursolPositionObject ? cursolPositionObject[0].type : '';
+  edit({isActive, value, onChange}){
 
     return (
-      <Fragment>
-        <BlockControls>
+      <BlockFormatControls>
+        <div className="editor-format-toolbar block-editor-format-toolbar">
           <Toolbar>
-            <DropdownMenu
-              icon={ <FontAwesomeIcon icon="highlighter" /> }
-              label={__( 'マーカー', THEME_NAME )}
-              className='merkers'
-              controls={ [
-                  {
-                      title: <span className="marker">{__( '黄色マーカー', THEME_NAME )}</span>,
-                      icon: <FontAwesomeIcon icon="highlighter" />,
-                      isActive: type === 'cocoon-blocks/marker',
-                      onClick: () => onChange( toggleFormat( value, { type: 'cocoon-blocks/marker' } ) )
-                  },
-                  {
-                      title: <span className="marker-under">{__( '黄色アンダーラインマーカー', THEME_NAME )}</span>,
-                      icon: <FontAwesomeIcon icon="window-minimize" />,
-                      isActive: type === 'cocoon-blocks/marker-under',
-                      onClick: () => onChange( toggleFormat( value, { type: 'cocoon-blocks/marker-under' } ) )
-                  },
-                  {
-                      title: <span className="marker-red">{__( '赤色マーカー', THEME_NAME )}</span>,
-                      icon: <FontAwesomeIcon icon="highlighter" />,
-                      isActive: type === 'cocoon-blocks/marker-red',
-                      onClick: () => onChange( toggleFormat( value, { type: 'cocoon-blocks/marker-red' } ) )
-                  },
-                  {
-                      title: <span className="marker-under-red">{__( '赤色アンダーラインマーカー', THEME_NAME )}</span>,
-                      icon: <FontAwesomeIcon icon="window-minimize" />,
-                      isActive: type === 'cocoon-blocks/marker-under-red',
-                      onClick: () => onChange( toggleFormat( value, { type: 'cocoon-blocks/marker-under-red' } ) )
-                  },
-                  {
-                      title: <span className="marker-blue">{__( '青色マーカー', THEME_NAME )}</span>,
-                      icon: <FontAwesomeIcon icon="highlighter" />,
-                      isActive: type === 'cocoon-blocks/marker-blue',
-                      onClick: () => onChange( toggleFormat( value, { type: 'cocoon-blocks/marker-blue' } ) )
-                  },
-                  {
-                      title: <span className="marker-under-blue">{__( '青色アンダーラインマーカー', THEME_NAME )}</span>,
-                      icon: <FontAwesomeIcon icon="window-minimize" />,
-                      isActive: type === 'cocoon-blocks/marker-under-blue',
-                      onClick: () => onChange( toggleFormat( value, { type: 'cocoon-blocks/marker-under-blue' } ) )
-                  },
-              ] }
-          />
+            <Slot name="Marker.ToolbarControls">
+              { ( fills ) => fills.length !== 0 &&
+                <DropdownMenu
+                  icon={<FontAwesomeIcon icon="highlighter" />}
+                  label={__( '文字', THEME_NAME )}
+                  className='letters'
+                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                />
+              }
+            </Slot>
           </Toolbar>
-        </BlockControls>
-      </Fragment>
+        </div>
+      </BlockFormatControls>
     );
-  },
+  }
 } );

@@ -5,58 +5,65 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
+import {THEME_NAME, FontSizeToolbarButton } from '../helpers.js';
 const { Fragment } = wp.element;
 const { __ } = wp.i18n;
 const { registerFormatType, toggleFormat } = wp.richText;
-const { BlockControls, RichTextShortcut, RichTextToolbarButton } = wp.editor;
-const { Toolbar, DropdownMenu } = wp.components;
-const THEME_NAME = 'cocoon';
+const { BlockFormatControls } = wp.editor;
+const { Slot, Toolbar, DropdownMenu } = wp.components;
 const FORMAT_TYPE_NAME = 'cocoon-blocks/font-sizes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { orderBy } from 'lodash';
 
 var sizes = [12, 14, 16, 18, 20, 22, 24, 28, 32, 36, 40, 44, 48];
 sizes.map((size, index) => {
   var name = 'fz-' + size + 'px';
-  registerFormatType( 'cocoon-blocks/' + name, {
+  var formatType = 'cocoon-blocks/' + name;
+  registerFormatType( formatType, {
     title: name,
     tagName: 'span',
     className: name,
+    edit({isActive, value, onChange}){
+      const onToggle = () => onChange(toggleFormat(value,{type:formatType}));
+
+      return (
+        <Fragment>
+          <FontSizeToolbarButton
+            icon={'edit'}
+            title={<span className={name}>{name}</span>}
+            onClick={ onToggle }
+            isActive={ isActive }
+          />
+        </Fragment>
+      );
+    }
   } );
 });
 
+//ドロップダウン
 registerFormatType( FORMAT_TYPE_NAME, {
   title: __( 'フォントサイズ', THEME_NAME ),
   tagName: 'span',
   className: 'font-sizes',
-  edit( { isActive, value, onChange } ) {
-
-    var cursolPositionObject = value.formats[value.start];
-    var type = cursolPositionObject ? cursolPositionObject[0].type : '';
-
-    var controls = [];
-    sizes.map((size, index) => {
-      var name = 'fz-' + size + 'px';
-      controls.push({
-        title: <span className={name}>{size}px</span>,
-        icon: 'edit',
-        isActive: type === 'cocoon-blocks/' + name,
-        onClick: () => onChange( toggleFormat( value, { type: 'cocoon-blocks/' + name } ) )
-      });
-    });
+  edit({isActive, value, onChange}){
 
     return (
-      <Fragment>
-        <BlockControls>
+      <BlockFormatControls>
+        <div className="editor-format-toolbar block-editor-format-toolbar">
           <Toolbar>
-            <DropdownMenu
-              icon={ <FontAwesomeIcon icon="text-height" /> }
-              label={__( 'フォントサイズ', THEME_NAME )}
-              className='font-sizes'
-              controls={ controls }
-          />
+            <Slot name="FontSize.ToolbarControls">
+              { ( fills ) => fills.length !== 0 &&
+                <DropdownMenu
+                  icon={ <FontAwesomeIcon icon="text-height" /> }
+                  label={__( 'フォントサイズ', THEME_NAME )}
+                  className='font-sizes'
+                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                />
+              }
+            </Slot>
           </Toolbar>
-        </BlockControls>
-      </Fragment>
+        </div>
+      </BlockFormatControls>
     );
-  },
+  }
 } );
