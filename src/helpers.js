@@ -35,6 +35,23 @@ export function getIconClass(icon){
   return icon ? (' ' + icon) : '';
 }
 
+//classの取得
+export function getClasses(id, style, position, iconstyle) {
+  const classes = classnames(
+    {
+      [ 'speech-wrap' ]: true,
+      [ `sb-id-${ id }` ]: !! id,
+      [ `sbs-${ style  }` ]: !! style ,
+      [ `sbp-${ position  }` ]: !! position ,
+      [ `sbis-${ iconstyle  }` ]: !! iconstyle ,
+      [ 'cf' ]: true,
+      [ 'block-box' ]: true,
+    }
+  );
+  return classes;
+}
+
+
 //色からスラッグを取得
 export function colorValueToSlug(color){
   switch (color) {
