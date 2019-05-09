@@ -34,6 +34,7 @@ import './micro/micro-balloon/block.js';
 import './old/micro-balloon/block.js';
 import './old/micro-balloon-1/block.js';
 import './old/balloon/block.js';
+import './old/balloon-1/block.js';
 import './old/blank-box/block.js';
 import './old/tab-box/block.js';
 import './old/toggle-box/block.js';

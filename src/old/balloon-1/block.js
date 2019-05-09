@@ -35,8 +35,8 @@ function getClasses(index) {
 registerBlockType( 'cocoon-blocks/balloon-box-1', {
 
   title: __( '吹き出し', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'comment']} />,
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( '登録されている吹き出しを挿入できます。', THEME_NAME ),
   keywords: [ 'balloon', 'box' ],
 
@@ -49,6 +49,9 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
       type: 'string',
       default: '0',
     },
+  },
+  supports: {
+    inserter: false,
   },
 
   edit( { attributes, setAttributes } ) {

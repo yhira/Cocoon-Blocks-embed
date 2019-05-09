@@ -17,14 +17,14 @@ const { Fragment } = wp.element;
 const DEFAULT_NAME = __( '未入力', THEME_NAME );
 
 //classの取得
-function getClasses(index) {
+function getClasses(id, icon, style, position, iconstyle) {
   const classes = classnames(
     {
       [ 'speech-wrap' ]: true,
-      [ `sb-id-${ speechBaloons[index].id }` ]: !! speechBaloons[index].id,
-      [ `sbs-${ speechBaloons[index].style  }` ]: !! speechBaloons[index].style ,
-      [ `sbp-${ speechBaloons[index].position  }` ]: !! speechBaloons[index].position ,
-      [ `sbis-${ speechBaloons[index].iconstyle  }` ]: !! speechBaloons[index].iconstyle ,
+      [ `sb-id-${ id }` ]: !! id,
+      [ `sbs-${ style  }` ]: !! style ,
+      [ `sbp-${ position  }` ]: !! position ,
+      [ `sbis-${ iconstyle  }` ]: !! iconstyle ,
       [ 'cf' ]: true,
       [ 'block-box' ]: true,
     }
@@ -32,7 +32,23 @@ function getClasses(index) {
   return classes;
 }
 
-registerBlockType( 'cocoon-blocks/balloon-box-1', {
+function isSameBalloon(index, id, icon, style, position, iconstyle) {
+  if (speechBaloons[index]) {
+    if (
+      speechBaloons[index].id == id &&
+      speechBaloons[index].icon == icon &&
+      speechBaloons[index].style == style &&
+      speechBaloons[index].position == position &&
+      speechBaloons[index].iconstyle == iconstyle
+
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+registerBlockType( 'cocoon-blocks/balloon-box-2', {
 
   title: __( '吹き出し', THEME_NAME ),
   icon: <FontAwesomeIcon icon={['far', 'comment']} />,
@@ -49,10 +65,57 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
       type: 'string',
       default: '0',
     },
+    id: {
+      type: 'string',
+      default: '',
+    },
+    icon: {
+      type: 'string',
+      default: '',
+    },
+    style: {
+      type: 'string',
+      default: 'stn',
+    },
+    position: {
+      type: 'string',
+      default: 'l',
+    },
+    iconstyle: {
+      type: 'string',
+      default: 'cb',
+    },
   },
 
   edit( { attributes, setAttributes } ) {
-    const { name, index } = attributes;
+    var { name, index, id, icon, style, position, iconstyle } = attributes;
+    //新規作成時
+    if (!icon && index == '0' && speechBaloons[0]) {
+        id = speechBaloons[0].id;
+        icon = speechBaloons[0].icon;
+        style = speechBaloons[0].style;
+        position = speechBaloons[0].position;
+        iconstyle = speechBaloons[0].iconstyle;
+        if (!name) {
+          name = speechBaloons[0].name;
+        }
+        setAttributes( { index: index, id: id, icon: icon, style: style, position: position, iconstyle: iconstyle } );
+    }
+    //新規作成以外
+    if (speechBaloons[index]) {
+      if (isSameBalloon(index, id, icon, style, position, iconstyle)) {
+
+        id = speechBaloons[index].id;
+        icon = speechBaloons[index].icon;
+        style = speechBaloons[index].style;
+        position = speechBaloons[index].position;
+        iconstyle = speechBaloons[index].iconstyle;
+        if (!name) {
+          name = speechBaloons[index].name;
+        }
+        setAttributes( { index: index, id: id, icon: icon, style: style, position: position, iconstyle: iconstyle } );
+      }
+    }
 
     //console.log(speechBaloons);
     var balloons = [];
@@ -76,7 +139,14 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
             <SelectControl
               label={ __( '人物', THEME_NAME ) }
               value={ index }
-              onChange={ ( value ) => setAttributes( { index: value } ) }
+              onChange={ ( value ) => setAttributes( {
+                index: value,
+                name: speechBaloons[value].name,
+                id: speechBaloons[value].id,
+                icon: speechBaloons[value].icon,
+                style: speechBaloons[value].style,
+                position: speechBaloons[value].position,
+                iconstyle: speechBaloons[value].iconstyle } ) }
               options={ balloons }
             />
 
@@ -84,18 +154,18 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
         </InspectorControls>
 
         <div
-          className={ getClasses(index) }>
+          className={ getClasses(id, icon, style, position, iconstyle) }>
           <div className="speech-person">
             <figure className="speech-icon">
               <img
-                src={speechBaloons[index].icon}
-                alt={speechBaloons[index].name}
+                src={icon}
+                alt={name}
                 className="speech-icon-image"
               />
             </figure>
             <div className="speech-name">
               <RichText
-                value={ name ? name : speechBaloons[index].name }
+                value={ name }
                 placeholder={DEFAULT_NAME}
                 onChange={ ( value ) => setAttributes( { name: value } ) }
               />
@@ -111,21 +181,21 @@ registerBlockType( 'cocoon-blocks/balloon-box-1', {
   },
 
   save( { attributes } ) {
-    const { name, index } = attributes;
+    const { name, index, id, icon, style, position, iconstyle } = attributes;
     return (
         <div
-          className={ getClasses(index) }>
+          className={ getClasses(id, icon, style, position, iconstyle) }>
           <div className="speech-person">
             <figure className="speech-icon">
               <img
-                src={speechBaloons[index].icon}
-                alt={speechBaloons[index].name}
+                src={icon}
+                alt={name}
                 className="speech-icon-image"
               />
             </figure>
             <div className="speech-name">
               <RichText.Content
-                value={ name ? name : speechBaloons[index].name }
+                value={ name }
               />
             </div>
           </div>
