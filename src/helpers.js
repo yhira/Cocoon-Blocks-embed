@@ -8,6 +8,7 @@
 const { __ } = wp.i18n;
 const { Fill, ToolbarButton } = wp.components;
 const { displayShortcut } = wp.keycodes;
+import classnames from 'classnames';
 
 export const THEME_NAME = 'cocoon';
 export const BLOCK_CLASS = ' block-box';
