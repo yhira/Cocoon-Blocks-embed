@@ -8,6 +8,7 @@
 const { __ } = wp.i18n;
 const { Fill, ToolbarButton } = wp.components;
 const { displayShortcut } = wp.keycodes;
+import classnames from 'classnames';
 
 export const THEME_NAME = 'cocoon';
 export const BLOCK_CLASS = ' block-box';
@@ -35,8 +36,8 @@ export function getIconClass(icon){
   return icon ? (' ' + icon) : '';
 }
 
-//classの取得
-export function getClasses(id, style, position, iconstyle) {
+//バルーンclassの取得
+export function getBalloonClasses(id, style, position, iconstyle) {
   const classes = classnames(
     {
       [ 'speech-wrap' ]: true,
@@ -49,6 +50,23 @@ export function getClasses(id, style, position, iconstyle) {
     }
   );
   return classes;
+}
+
+//オブジェクト吹き出しと保存した吹き出しの情報が同じか
+export function isSameBalloon(index, id, icon, style, position, iconstyle) {
+  if (speechBaloons[index]) {
+    if (
+      speechBaloons[index].id == id &&
+      speechBaloons[index].icon == icon &&
+      speechBaloons[index].style == style &&
+      speechBaloons[index].position == position &&
+      speechBaloons[index].iconstyle == iconstyle
+
+    ) {
+      return true;
+    }
+  }
+  return false;
 }
 
 

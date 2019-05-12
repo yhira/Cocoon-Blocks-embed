@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, getClasses} from '../../helpers.js';
+import {THEME_NAME, BLOCK_CLASS, getBalloonClasses, isSameBalloon} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
@@ -15,23 +15,6 @@ const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
 const DEFAULT_NAME = __( '未入力', THEME_NAME );
-
-//オブジェクト吹き出しと保存した吹き出しの情報が同じか
-function isSameBalloon(index, id, icon, style, position, iconstyle) {
-  if (speechBaloons[index]) {
-    if (
-      speechBaloons[index].id == id &&
-      speechBaloons[index].icon == icon &&
-      speechBaloons[index].style == style &&
-      speechBaloons[index].position == position &&
-      speechBaloons[index].iconstyle == iconstyle
-
-    ) {
-      return true;
-    }
-  }
-  return false;
-}
 
 registerBlockType( 'cocoon-blocks/balloon-box-2', {
 
@@ -139,7 +122,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-2', {
         </InspectorControls>
 
         <div
-          className={ getClasses(id, style, position, iconstyle) }>
+          className={ getBalloonClasses(id, style, position, iconstyle) }>
           <div className="speech-person">
             <figure className="speech-icon">
               <img
@@ -169,7 +152,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-2', {
     const { name, index, id, icon, style, position, iconstyle } = attributes;
     return (
         <div
-          className={ getClasses(id, style, position, iconstyle) }>
+          className={ getBalloonClasses(id, style, position, iconstyle) }>
           <div className="speech-person">
             <figure className="speech-icon">
               <img
