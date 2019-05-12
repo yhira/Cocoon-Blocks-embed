@@ -9,7 +9,7 @@ import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, createBlock } = wp.blocks;
 const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
@@ -50,6 +50,17 @@ registerBlockType( 'cocoon-blocks/micro-text', {
   supports: {
     align: [ 'left', 'center', 'right' ],
     customClassName: true,
+  },
+  transforms: {
+    to: [
+      {
+        type: 'block',
+        blocks: [ 'cocoon-blocks/micro-balloon-2' ],
+        transform: ( attributes ) => {
+          return createBlock( 'cocoon-blocks/micro-balloon-2', attributes );
+        },
+      }
+    ]
   },
 
   edit( { attributes, setAttributes } ) {

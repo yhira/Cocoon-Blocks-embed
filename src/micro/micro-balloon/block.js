@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, createBlock } = wp.blocks;
 const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, ToggleControl } = wp.components;
 const { Fragment } = wp.element;
@@ -65,6 +65,17 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
   supports: {
     align: [ 'left', 'center', 'right' ],
     customClassName: true,
+  },
+  transforms: {
+    to: [
+      {
+        type: 'block',
+        blocks: [ 'cocoon-blocks/micro-text' ],
+        transform: ( attributes ) => {
+          return createBlock( 'cocoon-blocks/micro-text', attributes );
+        },
+      }
+    ]
   },
 
   edit( { attributes, setAttributes } ) {
