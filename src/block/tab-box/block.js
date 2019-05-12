@@ -9,7 +9,7 @@ import {THEME_NAME, BLOCK_CLASS, colorValueToSlug} from '../../helpers.js';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, createBlock } = wp.blocks;
 const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
@@ -50,6 +50,38 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
       type: 'string',
       default: '',
     },
+  },
+  transforms: {
+    to: [
+      {
+        type: 'block',
+        blocks: [ 'cocoon-blocks/sticky-box' ],
+        transform: ( attributes ) => {
+          return createBlock( 'cocoon-blocks/sticky-box', attributes );
+        },
+      },
+      {
+        type: 'block',
+        blocks: [ 'cocoon-blocks/blank-box-1' ],
+        transform: ( attributes ) => {
+          return createBlock( 'cocoon-blocks/blank-box-1', attributes );
+        },
+      },
+      // {
+      //   type: 'block',
+      //   blocks: [ 'cocoon-blocks/icon-box' ],
+      //   transform: ( attributes ) => {
+      //     return createBlock( 'cocoon-blocks/icon-box', attributes );
+      //   },
+      // },
+      // {
+      //   type: 'block',
+      //   blocks: [ 'cocoon-blocks/info-box' ],
+      //   transform: ( attributes ) => {
+      //     return createBlock( 'cocoon-blocks/info-box', attributes );
+      //   },
+      // },
+    ],
   },
 
   edit( { attributes, setAttributes } ) {

@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, createBlock } = wp.blocks;
 const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
@@ -46,6 +46,38 @@ registerBlockType( 'cocoon-blocks/icon-box', {
       default: 'information-box'
     },
   },
+  // transforms: {
+  //   to: [
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/sticky-box' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/sticky-box', attributes );
+  //       },
+  //     },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/blank-box-1' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/blank-box-1', attributes );
+  //       },
+  //     },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/tab-box-1' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/tab-box-1', attributes );
+  //       },
+  //     },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/info-box' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/info-box', attributes );
+  //       },
+  //     },
+  //   ],
+  // },
 
   edit( { attributes, setAttributes } ) {
     const { content, style } = attributes;
