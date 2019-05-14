@@ -42,29 +42,31 @@ templates.map((temp, index) => {
 
 });
 
-registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( 'アフィリエイト', THEME_NAME ),
-  tagName: 'span',
-  className: 'templates',
-  edit({isActive, value, onChange}){
+if (isTemplateVisible) {
+  registerFormatType( FORMAT_TYPE_NAME, {
+    title: __( 'テンプレート', THEME_NAME ),
+    tagName: 'span',
+    className: 'templates',
+    edit({isActive, value, onChange}){
 
-    return (
-      <BlockFormatControls>
-        <div className="editor-format-toolbar block-editor-format-toolbar">
-          <Toolbar>
-            <Slot name="Template.ToolbarControls">
-              { ( fills ) => fills.length !== 0 &&
-                <DropdownMenu
-                  icon={<FontAwesomeIcon icon={['fas', 'file-alt']} />}
-                  label={__( 'テンプレート', THEME_NAME )}
-                  className='templates'
-                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
-                />
-              }
-            </Slot>
-          </Toolbar>
-        </div>
-      </BlockFormatControls>
-    );
-  }
-} );
+      return (
+        <BlockFormatControls>
+          <div className="editor-format-toolbar block-editor-format-toolbar">
+            <Toolbar>
+              <Slot name="Template.ToolbarControls">
+                { ( fills ) => fills.length !== 0 &&
+                  <DropdownMenu
+                    icon={<FontAwesomeIcon icon={['fas', 'file-alt']} />}
+                    label={__( 'テンプレート', THEME_NAME )}
+                    className='templates'
+                    controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                  />
+                }
+              </Slot>
+            </Toolbar>
+          </div>
+        </BlockFormatControls>
+      );
+    }
+  } );
+}

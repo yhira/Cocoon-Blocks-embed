@@ -42,29 +42,31 @@ itemRankings.map((rank, index) => {
 
 });
 
-registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( 'アフィリエイト', THEME_NAME ),
-  tagName: 'span',
-  className: 'rankings',
-  edit({isActive, value, onChange}){
+if (isRankingVisible) {
+  registerFormatType( FORMAT_TYPE_NAME, {
+    title: __( 'ランキング', THEME_NAME ),
+    tagName: 'span',
+    className: 'rankings',
+    edit({isActive, value, onChange}){
 
-    return (
-      <BlockFormatControls>
-        <div className="editor-format-toolbar block-editor-format-toolbar">
-          <Toolbar>
-            <Slot name="Ranking.ToolbarControls">
-              { ( fills ) => fills.length !== 0 &&
-                <DropdownMenu
-                  icon={<FontAwesomeIcon icon={['fas', 'crown']} />}
-                  label={__( 'ランキング', THEME_NAME )}
-                  className='rankings'
-                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
-                />
-              }
-            </Slot>
-          </Toolbar>
-        </div>
-      </BlockFormatControls>
-    );
-  }
-} );
+      return (
+        <BlockFormatControls>
+          <div className="editor-format-toolbar block-editor-format-toolbar">
+            <Toolbar>
+              <Slot name="Ranking.ToolbarControls">
+                { ( fills ) => fills.length !== 0 &&
+                  <DropdownMenu
+                    icon={<FontAwesomeIcon icon={['fas', 'crown']} />}
+                    label={__( 'ランキング', THEME_NAME )}
+                    className='rankings'
+                    controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                  />
+                }
+              </Slot>
+            </Toolbar>
+          </div>
+        </BlockFormatControls>
+      );
+    }
+  } );
+}

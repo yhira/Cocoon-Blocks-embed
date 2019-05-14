@@ -180,29 +180,31 @@ registerShortcodeFormatType(
 //   }
 // } );
 
-registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( 'アフィリエイト', THEME_NAME ),
-  tagName: 'span',
-  className: 'shortcodes',
-  edit({isActive, value, onChange}){
+if (isGeneralVisible) {
+  registerFormatType( FORMAT_TYPE_NAME, {
+    title: __( '汎用ショートコード', THEME_NAME ),
+    tagName: 'span',
+    className: 'shortcodes',
+    edit({isActive, value, onChange}){
 
-    return (
-      <BlockFormatControls>
-        <div className="editor-format-toolbar block-editor-format-toolbar">
-          <Toolbar>
-            <Slot name="Shortcode.ToolbarControls">
-              { ( fills ) => fills.length !== 0 &&
-                <DropdownMenu
-                  icon={<FontAwesomeIcon icon={['fas', 'code']} />}
-                  label={__( 'ショートコード', THEME_NAME )}
-                  className='shortcodes'
-                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
-                />
-              }
-            </Slot>
-          </Toolbar>
-        </div>
-      </BlockFormatControls>
-    );
-  }
-} );
+      return (
+        <BlockFormatControls>
+          <div className="editor-format-toolbar block-editor-format-toolbar">
+            <Toolbar>
+              <Slot name="Shortcode.ToolbarControls">
+                { ( fills ) => fills.length !== 0 &&
+                  <DropdownMenu
+                    icon={<FontAwesomeIcon icon={['fas', 'code']} />}
+                    label={__( 'ショートコード', THEME_NAME )}
+                    className='shortcodes'
+                    controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                  />
+                }
+              </Slot>
+            </Toolbar>
+          </div>
+        </BlockFormatControls>
+      );
+    }
+  } );
+}

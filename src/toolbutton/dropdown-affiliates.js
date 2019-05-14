@@ -42,29 +42,31 @@ affiliateTags.map((affi, index) => {
 
 });
 
-registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( 'アフィリエイト', THEME_NAME ),
-  tagName: 'span',
-  className: 'affiliates',
-  edit({isActive, value, onChange}){
+if (isAffiliateVisible) {
+  registerFormatType( FORMAT_TYPE_NAME, {
+    title: __( 'アフィリエイト', THEME_NAME ),
+    tagName: 'span',
+    className: 'affiliates',
+    edit({isActive, value, onChange}){
 
-    return (
-      <BlockFormatControls>
-        <div className="editor-format-toolbar block-editor-format-toolbar">
-          <Toolbar>
-            <Slot name="Affiliate.ToolbarControls">
-              { ( fills ) => fills.length !== 0 &&
-                <DropdownMenu
-                  icon={<FontAwesomeIcon icon={['fas', 'dollar-sign']} />}
-                  label={__( 'アフィリエイトタグ', THEME_NAME )}
-                  className='affiliates'
-                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
-                />
-              }
-            </Slot>
-          </Toolbar>
-        </div>
-      </BlockFormatControls>
-    );
-  }
-} );
+      return (
+        <BlockFormatControls>
+          <div className="editor-format-toolbar block-editor-format-toolbar">
+            <Toolbar>
+              <Slot name="Affiliate.ToolbarControls">
+                { ( fills ) => fills.length !== 0 &&
+                  <DropdownMenu
+                    icon={<FontAwesomeIcon icon={['fas', 'dollar-sign']} />}
+                    label={__( 'アフィリエイトタグ', THEME_NAME )}
+                    className='affiliates'
+                    controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                  />
+                }
+              </Slot>
+            </Toolbar>
+          </div>
+        </BlockFormatControls>
+      );
+    }
+  } );
+}
