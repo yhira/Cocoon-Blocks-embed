@@ -15,34 +15,34 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/templates';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
-templates.map((temp, index) => {
-  var name = 'template-' + temp.id;
-  var title = temp.title;
-  var formatType = 'cocoon-blocks/' + name;
-  if (temp.visible == '1') {
-    registerFormatType( formatType, {
-      title: title,
-      tagName: name,
-      className: null,
-      edit({value, onChange}){
-        const onToggle = () => onChange( insert( value, '[temp id=' + temp.id + ']', value.start, value.end ) );
-
-        return (
-          <Fragment>
-            <TemplateToolbarButton
-              icon={'editor-code'}
-              title={<span className={name}>{title}</span>}
-              onClick={ onToggle }
-            />
-          </Fragment>
-        );
-      }
-    } );
-  }
-
-});
-
 if (isTemplateVisible) {
+  templates.map((temp, index) => {
+    var name = 'template-' + temp.id;
+    var title = temp.title;
+    var formatType = 'cocoon-blocks/' + name;
+    if (temp.visible == '1') {
+      registerFormatType( formatType, {
+        title: title,
+        tagName: name,
+        className: null,
+        edit({value, onChange}){
+          const onToggle = () => onChange( insert( value, '[temp id=' + temp.id + ']', value.start, value.end ) );
+
+          return (
+            <Fragment>
+              <TemplateToolbarButton
+                icon={'editor-code'}
+                title={<span className={name}>{title}</span>}
+                onClick={ onToggle }
+              />
+            </Fragment>
+          );
+        }
+      } );
+    }
+
+  });
+
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( 'テンプレート', THEME_NAME ),
     tagName: 'span',

@@ -15,34 +15,34 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/affiliates';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
-affiliateTags.map((affi, index) => {
-  var name = 'affiliate-' + affi.id;
-  var title = affi.title;
-  var formatType = 'cocoon-blocks/' + name;
-  if (affi.visible == '1') {
-    registerFormatType( formatType, {
-      title: title,
-      tagName: name,
-      className: null,
-      edit({value, onChange}){
-        const onToggle = () => onChange( insert( value, '[affi id=' + affi.id + ']', value.start, value.end ) );
-
-        return (
-          <Fragment>
-            <AffiliateToolbarButton
-              icon={'editor-code'}
-              title={<span className={name}>{title}</span>}
-              onClick={ onToggle }
-            />
-          </Fragment>
-        );
-      }
-    } );
-  }
-
-});
-
 if (isAffiliateVisible) {
+  affiliateTags.map((affi, index) => {
+    var name = 'affiliate-' + affi.id;
+    var title = affi.title;
+    var formatType = 'cocoon-blocks/' + name;
+    if (affi.visible == '1') {
+      registerFormatType( formatType, {
+        title: title,
+        tagName: name,
+        className: null,
+        edit({value, onChange}){
+          const onToggle = () => onChange( insert( value, '[affi id=' + affi.id + ']', value.start, value.end ) );
+
+          return (
+            <Fragment>
+              <AffiliateToolbarButton
+                icon={'editor-code'}
+                title={<span className={name}>{title}</span>}
+                onClick={ onToggle }
+              />
+            </Fragment>
+          );
+        }
+      } );
+    }
+
+  });
+
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( 'アフィリエイト', THEME_NAME ),
     tagName: 'span',
