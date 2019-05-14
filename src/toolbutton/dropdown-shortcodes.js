@@ -79,6 +79,34 @@ registerShortcodeFormatType(
   '[amazon asin="ASIN" title="' + __( '商品名', THEME_NAME ) + '" kw="' + __( 'キーワード', THEME_NAME ) + '" amazon=0 rakuten=0 yahoo=0]',
   ['fab', 'amazon']
 );
+//Amazonリンク（ボタン非表示）
+registerShortcodeFormatType(
+  'shortcode-amazon-no-buttons',
+  __( 'Amazonリンク（ボタン非表示）', THEME_NAME ),
+  '[amazon asin="ASIN" kw="' + __( 'キーワード', THEME_NAME ) + '" amazon=0 rakuten=0 yahoo=0]',
+  ['fab', 'amazon']
+);
+//楽天リンク
+registerShortcodeFormatType(
+  'shortcode-rakuten',
+  __( '楽天リンク', THEME_NAME ),
+  '[rakuten id="ID" kw="' + __( 'キーワード', THEME_NAME ) + '"]',
+  ['fas', 'registered']
+);
+//楽天リンク（商品名変更）
+registerShortcodeFormatType(
+  'shortcode-rakuten-title',
+  __( '楽天リンク（商品名変更）', THEME_NAME ),
+  '[rakuten id="ID" title="' + __( '商品名', THEME_NAME ) + '" kw="' + __( 'キーワード', THEME_NAME ) + '" amazon=0 rakuten=0 yahoo=0]',
+  ['fas', 'registered']
+);
+//楽天リンク（ボタン非表示）
+registerShortcodeFormatType(
+  'shortcode-rakuten-no-buttons',
+  __( '楽天リンク（ボタン非表示）', THEME_NAME ),
+  '[rakuten id="ID" kw="' + __( 'キーワード', THEME_NAME ) + '" amazon=0 rakuten=0 yahoo=0]',
+  ['fas', 'registered']
+);
 
 // //XXXXXXXXX
 // registerShortcodeFormatType(
