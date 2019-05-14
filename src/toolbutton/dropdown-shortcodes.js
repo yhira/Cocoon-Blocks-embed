@@ -76,7 +76,7 @@ registerShortcodeFormatType(
 registerShortcodeFormatType(
   'shortcode-amazon-title',
   __( 'Amazonリンク（商品名変更）', THEME_NAME ),
-  '[amazon asin="ASIN" title="' + __( '商品名', THEME_NAME ) + '" kw="' + __( 'キーワード', THEME_NAME ) + '" amazon=0 rakuten=0 yahoo=0]',
+  '[amazon asin="ASIN" title="' + __( '商品名', THEME_NAME ) + '" kw="' + __( 'キーワード', THEME_NAME ) + '"]',
   ['fab', 'amazon']
 );
 //Amazonリンク（ボタン非表示）
@@ -97,7 +97,7 @@ registerShortcodeFormatType(
 registerShortcodeFormatType(
   'shortcode-rakuten-title',
   __( '楽天リンク（商品名変更）', THEME_NAME ),
-  '[rakuten id="ID" title="' + __( '商品名', THEME_NAME ) + '" kw="' + __( 'キーワード', THEME_NAME ) + '" amazon=0 rakuten=0 yahoo=0]',
+  '[rakuten id="ID" title="' + __( '商品名', THEME_NAME ) + '" kw="' + __( 'キーワード', THEME_NAME ) + '"]',
   ['fas', 'registered']
 );
 //楽天リンク（ボタン非表示）
@@ -106,6 +106,34 @@ registerShortcodeFormatType(
   __( '楽天リンク（ボタン非表示）', THEME_NAME ),
   '[rakuten id="ID" kw="' + __( 'キーワード', THEME_NAME ) + '" amazon=0 rakuten=0 yahoo=0]',
   ['fas', 'registered']
+);
+//過去日時
+registerShortcodeFormatType(
+  'shortcode-ago',
+  __( '過去日時', THEME_NAME ),
+  '[ago from="YYYY/MM/DD"]',
+  ['fas', 'calendar-alt']
+);
+//過去日時（年）
+registerShortcodeFormatType(
+  'shortcode-yago',
+  __( '過去日時（年）', THEME_NAME ),
+  '[yago from="YYYY/MM/DD"]',
+  ['fas', 'calendar-alt']
+);
+//年齢
+registerShortcodeFormatType(
+  'shortcode-age',
+  __( '年齢', THEME_NAME ),
+  '[age birth="YYYY/MM/DD"]',
+  ['fas', 'birthday-cake']
+);
+//カウントダウン
+registerShortcodeFormatType(
+  'shortcode-countdown',
+  __( 'カウントダウン', THEME_NAME ),
+  '[countdown to="YYYY/MM/DD"]',
+  ['fas', 'calendar-day']
 );
 
 // //XXXXXXXXX
