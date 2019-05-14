@@ -135,6 +135,20 @@ registerShortcodeFormatType(
   '[countdown to="YYYY/MM/DD"]',
   ['fas', 'calendar-day']
 );
+//評価スター
+registerShortcodeFormatType(
+  'shortcode-star',
+  __( '評価スター', THEME_NAME ),
+  '[star rate="3.7" max="5" number="1"]',
+  ['fas', 'star']
+);
+//ログインコンテンツ
+registerShortcodeFormatType(
+  'shortcode-login',
+  __( 'ログインコンテンツ', THEME_NAME ),
+  '[login_user_only msg="' + __( 'こちらのコンテンツはログインユーザーのみに表示されます。', THEME_NAME ) + '"]' +__( '内容', THEME_NAME )  + '[/login_user_only]',
+  ['fas', 'sign-in-alt']
+);
 
 // //XXXXXXXXX
 // registerShortcodeFormatType(
