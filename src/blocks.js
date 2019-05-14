@@ -96,6 +96,7 @@ import './toolbutton/dropdown-letters.js';
 import './toolbutton/dropdown-markers.js';
 import './toolbutton/dropdown-badges.js';
 import './toolbutton/dropdown-font-sizes.js';
+import './toolbutton/dropdown-templates.js';
 import './toolbutton/dropdown-affiliates.js';
 
 // //サンプル
