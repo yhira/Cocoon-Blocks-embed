@@ -690,6 +690,27 @@ export function ShortcodeToolbarButton( { name, shortcutType, shortcutCharacter,
 }
 
 
+export function RankingToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'Ranking.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
 
 
 
