@@ -98,6 +98,7 @@ import './toolbutton/dropdown-badges.js';
 import './toolbutton/dropdown-font-sizes.js';
 import './toolbutton/dropdown-templates.js';
 import './toolbutton/dropdown-affiliates.js';
+import './toolbutton/dropdown-shortcodes.js';
 
 // //サンプル
 // import './sample/cocoon-buttons.js';
