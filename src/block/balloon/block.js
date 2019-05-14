@@ -67,7 +67,7 @@ registerBlockType( 'cocoon-blocks/balloon-box-2', {
         if (!name) {
           name = speechBaloons[0].name;
         }
-        setAttributes( { index: index, id: id, icon: icon, style: style, position: position, iconstyle: iconstyle } );
+        setAttributes( { name: name, index: index, id: id, icon: icon, style: style, position: position, iconstyle: iconstyle } );
     }
     //新規作成以外
     if (speechBaloons[index]) {
