@@ -46,38 +46,38 @@ registerBlockType( 'cocoon-blocks/blank-box-1', {
       default: '',
     },
   },
-  transforms: {
-    to: [
-      {
-        type: 'block',
-        blocks: [ 'cocoon-blocks/sticky-box' ],
-        transform: ( attributes ) => {
-          return createBlock( 'cocoon-blocks/sticky-box', attributes );
-        },
-      },
-      {
-        type: 'block',
-        blocks: [ 'cocoon-blocks/tab-box-1' ],
-        transform: ( attributes ) => {
-          return createBlock( 'cocoon-blocks/tab-box-1', attributes );
-        },
-      },
-      // {
-      //   type: 'block',
-      //   blocks: [ 'cocoon-blocks/icon-box' ],
-      //   transform: ( attributes ) => {
-      //     return createBlock( 'cocoon-blocks/icon-box', attributes );
-      //   },
-      // },
-      // {
-      //   type: 'block',
-      //   blocks: [ 'cocoon-blocks/info-box' ],
-      //   transform: ( attributes ) => {
-      //     return createBlock( 'cocoon-blocks/info-box', attributes );
-      //   },
-      // },
-    ],
-  },
+  // transforms: {
+  //   to: [
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/sticky-box' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/sticky-box', attributes );
+  //       },
+  //     },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/tab-box-1' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/tab-box-1', attributes );
+  //       },
+  //     },
+  //     // {
+  //     //   type: 'block',
+  //     //   blocks: [ 'cocoon-blocks/icon-box' ],
+  //     //   transform: ( attributes ) => {
+  //     //     return createBlock( 'cocoon-blocks/icon-box', attributes );
+  //     //   },
+  //     // },
+  //     // {
+  //     //   type: 'block',
+  //     //   blocks: [ 'cocoon-blocks/info-box' ],
+  //     //   transform: ( attributes ) => {
+  //     //     return createBlock( 'cocoon-blocks/info-box', attributes );
+  //     //   },
+  //     // },
+  //   ],
+  // },
 
   edit( { attributes, setAttributes } ) {
     const { content, borderColor } = attributes;
