@@ -1,3 +1,4 @@
+
 /**
  * Cocoon Blocks
  * @author: yhira
@@ -15,29 +16,31 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/letters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
-registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( '文字', THEME_NAME ),
-  tagName: 'span',
-  className: 'letters',
-  edit({isActive, value, onChange}){
+if (isLetterVisible) {
+  registerFormatType( FORMAT_TYPE_NAME, {
+    title: __( '文字', THEME_NAME ),
+    tagName: 'span',
+    className: 'letters',
+    edit({isActive, value, onChange}){
 
-    return (
-      <BlockFormatControls>
-        <div className="editor-format-toolbar block-editor-format-toolbar">
-          <Toolbar>
-            <Slot name="Letter.ToolbarControls">
-              { ( fills ) => fills.length !== 0 &&
-                <DropdownMenu
-                  icon="editor-textcolor"
-                  label={__( '文字', THEME_NAME )}
-                  className='letters'
-                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
-                />
-              }
-            </Slot>
-          </Toolbar>
-        </div>
-      </BlockFormatControls>
-    );
-  }
-} );
+      return (
+        <BlockFormatControls>
+          <div className="editor-format-toolbar block-editor-format-toolbar">
+            <Toolbar>
+              <Slot name="Letter.ToolbarControls">
+                { ( fills ) => fills.length !== 0 &&
+                  <DropdownMenu
+                    icon="editor-textcolor"
+                    label={__( '文字', THEME_NAME )}
+                    className='letters'
+                    controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                  />
+                }
+              </Slot>
+            </Toolbar>
+          </div>
+        </BlockFormatControls>
+      );
+    }
+  } );
+}

@@ -41,29 +41,31 @@ sizes.map((size, index) => {
 });
 
 //ドロップダウン
-registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( 'フォントサイズ', THEME_NAME ),
-  tagName: 'span',
-  className: 'font-sizes',
-  edit({isActive, value, onChange}){
+if (isFontSizeVisible) {
+  registerFormatType( FORMAT_TYPE_NAME, {
+    title: __( 'フォントサイズ', THEME_NAME ),
+    tagName: 'span',
+    className: 'font-sizes',
+    edit({isActive, value, onChange}){
 
-    return (
-      <BlockFormatControls>
-        <div className="editor-format-toolbar block-editor-format-toolbar">
-          <Toolbar>
-            <Slot name="FontSize.ToolbarControls">
-              { ( fills ) => fills.length !== 0 &&
-                <DropdownMenu
-                  icon={ <FontAwesomeIcon icon="text-height" /> }
-                  label={__( 'フォントサイズ', THEME_NAME )}
-                  className='font-sizes'
-                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
-                />
-              }
-            </Slot>
-          </Toolbar>
-        </div>
-      </BlockFormatControls>
-    );
-  }
-} );
+      return (
+        <BlockFormatControls>
+          <div className="editor-format-toolbar block-editor-format-toolbar">
+            <Toolbar>
+              <Slot name="FontSize.ToolbarControls">
+                { ( fills ) => fills.length !== 0 &&
+                  <DropdownMenu
+                    icon={ <FontAwesomeIcon icon="text-height" /> }
+                    label={__( 'フォントサイズ', THEME_NAME )}
+                    className='font-sizes'
+                    controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                  />
+                }
+              </Slot>
+            </Toolbar>
+          </div>
+        </BlockFormatControls>
+      );
+    }
+  } );
+}

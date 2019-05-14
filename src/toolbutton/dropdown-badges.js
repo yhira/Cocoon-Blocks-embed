@@ -15,29 +15,31 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/badges';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
-registerFormatType( FORMAT_TYPE_NAME, {
-  title: __( 'バッジ', THEME_NAME ),
-  tagName: 'span',
-  className: 'badges',
-  edit({isActive, value, onChange}){
+if (isBadgeVisible) {
+  registerFormatType( FORMAT_TYPE_NAME, {
+    title: __( 'バッジ', THEME_NAME ),
+    tagName: 'span',
+    className: 'badges',
+    edit({isActive, value, onChange}){
 
-    return (
-      <BlockFormatControls>
-        <div className="editor-format-toolbar block-editor-format-toolbar">
-          <Toolbar>
-            <Slot name="Badge.ToolbarControls">
-              { ( fills ) => fills.length !== 0 &&
-                <DropdownMenu
-                  icon={<FontAwesomeIcon icon="tag" />}
-                  label={__( 'バッジ', THEME_NAME )}
-                  className='badges'
-                  controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
-                />
-              }
-            </Slot>
-          </Toolbar>
-        </div>
-      </BlockFormatControls>
-    );
-  }
-} );
+      return (
+        <BlockFormatControls>
+          <div className="editor-format-toolbar block-editor-format-toolbar">
+            <Toolbar>
+              <Slot name="Badge.ToolbarControls">
+                { ( fills ) => fills.length !== 0 &&
+                  <DropdownMenu
+                    icon={<FontAwesomeIcon icon="tag" />}
+                    label={__( 'バッジ', THEME_NAME )}
+                    className='badges'
+                    controls={ orderBy( fills.map( ( [ { props } ] ) => props ), 'title' ) }
+                  />
+                }
+              </Slot>
+            </Toolbar>
+          </div>
+        </BlockFormatControls>
+      );
+    }
+  } );
+}

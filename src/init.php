@@ -78,7 +78,38 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: File modification time.
 		true // Enqueue the script in the footer.
   );
-  //吹き出し情報渡す
+  ///////////////////////////////////////////
+  // 表示
+  ///////////////////////////////////////////
+  //文字スタイル
+  wp_localize_script(
+    'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
+    'isLetterVisible', //任意のオブジェクト名
+    is_block_editor_letter_style_dropdown_enable() //プロバティ
+  );
+  //マーカーのスタイル
+  wp_localize_script(
+    'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
+    'isMarkerVisible', //任意のオブジェクト名
+    is_block_editor_marker_style_dropdown_enable() //プロバティ
+  );
+  //バッジスタイル
+  wp_localize_script(
+    'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
+    'isBadgeVisible', //任意のオブジェクト名
+    is_block_editor_badge_style_dropdown_enable() //プロバティ
+  );
+  //文字サイズスタイル
+  wp_localize_script(
+    'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
+    'isFontSizeVisible', //任意のオブジェクト名
+    is_block_editor_font_size_style_dropdown_enable() //プロバティ
+  );
+
+  ///////////////////////////////////////////
+  // オブジェクト渡し
+  ///////////////////////////////////////////
+  //吹き出し情報を渡す
   $baloons = get_speech_balloons();
   //_v($baloons);
   wp_localize_script(
