@@ -621,3 +621,27 @@ export function FontSizeToolbarButton( { name, shortcutType, shortcutCharacter, 
 }
 
 
+export function AffiliateToolbarButton( { name, shortcutType, shortcutCharacter, ...props } ) {
+  let shortcut;
+  let fillName = 'Affiliate.ToolbarControls';
+
+  if ( name ) {
+    fillName += `.${ name }`;
+  }
+
+  if ( shortcutType && shortcutCharacter ) {
+    shortcut = displayShortcut[ shortcutType ]( shortcutCharacter );
+  }
+
+  return (
+    <Fill name={ fillName }>
+      <ToolbarButton
+        { ...props }
+        shortcut={ shortcut }
+      />
+    </Fill>
+  );
+}
+
+
+
