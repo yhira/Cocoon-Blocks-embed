@@ -15,6 +15,8 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/badges';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
+
+var isBadgeVisible = Number(dropdowns['isBadgeVisible'] ? dropdowns['isBadgeVisible'] : 0);
 if (isBadgeVisible) {
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( 'バッジ', THEME_NAME ),

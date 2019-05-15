@@ -15,6 +15,7 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/rankings';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
+var isRankingVisible = Number(dropdowns['isRankingVisible'] ? dropdowns['isRankingVisible'] : 0);
 if (isRankingVisible) {
   itemRankings.map((rank, index) => {
     var name = 'ranking-' + rank.id;

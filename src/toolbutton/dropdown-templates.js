@@ -15,6 +15,7 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/templates';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
+var isTemplateVisible = Number(dropdowns['isTemplateVisible'] ? dropdowns['isTemplateVisible'] : 0);
 if (isTemplateVisible) {
   templates.map((temp, index) => {
     var name = 'template-' + temp.id;

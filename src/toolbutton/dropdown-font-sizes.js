@@ -41,6 +41,7 @@ sizes.map((size, index) => {
 });
 
 //ドロップダウン
+var isFontSizeVisible = Number(dropdowns['isFontSizeVisible'] ? dropdowns['isFontSizeVisible'] : 0);
 if (isFontSizeVisible) {
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( 'フォントサイズ', THEME_NAME ),

@@ -15,6 +15,7 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/markers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
+var isMarkerVisible = Number(dropdowns['isMarkerVisible'] ? dropdowns['isMarkerVisible'] : 0);
 if (isMarkerVisible) {
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( 'マーカー', THEME_NAME ),
