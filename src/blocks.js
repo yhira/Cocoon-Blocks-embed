@@ -71,7 +71,7 @@ import './toolbutton/bold-blue.js';
 import './toolbutton/green.js';
 import './toolbutton/bold-green.js';
 import './toolbutton/keyboard-key.js';
-//import './toolbutton/strike.js';
+import './toolbutton/ruby.js';
 
 //マーカー
 import './toolbutton/marker-yellow.js';
