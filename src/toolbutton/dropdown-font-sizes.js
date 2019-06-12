@@ -17,12 +17,13 @@ import { orderBy } from 'lodash';
 
 var sizes = [12, 14, 16, 18, 20, 22, 24, 28, 32, 36, 40, 44, 48];
 sizes.map((size, index) => {
-  var name = 'fz-' + size + 'px';
-  var formatType = 'cocoon-blocks/' + name;
+  var name = size + 'px';
+  var clss = 'fz-' + name;
+  var formatType = 'cocoon-blocks/' + clss;
   registerFormatType( formatType, {
-    title: name,
+    title: clss,
     tagName: 'span',
-    className: name,
+    className: clss,
     edit({isActive, value, onChange}){
       const onToggle = () => onChange(toggleFormat(value,{type:formatType}));
 
@@ -30,7 +31,7 @@ sizes.map((size, index) => {
         <Fragment>
           <FontSizeToolbarButton
             icon={'edit'}
-            title={<span className={name}>{name}</span>}
+            title={<span className={clss}>{name}</span>}
             onClick={ onToggle }
             isActive={ isActive }
           />
