@@ -13,63 +13,69 @@ const { toggleFormat, registerFormatType, insert, applyFormat } = wp.richText;
 const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
 const { SVG, Path } = wp.components;
 
-registerFormatType( 'cocoon-blocks/rt', {
 
-  title: __( 'Ruby Character', THEME_NAME ),
+var isRubyVisible = Number(dropdowns['isRubyVisible'] ? dropdowns['isRubyVisible'] : 0);
 
-  tagName: 'rt',
+if (isRubyVisible) {
+  registerFormatType( 'cocoon-blocks/rt', {
 
-  className: null,
+    title: __( 'ふりがな（ルビ）キャラクター', THEME_NAME ),
 
-  edit( {isActive, value, onChange} ) {
-    return <Fragment></Fragment>;
-  }
+    tagName: 'rt',
 
-} );
+    className: null,
 
-registerFormatType( 'cocoon-blocks/ruby', {
+    edit( {isActive, value, onChange} ) {
+      return <Fragment></Fragment>;
+    }
 
-  title: __( 'ふりがな', THEME_NAME ),
+  } );
 
-  tagName: 'ruby',
+  registerFormatType( 'cocoon-blocks/ruby', {
 
-  className: null,
+    title: __( 'ふりがな（ルビ）', THEME_NAME ),
 
-  edit ({ isActive, value, onChange }) {
+    tagName: 'ruby',
 
-    const onToggle = () => {
-      let ruby = '';
-      if ( ! isActive ) {
-        ruby = window.prompt( __( 'ふりがなを入力してください。', THEME_NAME ) ) || value.text.substr( value.start, value.end -value.start );
-        const rubyEnd   = value.end;
-        const rubyStart = value.start;
-        value = insert( value, ruby, rubyEnd );
-        value.start = rubyStart;
-        value.end   = rubyEnd + ruby.length;
-        value = applyFormat( value, {
-          type: 'cocoon-blocks/ruby'
-        }, rubyStart, rubyEnd + ruby.length );
-        value = applyFormat( value, {
-          type: 'cocoon-blocks/rt'
-        }, rubyEnd, rubyEnd + ruby.length );
-      } else {
-        value = toggleFormat( value, {
-          type: 'cocoon-blocks/ruby'
-        } );
-      }
-      return onChange( value );
-    };
+    className: null,
 
-    // @see keycodes/src/index.js
-    const shortcutType = 'primaryShift';
-    const shortcutCharacter ='r';
-    //const icon = (<FontAwesomeIcon icon={['fas', 'ellipsis-h']} />);
-    return (
-      <Fragment>
-        <RichTextShortcut type={shortcutType} character={shortcutCharacter} onUse={onToggle}  />
-        <RichTextToolbarButton icon={<FontAwesomeIcon icon={['fas', 'ellipsis-h']} />} title={__( 'ふりがな', THEME_NAME )} onClick={onToggle}
-                               isActive={isActive} shorcutType={shortcutType} shorcutCharacter={shortcutCharacter} />
-      </Fragment>
-    )
-  }
-} );
+    edit ({ isActive, value, onChange }) {
+
+      const onToggle = () => {
+        let ruby = '';
+        if ( ! isActive ) {
+          ruby = window.prompt( __( 'ふりがな（ルビ）を入力してください。', THEME_NAME ) ) || value.text.substr( value.start, value.end -value.start );
+          const rubyEnd   = value.end;
+          const rubyStart = value.start;
+          value = insert( value, ruby, rubyEnd );
+          value.start = rubyStart;
+          value.end   = rubyEnd + ruby.length;
+          value = applyFormat( value, {
+            type: 'cocoon-blocks/ruby'
+          }, rubyStart, rubyEnd + ruby.length );
+          value = applyFormat( value, {
+            type: 'cocoon-blocks/rt'
+          }, rubyEnd, rubyEnd + ruby.length );
+        } else {
+          value = toggleFormat( value, {
+            type: 'cocoon-blocks/ruby'
+          } );
+        }
+        return onChange( value );
+      };
+
+      // @see keycodes/src/index.js
+      const shortcutType = 'primaryShift';
+      const shortcutCharacter ='r';
+      //const icon = (<FontAwesomeIcon icon={['fas', 'ellipsis-h']} />);
+      return (
+        <Fragment>
+          <RichTextShortcut type={shortcutType} character={shortcutCharacter} onUse={onToggle}  />
+          <RichTextToolbarButton icon={<FontAwesomeIcon icon={['fas', 'ellipsis-h']} />} title={__( 'ふりがな（ルビ）', THEME_NAME )} onClick={onToggle}
+                                 isActive={isActive} shorcutType={shortcutType} shorcutCharacter={shortcutCharacter} />
+        </Fragment>
+      )
+    }
+  } );
+}
+
