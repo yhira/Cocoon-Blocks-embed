@@ -15,13 +15,14 @@ const { PanelBody, SelectControl, BaseControl, TextControl, ToggleControl } = wp
 const { Fragment } = wp.element;
 
 //classの取得
-function getClasses(color, size, isCircle) {
+function getClasses(color, size, isCircle, isShine) {
   const classes = classnames(
     {
       'btn': true,
       [ `btn-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
       [ size ]: size,
       [ 'btn-circle' ]: !! isCircle,
+      [ 'btn-shine' ]: !! isShine,
     }
   );
   return classes;
@@ -60,6 +61,10 @@ registerBlockType( 'cocoon-blocks/button-1', {
       type: 'boolean',
       default: false,
     },
+    isShine: {
+      type: 'boolean',
+      default: false,
+    },
   },
   supports: {
     align: [ 'left', 'center', 'right' ],
@@ -67,7 +72,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, color, size, url, target, isCircle } = attributes;
+    const { content, color, size, url, target, isCircle, isShine } = attributes;
 
     return (
       <Fragment>
@@ -122,6 +127,12 @@ registerBlockType( 'cocoon-blocks/button-1', {
               onChange={ ( value ) => setAttributes( { isCircle: value } ) }
             />
 
+            <ToggleControl
+              label={ __( '光らせる', THEME_NAME ) }
+              checked={ isShine }
+              onChange={ ( value ) => setAttributes( { isShine: value } ) }
+            />
+
           </PanelBody>
 
           <PanelColorSettings
@@ -144,7 +155,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
 
         <div className={BUTTON_BLOCK}>
           <span
-            className={ getClasses(color, size, isCircle) }
+            className={ getClasses(color, size, isCircle, isShine) }
             href={ url }
             target={ target }
           >
@@ -160,12 +171,12 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   save( { attributes } ) {
-    const { content, color, size, url, target, isCircle } = attributes;
+    const { content, color, size, url, target, isCircle, isShine } = attributes;
     return (
       <div className={BUTTON_BLOCK}>
         <a
           href={ url }
-          className={ getClasses(color, size, isCircle) }
+          className={ getClasses(color, size, isCircle, isShine) }
           target={ target }
         >
           <RichText.Content

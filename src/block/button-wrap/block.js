@@ -16,7 +16,7 @@ const { PanelBody, SelectControl, BaseControl, TextareaControl, ToggleControl } 
 const { Fragment } = wp.element;
 
 //classの取得
-function getClasses(color, size, isCircle) {
+function getClasses(color, size, isCircle, isShine) {
   const classes = classnames(
     {
       [ 'btn-wrap' ]: true,
@@ -24,6 +24,7 @@ function getClasses(color, size, isCircle) {
       [ size ]: size,
       [ BUTTON_BLOCK ]: true,
       [ 'btn-wrap-circle' ]: !! isCircle,
+      [ 'btn-wrap-shine' ]: !! isShine,
     }
   );
   return classes;
@@ -54,13 +55,21 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
       type: 'string',
       default: '',
     },
+    isCircle: {
+      type: 'boolean',
+      default: false,
+    },
+    isShine: {
+      type: 'boolean',
+      default: false,
+    },
   },
   supports: {
     align: [ 'left', 'center', 'right' ],
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, color, size, tag, isCircle } = attributes;
+    const { content, color, size, tag, isCircle, isShine } = attributes;
 
     return (
       <Fragment>
@@ -99,6 +108,12 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
               onChange={ ( value ) => setAttributes( { isCircle: value } ) }
             />
 
+            <ToggleControl
+              label={ __( '光らせる', THEME_NAME ) }
+              checked={ isShine }
+              onChange={ ( value ) => setAttributes( { isShine: value } ) }
+            />
+
           </PanelBody>
 
           <PanelColorSettings
@@ -124,7 +139,7 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
           />
         </span>
         <div
-          className={ getClasses(color, size, isCircle) }
+          className={ getClasses(color, size, isCircle, isShine) }
           dangerouslySetInnerHTML={{__html: tag}}
         >
         </div>
@@ -133,9 +148,9 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
   },
 
   save( { attributes } ) {
-    const { content, color, size, tag, isCircle } = attributes;
+    const { content, color, size, tag, isCircle, isShine } = attributes;
     return (
-      <div className={ getClasses(color, size, isCircle) }>
+      <div className={ getClasses(color, size, isCircle, isShine) }>
         <RichText.Content
           value={ tag }
         />
