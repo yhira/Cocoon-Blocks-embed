@@ -12,17 +12,18 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
-const { PanelBody, SelectControl, BaseControl, TextareaControl } = wp.components;
+const { PanelBody, SelectControl, BaseControl, TextareaControl, ToggleControl } = wp.components;
 const { Fragment } = wp.element;
 
 //classの取得
-function getClasses(color, size) {
+function getClasses(color, size, isCircle) {
   const classes = classnames(
     {
       [ 'btn-wrap' ]: true,
       [ `btn-wrap-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
       [ size ]: size,
       [ BUTTON_BLOCK ]: true,
+      [ 'btn-wrap-circle' ]: !! isCircle,
     }
   );
   return classes;
@@ -59,7 +60,7 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, color, size, tag } = attributes;
+    const { content, color, size, tag, isCircle } = attributes;
 
     return (
       <Fragment>
@@ -92,6 +93,12 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
               ] }
             />
 
+            <ToggleControl
+              label={ __( '円形にする', THEME_NAME ) }
+              checked={ isCircle }
+              onChange={ ( value ) => setAttributes( { isCircle: value } ) }
+            />
+
           </PanelBody>
 
           <PanelColorSettings
@@ -117,7 +124,7 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
           />
         </span>
         <div
-          className={ getClasses(color, size) }
+          className={ getClasses(color, size, isCircle) }
           dangerouslySetInnerHTML={{__html: tag}}
         >
         </div>
@@ -126,9 +133,9 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
   },
 
   save( { attributes } ) {
-    const { content, color, size, tag } = attributes;
+    const { content, color, size, tag, isCircle } = attributes;
     return (
-      <div className={ getClasses(color, size) }>
+      <div className={ getClasses(color, size, isCircle) }>
         <RichText.Content
           value={ tag }
         />

@@ -11,16 +11,17 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
-const { PanelBody, SelectControl, BaseControl, TextControl } = wp.components;
+const { PanelBody, SelectControl, BaseControl, TextControl, ToggleControl } = wp.components;
 const { Fragment } = wp.element;
 
 //classの取得
-function getClasses(color, size) {
+function getClasses(color, size, isCircle) {
   const classes = classnames(
     {
       'btn': true,
       [ `btn-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
       [ size ]: size,
+      [ 'btn-circle' ]: !! isCircle,
     }
   );
   return classes;
@@ -55,6 +56,10 @@ registerBlockType( 'cocoon-blocks/button-1', {
       type: 'string',
       default: '',
     },
+    isCircle: {
+      type: 'boolean',
+      default: false,
+    },
   },
   supports: {
     align: [ 'left', 'center', 'right' ],
@@ -62,7 +67,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, color, size, url, target } = attributes;
+    const { content, color, size, url, target, isCircle } = attributes;
 
     return (
       <Fragment>
@@ -111,6 +116,12 @@ registerBlockType( 'cocoon-blocks/button-1', {
               ] }
             />
 
+            <ToggleControl
+              label={ __( '円形にする', THEME_NAME ) }
+              checked={ isCircle }
+              onChange={ ( value ) => setAttributes( { isCircle: value } ) }
+            />
+
           </PanelBody>
 
           <PanelColorSettings
@@ -133,7 +144,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
 
         <div className={BUTTON_BLOCK}>
           <span
-            className={ getClasses(color, size) }
+            className={ getClasses(color, size, isCircle) }
             href={ url }
             target={ target }
           >
@@ -149,12 +160,12 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   save( { attributes } ) {
-    const { content, color, size, url, target } = attributes;
+    const { content, color, size, url, target, isCircle } = attributes;
     return (
       <div className={BUTTON_BLOCK}>
         <a
           href={ url }
-          className={ getClasses(color, size) }
+          className={ getClasses(color, size, isCircle) }
           target={ target }
         >
           <RichText.Content
