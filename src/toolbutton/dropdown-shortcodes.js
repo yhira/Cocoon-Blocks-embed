@@ -58,6 +58,13 @@ registerShortcodeFormatType(
   '[popular_list days="all" rank="0" pv="0" count="5" type="default" cats="all"]',
   ['fas', 'th-list']
 );
+//ナビカード一覧
+registerShortcodeFormatType(
+  'shortcode-navi-list',
+  __( 'ナビカード一覧', THEME_NAME ),
+  '[navi_list name="' + __( 'メニュー名', THEME_NAME ) + '" type="default" bold="0" arrow="0"]',
+  ['fas', 'th-list']
+);
 //プロフィールボックス
 registerShortcodeFormatType(
   'shortcode-profile',
