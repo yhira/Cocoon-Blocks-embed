@@ -18,11 +18,8 @@ var isRubyVisible = Number(dropdowns['isRubyVisible'] ? dropdowns['isRubyVisible
 
 if (isRubyVisible) {
   registerFormatType( 'cocoon-blocks/rt', {
-
     title: __( 'ふりがな（ルビ）キャラクター', THEME_NAME ),
-
     tagName: 'rt',
-
     className: null,
 
     edit( {isActive, value, onChange} ) {
@@ -32,11 +29,8 @@ if (isRubyVisible) {
   } );
 
   registerFormatType( 'cocoon-blocks/ruby', {
-
     title: __( 'ふりがな（ルビ）', THEME_NAME ),
-
     tagName: 'ruby',
-
     className: null,
 
     edit ({ isActive, value, onChange }) {
