@@ -91,6 +91,10 @@ registerBlockType( 'cocoon-blocks/blogcard', {
                   value: 'blogcard-type bct-official',
                   label: __( '公式サイト', THEME_NAME ),
                 },
+                {
+                  value: 'blogcard-type bct-dl',
+                  label: __( 'ダウンロード', THEME_NAME ),
+                },
               ] }
             />
 
