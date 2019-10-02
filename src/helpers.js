@@ -137,7 +137,7 @@ export function colorValueToSlug(color){
       return 'white';
       break;
     default:
-      return '';
+      return 'color--' + color.replace('#', '');
       break;
   }
 }
