@@ -16,11 +16,11 @@ const { Fragment } = wp.element;
 const { select } = wp.data;
 
 //classの取得
-function getClasses(slug, size, isCircle, isShine) {
+function getClasses(color, size, isCircle, isShine) {
   const classes = classnames(
     {
       'btn': true,
-      [ `has-${ slug }` ]: !! slug,
+      [ `has-${ getCurrentColorSlug(color) }` ]: !! getCurrentColorSlug(color),
       [ size ]: size,
       [ 'btn-circle' ]: !! isCircle,
       [ 'btn-shine' ]: !! isShine,
@@ -157,7 +157,7 @@ registerBlockType( 'cocoon-blocks/button-2', {
 
         <div className={BUTTON_BLOCK}>
           <span
-            className={ getClasses(getCurrentColorSlug(color), size, isCircle, isShine) }
+            className={ getClasses(color, size, isCircle, isShine) }
             href={ url }
             target={ target }
           >
@@ -178,7 +178,7 @@ registerBlockType( 'cocoon-blocks/button-2', {
       <div className={BUTTON_BLOCK}>
         <a
           href={ url }
-          className={ getClasses(getCurrentColorSlug(color), size, isCircle, isShine) }
+          className={ getClasses(color, size, isCircle, isShine) }
           target={ target }
         >
           <RichText.Content

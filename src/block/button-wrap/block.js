@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, BUTTON_BLOCK, colorValueToSlug} from '../../helpers.js';
+import { THEME_NAME, BUTTON_BLOCK, getCurrentColorSlug} from '../../helpers.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
@@ -20,7 +20,7 @@ function getClasses(color, size, isCircle, isShine) {
   const classes = classnames(
     {
       [ 'btn-wrap' ]: true,
-      [ `btn-wrap-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
+      [ `has-${ getCurrentColorSlug(color) }` ]: !! getCurrentColorSlug(color),
       [ size ]: size,
       [ BUTTON_BLOCK ]: true,
       [ 'btn-wrap-circle' ]: !! isCircle,
@@ -30,7 +30,7 @@ function getClasses(color, size, isCircle, isShine) {
   return classes;
 }
 
-registerBlockType( 'cocoon-blocks/button-wrap-1', {
+registerBlockType( 'cocoon-blocks/button-wrap-2', {
 
   title: __( '囲みボタン', THEME_NAME ),
   icon: <FontAwesomeIcon icon={['fas', 'ticket-alt']} />,

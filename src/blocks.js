@@ -46,6 +46,7 @@ import './old/label-box/block.js';
 import './old/button/block.js';
 import './old/button-1/block.js';
 import './old/button-wrap/block.js';
+import './old/button-wrap-1/block.js';
 
 // import './demo/test/block.js';
 // import './demo/info-box-drop/block.js';
