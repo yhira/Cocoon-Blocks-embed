@@ -7,6 +7,7 @@
 
 const { __ } = wp.i18n;
 const { Fill, ToolbarButton } = wp.components;
+const { getColorObjectByColorValue } = wp.editor;
 const { displayShortcut } = wp.keycodes;
 import classnames from 'classnames';
 
@@ -69,6 +70,15 @@ export function isSameBalloon(index, id, icon, style, position, iconstyle) {
   return false;
 }
 
+//現在のカラーパレットのスラッグを取得
+export function getCurrentColorSlug(color){
+  let object = getColorObjectByColorValue(cocoonPaletteColors, color);
+  let slug = object.slug;
+  if (!slug) {
+    slug = 'key-color';
+  }
+  return slug;
+}
 
 //色からスラッグを取得
 export function colorValueToSlug(color){
@@ -130,10 +140,10 @@ export function colorValueToSlug(color){
     case '#949495':
       return 'grey';
       break;
-    case '#333':
+    case '#333333':
       return 'black';
       break;
-    case '#fff':
+    case '#ffffff':
       return 'white';
       break;
     default:

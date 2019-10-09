@@ -44,6 +44,7 @@ import './old/caption-box/block.js';
 import './old/tab-caption-box/block.js';
 import './old/label-box/block.js';
 import './old/button/block.js';
+import './old/button-1/block.js';
 import './old/button-wrap/block.js';
 
 // import './demo/test/block.js';
@@ -72,6 +73,7 @@ import './toolbutton/green.js';
 import './toolbutton/bold-green.js';
 import './toolbutton/keyboard-key.js';
 import './toolbutton/ruby.js';
+// import './toolbutton/html.js';
 
 //マーカー
 import './toolbutton/marker-yellow.js';

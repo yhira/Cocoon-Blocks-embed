@@ -11,16 +11,18 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
-const { PanelBody, SelectControl, BaseControl, TextControl } = wp.components;
+const { PanelBody, SelectControl, BaseControl, TextControl, ToggleControl } = wp.components;
 const { Fragment } = wp.element;
 
 //classの取得
-function getClasses(color, size) {
+function getClasses(color, size, isCircle, isShine) {
   const classes = classnames(
     {
       'btn': true,
       [ `btn-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
       [ size ]: size,
+      [ 'btn-circle' ]: !! isCircle,
+      [ 'btn-shine' ]: !! isShine,
     }
   );
   return classes;
@@ -29,8 +31,8 @@ function getClasses(color, size) {
 registerBlockType( 'cocoon-blocks/button-1', {
 
   title: __( 'ボタン', THEME_NAME ),
-  icon: 'embed-generic',
-  category: THEME_NAME + '-block',
+  icon: 'dismiss',
+  category: THEME_NAME + '-old',
   description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
   keywords: [ 'button', 'btn' ],
 
@@ -55,6 +57,14 @@ registerBlockType( 'cocoon-blocks/button-1', {
       type: 'string',
       default: '',
     },
+    isCircle: {
+      type: 'boolean',
+      default: false,
+    },
+    isShine: {
+      type: 'boolean',
+      default: false,
+    },
   },
   supports: {
     align: [ 'left', 'center', 'right' ],
@@ -62,7 +72,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, color, size, url, target } = attributes;
+    const { content, color, size, url, target, isCircle, isShine } = attributes;
 
     return (
       <Fragment>
@@ -111,6 +121,18 @@ registerBlockType( 'cocoon-blocks/button-1', {
               ] }
             />
 
+            <ToggleControl
+              label={ __( '円形にする', THEME_NAME ) }
+              checked={ isCircle }
+              onChange={ ( value ) => setAttributes( { isCircle: value } ) }
+            />
+
+            <ToggleControl
+              label={ __( '光らせる', THEME_NAME ) }
+              checked={ isShine }
+              onChange={ ( value ) => setAttributes( { isShine: value } ) }
+            />
+
           </PanelBody>
 
           <PanelColorSettings
@@ -133,7 +155,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
 
         <div className={BUTTON_BLOCK}>
           <span
-            className={ getClasses(color, size) }
+            className={ getClasses(color, size, isCircle, isShine) }
             href={ url }
             target={ target }
           >
@@ -149,12 +171,12 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   save( { attributes } ) {
-    const { content, color, size, url, target } = attributes;
+    const { content, color, size, url, target, isCircle, isShine } = attributes;
     return (
       <div className={BUTTON_BLOCK}>
         <a
           href={ url }
-          className={ getClasses(color, size) }
+          className={ getClasses(color, size, isCircle, isShine) }
           target={ target }
         >
           <RichText.Content
