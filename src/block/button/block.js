@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, BUTTON_BLOCK, getCurrentColorSlug } from '../../helpers.js';
+import { THEME_NAME, BUTTON_BLOCK, colorValueToSlug } from '../../helpers.js';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
@@ -13,14 +13,13 @@ const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, TextControl, ToggleControl } = wp.components;
 const { Fragment } = wp.element;
-const { select } = wp.data;
 
 //classの取得
-function getClasses(slug, size, isCircle, isShine) {
+function getClasses(color, size, isCircle, isShine) {
   const classes = classnames(
     {
       'btn': true,
-      [ `has-${ slug }` ]: !! slug,
+      [ `btn-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
       [ size ]: size,
       [ 'btn-circle' ]: !! isCircle,
       [ 'btn-shine' ]: !! isShine,
@@ -29,7 +28,7 @@ function getClasses(slug, size, isCircle, isShine) {
   return classes;
 }
 
-registerBlockType( 'cocoon-blocks/button-2', {
+registerBlockType( 'cocoon-blocks/button-1', {
 
   title: __( 'ボタン', THEME_NAME ),
   icon: 'embed-generic',
@@ -54,10 +53,6 @@ registerBlockType( 'cocoon-blocks/button-2', {
       type: 'string',
       default: keyColor,
     },
-    slug: {
-      type: 'string',
-      default: getCurrentColorSlug(keyColor)
-    },
     size: {
       type: 'string',
       default: '',
@@ -77,9 +72,8 @@ registerBlockType( 'cocoon-blocks/button-2', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, color, slug, size, url, target, isCircle, isShine } = attributes;            // 設定したカラーパレーットを読み込む
-    const colorSet = select('core/editor').getEditorSettings().colors;
-    //console.log(colorSet);
+    const { content, color, size, url, target, isCircle, isShine } = attributes;
+
     return (
       <Fragment>
         <InspectorControls>
@@ -147,7 +141,7 @@ registerBlockType( 'cocoon-blocks/button-2', {
             colorSettings={ [
               {
                 value: color,
-                onChange: ( value ) => setAttributes( { slug: getCurrentColorSlug(value) } ),
+                onChange: ( value ) => setAttributes( { color: value } ),
                 label: __( '色', THEME_NAME ),
               },
             ] }
@@ -161,7 +155,7 @@ registerBlockType( 'cocoon-blocks/button-2', {
 
         <div className={BUTTON_BLOCK}>
           <span
-            className={ getClasses(slug, size, isCircle, isShine) }
+            className={ getClasses(color, size, isCircle, isShine) }
             href={ url }
             target={ target }
           >
@@ -177,12 +171,12 @@ registerBlockType( 'cocoon-blocks/button-2', {
   },
 
   save( { attributes } ) {
-    const { content, color, slug, size, url, target, isCircle, isShine } = attributes;
+    const { content, color, size, url, target, isCircle, isShine } = attributes;
     return (
       <div className={BUTTON_BLOCK}>
         <a
           href={ url }
-          className={ getClasses(slug, size, isCircle, isShine) }
+          className={ getClasses(color, size, isCircle, isShine) }
           target={ target }
         >
           <RichText.Content
