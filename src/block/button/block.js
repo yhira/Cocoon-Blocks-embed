@@ -122,10 +122,15 @@ registerBlockType( 'cocoon-blocks/button-1', {
             initialOpen={ true }
             colorSettings={ [
               {
-                value: slug,
+                value: color,
                 onChange: ( value ) => setAttributes( {
+                  color: value,
                   slug: getCurrentColorSlug(value)
                 } ),
+                // value: slug,
+                // onChange: ( value ) => setAttributes( {
+                //   slug: getCurrentColorSlug(value)
+                // } ),
                 label: __( '色', THEME_NAME ),
               },
             ] }
