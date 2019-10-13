@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME } from '../../helpers';
+import { THEME_NAME, getCurrentColorSlug } from '../../helpers';
 const { __ } = wp.i18n;
 
 export const attrs = {
@@ -25,6 +25,10 @@ export const attrs = {
 	  type: 'string',
 	  default: keyColor,
 	},
+  slug: {
+    type: 'string',
+    default: getCurrentColorSlug(keyColor),
+  },
 	size: {
 	  type: 'string',
 	  default: '',

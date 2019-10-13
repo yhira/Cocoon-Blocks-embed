@@ -39,15 +39,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
   keywords: [ 'button', 'btn' ],
 
-  attributes: merge(
-    attrs,
-    {
-      slug: {
-        type: 'string',
-        default: getCurrentColorSlug(keyColor),
-      },
-    },
-  ),
+  attributes: attrs,
   supports: {
     align: [ 'left', 'center', 'right' ],
     customClassName: true,

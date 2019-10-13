@@ -17,6 +17,8 @@ export const deprecated = [
 
     //migrate( { content, color, size, url, target, isCircle, isShine } ) {
     migrate( attributes ) {
+      const { content, color, size, url, target, isCircle, isShine } = attributes;
+      //console.log(attributes);
       return merge(
         attributes,
         {
