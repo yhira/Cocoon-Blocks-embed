@@ -68,6 +68,10 @@ registerBlockType( 'cocoon-blocks/blogcard', {
                   label: __( '参考記事', THEME_NAME ),
                 },
                 {
+                  value: 'blogcard-type bct-reference-link',
+                  label: __( '参考リンク', THEME_NAME ),
+                },
+                {
                   value: 'blogcard-type bct-popular',
                   label: __( '人気記事', THEME_NAME ),
                 },
