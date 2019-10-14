@@ -22,7 +22,7 @@ export const deprecated = [
       return merge(
         attributes,
         {
-          slug: getCurrentColorSlug(color)
+          slug: colorValueToSlug(color)
         }
       );
       // return {
