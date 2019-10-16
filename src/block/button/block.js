@@ -122,6 +122,10 @@ registerBlockType( 'cocoon-blocks/button-1', {
               },
             ] }
           >
+            <ContrastChecker
+              backgroundColor={ getCurrentColorCode(slug) }
+              textColor={ '#ffffff' } //後に設定
+            />
           </PanelColorSettings>
 
         </InspectorControls>
