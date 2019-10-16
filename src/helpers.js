@@ -72,8 +72,8 @@ export function isSameBalloon(index, id, icon, style, position, iconstyle) {
 }
 
 //現在のカラーパレットのスラッグを取得
-export function getCurrentColorSlug(color){
-  const object = getColorObjectByColorValue(cocoonPaletteColors, color);
+export function getCurrentColorSlug(colors, color){
+  const object = getColorObjectByColorValue(colors, color);
   let slug = 'key-color';
   if (object) {
     slug = object.slug;
@@ -82,8 +82,9 @@ export function getCurrentColorSlug(color){
 }
 
 //現在のカラーパレットのスラッグを取得
-export function getCurrentColorCode(slug){
-  const object = getColorObjectByAttributeValues(cocoonPaletteColors, slug, keyColor);
+export function getCurrentColorCode(colors, slug){
+  //console.log(colors);
+  const object = getColorObjectByAttributeValues(colors, slug, keyColor);
   //console.log(object);
   let color = keyColor;
   if (object) {

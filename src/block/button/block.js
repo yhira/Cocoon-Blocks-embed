@@ -15,6 +15,7 @@ const { merge } = lodash;
 const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
 const { PanelBody, SelectControl, BaseControl, TextControl, ToggleControl } = wp.components;
+const { select } = wp.data;
 const { Fragment } = wp.element;
 
 //classの取得
@@ -47,6 +48,9 @@ registerBlockType( 'cocoon-blocks/button-1', {
 
   edit( { attributes, setAttributes } ) {
     const { content, slug, size, url, target, isCircle, isShine } = attributes;
+    // 設定したカラーパレーットを読み込む
+    const colors = select('core/editor').getEditorSettings().colors;
+    //console.log(colors);
 
     return (
       <Fragment>
@@ -114,16 +118,16 @@ registerBlockType( 'cocoon-blocks/button-1', {
             initialOpen={ true }
             colorSettings={ [
               {
-                value: getCurrentColorCode(slug),
+                value: getCurrentColorCode(colors, slug),
                 onChange: ( value ) => setAttributes( {
-                  slug: getCurrentColorSlug(value)
+                  slug: getCurrentColorSlug(colors, value)
                 } ),
                 label: __( '背景色', THEME_NAME ),
               },
             ] }
           >
             <ContrastChecker
-              backgroundColor={ getCurrentColorCode(slug) }
+              backgroundColor={ getCurrentColorCode(colors, slug) }
               textColor={ '#ffffff' } //後に設定
             />
           </PanelColorSettings>
