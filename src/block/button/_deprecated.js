@@ -19,22 +19,22 @@ export const deprecated = [
     migrate( attributes ) {
       const { content, color, size, url, target, isCircle, isShine } = attributes;
       //console.log(attributes);
-      return merge(
-        attributes,
-        {
-          slug: colorValueToSlug(color)
-        }
-      );
-      // return {
-      //   content: content,
-      //   color: color,
-      //   slug: getCurrentColorSlug(color),
-      //   size: size,
-      //   url: url,
-      //   target: target,
-      //   isCircle: isCircle,
-      //   isShine: isShine
-      // };
+      // return merge(
+      //   attributes,
+      //   {
+      //     slug: colorValueToSlug(color)
+      //   }
+      // );
+      return {
+        content: content,
+        //color: color,
+        slug: colorValueToSlug(color),
+        size: size,
+        url: url,
+        target: target,
+        isCircle: isCircle,
+        isShine: isShine
+      };
     },
 
     save( { attributes } ) {

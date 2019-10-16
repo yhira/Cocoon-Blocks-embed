@@ -7,8 +7,9 @@
 
 const { __ } = wp.i18n;
 const { Fill, ToolbarButton } = wp.components;
-const { getColorObjectByColorValue } = wp.editor;
+const { getColorObjectByColorValue, getColorObjectByAttributeValues, getColorClassName } = wp.editor;
 const { displayShortcut } = wp.keycodes;
+const { find } = lodash;
 import classnames from 'classnames';
 
 export const THEME_NAME = 'cocoon';
@@ -72,12 +73,23 @@ export function isSameBalloon(index, id, icon, style, position, iconstyle) {
 
 //現在のカラーパレットのスラッグを取得
 export function getCurrentColorSlug(color){
-  let object = getColorObjectByColorValue(cocoonPaletteColors, color);
-  let slug = object.slug;
-  if (!slug) {
-    slug = 'key-color';
+  const object = getColorObjectByColorValue(cocoonPaletteColors, color);
+  let slug = 'key-color';
+  if (object) {
+    slug = object.slug;
   }
   return slug;
+}
+
+//現在のカラーパレットのスラッグを取得
+export function getCurrentColorCode(slug){
+  const object = getColorObjectByAttributeValues(cocoonPaletteColors, slug, keyColor);
+  //console.log(object);
+  let color = keyColor;
+  if (object) {
+    color = object.color;
+  }
+  return color;
 }
 
 //色からスラッグを取得

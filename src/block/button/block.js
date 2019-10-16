@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, BUTTON_BLOCK, getCurrentColorSlug } from '../../helpers';
+import { THEME_NAME, BUTTON_BLOCK, getCurrentColorSlug, getCurrentColorCode } from '../../helpers';
 import { attrs } from './_attrs';
 import { deprecated } from './_deprecated';
 import classnames from 'classnames';
@@ -46,7 +46,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   edit( { attributes, setAttributes } ) {
-    const { content, color, slug, size, url, target, isCircle, isShine } = attributes;
+    const { content, slug, size, url, target, isCircle, isShine } = attributes;
 
     return (
       <Fragment>
@@ -114,22 +114,14 @@ registerBlockType( 'cocoon-blocks/button-1', {
             initialOpen={ true }
             colorSettings={ [
               {
-                value: color,
+                value: getCurrentColorCode(slug),
                 onChange: ( value ) => setAttributes( {
-                  color: value,
                   slug: getCurrentColorSlug(value)
                 } ),
-                // value: slug,
-                // onChange: ( value ) => setAttributes( {
-                //   slug: getCurrentColorSlug(value)
-                // } ),
                 label: __( '色', THEME_NAME ),
               },
             ] }
           >
-            <ContrastChecker
-              color={ color }
-            />
           </PanelColorSettings>
 
         </InspectorControls>
@@ -152,7 +144,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   save( { attributes } ) {
-    const { content, color, slug, size, url, target, isCircle, isShine } = attributes;
+    const { content, slug, size, url, target, isCircle, isShine } = attributes;
     return (
       <div className={BUTTON_BLOCK}>
         <a
