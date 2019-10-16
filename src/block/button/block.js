@@ -6,7 +6,7 @@
  */
 
 import { THEME_NAME, BUTTON_BLOCK, getCurrentColorSlug, getCurrentColorCode } from '../../helpers';
-import { attrs } from './_attrs';
+// import { attrs } from './_attrs';
 import { deprecated } from './_deprecated';
 import classnames from 'classnames';
 
@@ -40,7 +40,36 @@ registerBlockType( 'cocoon-blocks/button-1', {
   description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
   keywords: [ 'button', 'btn' ],
 
-  attributes: attrs,
+  attributes: {
+    content: {
+      type: 'string',
+      default: __( 'ボタン', THEME_NAME ),
+    },
+    url: {
+      type: 'string',
+      default: '',
+    },
+    target: {
+      type: 'string',
+      default: '_self',
+    },
+    slug: {
+      type: 'string',
+      default: getCurrentColorSlug(keyColor),
+    },
+    size: {
+      type: 'string',
+      default: '',
+    },
+    isCircle: {
+      type: 'boolean',
+      default: false,
+    },
+    isShine: {
+      type: 'boolean',
+      default: false,
+    },
+  },
   supports: {
     align: [ 'left', 'center', 'right' ],
     customClassName: true,

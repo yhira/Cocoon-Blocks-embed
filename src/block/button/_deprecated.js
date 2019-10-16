@@ -5,26 +5,49 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 import { THEME_NAME, BUTTON_BLOCK, colorValueToSlug, getCurrentColorSlug } from '../../helpers';
-import { attrs } from './_attrs';
+//import { attrs } from './_attrs';
 import classnames from 'classnames';
 
-const { merge } = lodash;
+const { __ } = wp.i18n;
+// const { merge } = lodash;
 const { RichText } = wp.editor;
 
 export const deprecated = [
   {
-    attributes: attrs,
+    attributes: {
+      content: {
+        type: 'string',
+        default: __( 'ボタン', THEME_NAME ),
+      },
+      url: {
+        type: 'string',
+        default: '',
+      },
+      target: {
+        type: 'string',
+        default: '_self',
+      },
+      color: {
+        type: 'string',
+        default: keyColor,
+      },
+      size: {
+        type: 'string',
+        default: '',
+      },
+      isCircle: {
+        type: 'boolean',
+        default: false,
+      },
+      isShine: {
+        type: 'boolean',
+        default: false,
+      },
+    },
 
     //migrate( { content, color, size, url, target, isCircle, isShine } ) {
     migrate( attributes ) {
       const { content, color, size, url, target, isCircle, isShine } = attributes;
-      //console.log(attributes);
-      // return merge(
-      //   attributes,
-      //   {
-      //     slug: colorValueToSlug(color)
-      //   }
-      // );
       return {
         content: content,
         //color: color,
