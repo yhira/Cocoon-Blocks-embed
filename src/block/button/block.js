@@ -118,7 +118,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
                 onChange: ( value ) => setAttributes( {
                   slug: getCurrentColorSlug(value)
                 } ),
-                label: __( '色', THEME_NAME ),
+                label: __( '背景色', THEME_NAME ),
               },
             ] }
           >
