@@ -49,11 +49,11 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
   edit( { attributes, setAttributes } ) {
     const { name, index, style, position, iconstyle } = attributes;
 
-    //console.log(speechBaloons);
+    //console.log(gbSpeechBalloons);
     var balloons = [];
-    speechBaloons.map((balloon, index) => {
+    gbSpeechBalloons.map((balloon, index) => {
       //console.log(balloon);
-      if (speechBaloons[index].visible == '1') {
+      if (gbSpeechBalloons[index].visible == '1') {
         balloons.push({
           value: index,
           label: balloon.title,
@@ -70,14 +70,14 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
             <SelectControl
               label={ __( '人物', THEME_NAME ) }
-              value={ index ? index : speechBaloons[index].index }
+              value={ index ? index : gbSpeechBalloons[index].index }
               onChange={ ( value ) => setAttributes( { index: value } ) }
               options={ balloons }
             />
 
             <SelectControl
               label={ __( '吹き出しスタイル', THEME_NAME ) }
-              value={ style ? style : speechBaloons[index].style }
+              value={ style ? style : gbSpeechBalloons[index].style }
               onChange={ ( value ) => setAttributes( { style: value } ) }
               options={ [
                 {
@@ -101,7 +101,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
             <SelectControl
               label={ __( '人物位置', THEME_NAME ) }
-              value={ position ? position : speechBaloons[index].position }
+              value={ position ? position : gbSpeechBalloons[index].position }
               onChange={ ( value ) => setAttributes( { position: value } ) }
               options={ [
                 {
@@ -117,7 +117,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
             <SelectControl
               label={ __( 'アイコンスタイル', THEME_NAME ) }
-              value={ iconstyle ? iconstyle : speechBaloons[index].iconstyle }
+              value={ iconstyle ? iconstyle : gbSpeechBalloons[index].iconstyle }
               onChange={ ( value ) => setAttributes( { iconstyle: value } ) }
               options={ [
                 {
@@ -144,7 +144,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
         <div
           className={
-            "speech-wrap sb-id-" + speechBaloons[index].id +
+            "speech-wrap sb-id-" + gbSpeechBalloons[index].id +
             " sbs-" + style +
             " sbp-" + position +
             " sbis-" + iconstyle +
@@ -154,14 +154,14 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
           <div className="speech-person">
             <figure className="speech-icon">
               <img
-                src={speechBaloons[index].icon}
-                alt={speechBaloons[index].name}
+                src={gbSpeechBalloons[index].icon}
+                alt={gbSpeechBalloons[index].name}
                 className="speech-icon-image"
               />
             </figure>
             <div className="speech-name">
               <RichText
-                value={ name ? name : speechBaloons[index].name }
+                value={ name ? name : gbSpeechBalloons[index].name }
                 placeholder={DEFAULT_NAME}
                 onChange={ ( value ) => setAttributes( { name: value } ) }
               />
@@ -181,7 +181,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
     return (
         <div
           className={
-            "speech-wrap sb-id-" + speechBaloons[index].id +
+            "speech-wrap sb-id-" + gbSpeechBalloons[index].id +
             " sbs-" + style +
             " sbp-" + position +
             " sbis-" + iconstyle +
@@ -191,14 +191,14 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
           <div className="speech-person">
             <figure className="speech-icon">
               <img
-                src={speechBaloons[index].icon}
-                alt={speechBaloons[index].name}
+                src={gbSpeechBalloons[index].icon}
+                alt={gbSpeechBalloons[index].name}
                 className="speech-icon-image"
               />
             </figure>
             <div className="speech-name">
               <RichText.Content
-                value={ name ? name : speechBaloons[index].name }
+                value={ name ? name : gbSpeechBalloons[index].name }
               />
             </div>
           </div>

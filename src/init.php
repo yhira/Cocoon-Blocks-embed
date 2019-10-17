@@ -86,7 +86,7 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
   $is_templates_visible = (has_valid_shortcode_item($templates) && is_block_editor_template_shortcode_dropdown_visible()) ? 1 : 0;
   $is_affiliates_visible = (has_valid_shortcode_item($affiliates) && is_block_editor_affiliate_shortcode_dropdown_visible()) ? 1 : 0;
   $is_rankings_visible = (has_valid_shortcode_item($rankings) && is_block_editor_ranking_shortcode_dropdown_visible()) ? 1 : 0;
-  $dropdowns = array(
+  $dropdownSettings = array(
     'isRubyVisible' => is_block_editor_ruby_button_visible() ? 1 : 0,
     'isLetterVisible' => is_block_editor_letter_style_dropdown_visible() ? 1 : 0,
     'isMarkerVisible' => is_block_editor_marker_style_dropdown_visible() ? 1 : 0,
@@ -106,8 +106,8 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
   ///////////////////////////////////////////
   wp_localize_script(
     'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
-    'dropdowns', //任意のオブジェクト名
-    $dropdowns //プロバティ
+    'gbDropdownSettings', //任意のオブジェクト名
+    $dropdownSettings //プロバティ
   );
 
   ///////////////////////////////////////////
@@ -117,7 +117,7 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
   //_v($baloons);
   wp_localize_script(
     'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
-    'speechBaloons', //任意のオブジェクト名
+    'gbSpeechBalloons', //任意のオブジェクト名
     $baloons //プロバティ
   );
   //テーマのキーカラーを渡す
@@ -131,7 +131,7 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
   if ($is_templates_visible) {
     wp_localize_script(
       'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
-      'templates', //任意のオブジェクト名
+      'gbTemplates', //任意のオブジェクト名
       $templates //プロバティ
     );
   }
@@ -141,7 +141,7 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
   if ($is_affiliates_visible) {
     wp_localize_script(
       'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
-      'affiliateTags', //任意のオブジェクト名
+      'gbAffiliateTags', //任意のオブジェクト名
       $affiliates //プロバティ
     );
   }
@@ -151,7 +151,7 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
   if ($is_rankings_visible) {
     wp_localize_script(
       'cocoon-blocks-js', //値を渡すjsファイルのハンドル名
-      'itemRankings', //任意のオブジェクト名
+      'gbItemRankings', //任意のオブジェクト名
       $rankings //プロバティ
     );
   }

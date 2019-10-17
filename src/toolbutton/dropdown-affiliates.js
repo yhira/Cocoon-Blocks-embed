@@ -15,9 +15,9 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/affiliates';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
-var isAffiliateVisible = Number(dropdowns['isAffiliateVisible'] ? dropdowns['isAffiliateVisible'] : 0);
+var isAffiliateVisible = Number(gbDropdownSettings['isAffiliateVisible'] ? gbDropdownSettings['isAffiliateVisible'] : 0);
 if (isAffiliateVisible) {
-  affiliateTags.map((affi, index) => {
+  gbAffiliateTags.map((affi, index) => {
     var name = 'affiliate-' + affi.id;
     var title = affi.title;
     var formatType = 'cocoon-blocks/' + name;

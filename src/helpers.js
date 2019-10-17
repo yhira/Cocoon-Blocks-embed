@@ -55,13 +55,13 @@ export function getBalloonClasses(id, style, position, iconstyle) {
 
 //オブジェクト吹き出しと保存した吹き出しの情報が同じか
 export function isSameBalloon(index, id, icon, style, position, iconstyle) {
-  if (speechBaloons[index]) {
+  if (gbSpeechBalloons[index]) {
     if (
-      speechBaloons[index].id == id &&
-      speechBaloons[index].icon == icon &&
-      speechBaloons[index].style == style &&
-      speechBaloons[index].position == position &&
-      speechBaloons[index].iconstyle == iconstyle
+      gbSpeechBalloons[index].id == id &&
+      gbSpeechBalloons[index].icon == icon &&
+      gbSpeechBalloons[index].style == style &&
+      gbSpeechBalloons[index].position == position &&
+      gbSpeechBalloons[index].iconstyle == iconstyle
 
     ) {
       return true;

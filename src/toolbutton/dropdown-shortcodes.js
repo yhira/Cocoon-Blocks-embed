@@ -187,7 +187,7 @@ registerShortcodeFormatType(
 //   }
 // } );
 
-var isGeneralVisible = Number(dropdowns['isGeneralVisible'] ? dropdowns['isGeneralVisible'] : 0);
+var isGeneralVisible = Number(gbDropdownSettings['isGeneralVisible'] ? gbDropdownSettings['isGeneralVisible'] : 0);
 if (isGeneralVisible) {
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( '汎用ショートコード', THEME_NAME ),

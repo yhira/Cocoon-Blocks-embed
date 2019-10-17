@@ -62,28 +62,28 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
   edit( { attributes, setAttributes } ) {
     var { name, index, id, icon, style, position, iconstyle, iconid } = attributes;
     //新規作成時
-    if (!icon && index == '0' && speechBaloons[0]) {
-        id = speechBaloons[0].id;
-        icon = speechBaloons[0].icon;
-        style = speechBaloons[0].style;
-        position = speechBaloons[0].position;
-        iconstyle = speechBaloons[0].iconstyle;
+    if (!icon && index == '0' && gbSpeechBalloons[0]) {
+        id = gbSpeechBalloons[0].id;
+        icon = gbSpeechBalloons[0].icon;
+        style = gbSpeechBalloons[0].style;
+        position = gbSpeechBalloons[0].position;
+        iconstyle = gbSpeechBalloons[0].iconstyle;
         if (!name) {
-          name = speechBaloons[0].name;
+          name = gbSpeechBalloons[0].name;
         }
         setAttributes( { name: name, index: index, id: id, icon: icon, style: style, position: position, iconstyle: iconstyle } );
     }
     //新規作成以外
-    if (speechBaloons[index]) {
+    if (gbSpeechBalloons[index]) {
       if (isSameBalloon(index, id, icon, style, position, iconstyle)) {
 
-        id = speechBaloons[index].id;
-        icon = speechBaloons[index].icon;
-        style = speechBaloons[index].style;
-        position = speechBaloons[index].position;
-        iconstyle = speechBaloons[index].iconstyle;
+        id = gbSpeechBalloons[index].id;
+        icon = gbSpeechBalloons[index].icon;
+        style = gbSpeechBalloons[index].style;
+        position = gbSpeechBalloons[index].position;
+        iconstyle = gbSpeechBalloons[index].iconstyle;
         if (!name) {
-          name = speechBaloons[index].name;
+          name = gbSpeechBalloons[index].name;
         }
         setAttributes( { index: index, id: id, icon: icon, style: style, position: position, iconstyle: iconstyle } );
       }
@@ -91,20 +91,20 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
 
     const renderIcon = ( obj ) => {
       // console.log(icon);
-      // console.log(speechBaloons[index].icon);
-      // console.log((icon === speechBaloons[index].icon) ? icon : speechBaloons[index].icon);
+      // console.log(gbSpeechBalloons[index].icon);
+      // console.log((icon === gbSpeechBalloons[index].icon) ? icon : gbSpeechBalloons[index].icon);
       return (
         <Button className="image-button" onClick={ obj.open } style={ { padding: 0 } }>
-          <img src={ icon ? icon : speechBaloons[index].icon } alt={icon ? '' : speechBaloons[index].name} className={ `speech-icon-image wp-image-${ iconid }` } />
+          <img src={ icon ? icon : gbSpeechBalloons[index].icon } alt={icon ? '' : gbSpeechBalloons[index].name} className={ `speech-icon-image wp-image-${ iconid }` } />
         </Button>
       );
     };
 
-    //console.log(speechBaloons);
+    //console.log(gbSpeechBalloons);
     var balloons = [];
-    speechBaloons.map((balloon, index) => {
+    gbSpeechBalloons.map((balloon, index) => {
       //console.log(balloon);
-      if (speechBaloons[index].visible == '1') {
+      if (gbSpeechBalloons[index].visible == '1') {
         balloons.push({
           value: index,
           label: balloon.title,
@@ -123,12 +123,12 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
               value={ index }
               onChange={ ( value ) => setAttributes( {
                 index: value,
-                name: speechBaloons[value].name,
-                id: speechBaloons[value].id,
-                icon: speechBaloons[value].icon,
-                style: speechBaloons[value].style,
-                position: speechBaloons[value].position,
-                iconstyle: speechBaloons[value].iconstyle } ) }
+                name: gbSpeechBalloons[value].name,
+                id: gbSpeechBalloons[value].id,
+                icon: gbSpeechBalloons[value].icon,
+                style: gbSpeechBalloons[value].style,
+                position: gbSpeechBalloons[value].position,
+                iconstyle: gbSpeechBalloons[value].iconstyle } ) }
               options={ balloons }
             />
 
