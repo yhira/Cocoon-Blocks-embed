@@ -111,7 +111,7 @@ class OneColumnBlock extends Component {
 export default registerBlockType('slug/one-column', {
   title: 'Eine Spalte',
   icon: 'admin-post',
-  category: 'layout',
+  category: 'cocoon-block',
   attributes: {
     content: {
       type: 'string',
