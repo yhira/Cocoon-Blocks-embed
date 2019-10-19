@@ -92,13 +92,13 @@ class OneColumnBlock extends Component {
                 label: 'Textfarbe',
                 onChange: setTextColor,
                 value: textColor.color,
-                disableCustomColors: true,
+                //disableCustomColors: true,
               },
               {
                 label: 'Hintergrundfarbe',
                 onChange: setBackgroundColor,
                 value: backgroundColor.color,
-                disableCustomColors: true,
+                //disableCustomColors: true,
               }
             ]}
           />
