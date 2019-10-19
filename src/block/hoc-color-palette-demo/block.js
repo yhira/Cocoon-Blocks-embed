@@ -8,7 +8,10 @@ const {
   RichText,
   withColors,
   getColorClassName,
-  PanelColorSettings
+  PanelColorSettings,
+  getFontSizeClass,
+  withFontSizes,
+  FontSizePicker,
 } = wp.editor;
 const {
   PanelBody,
@@ -28,14 +31,15 @@ const {
 const {getComputedStyle} = window;
 
 const FallbackStyles = withFallbackStyles((node, ownProps) => {
-  const {textColor, backgroundColor} = ownProps.attributes;
+  const {textColor, backgroundColor, fontSize, customFontSize} = ownProps.attributes;
   const editableNode = node.querySelector('[contenteditable="true"]');
   //verify if editableNode is available, before using getComputedStyle.
   const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
   return {
     fallbackBackgroundColor: backgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
     fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
-  };
+    fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt( computedStyles.fontSize ) || undefined,
+  }
 });
 
 class OneColumnBlock extends Component {
@@ -57,49 +61,61 @@ class OneColumnBlock extends Component {
       fallbackBackgroundColor,
       fallbackTextColor,
       fallbackFontSize,
+      fontSize,
+      setFontSize,
     } = this.props;
 
-    console.log(backgroundColor);
-    console.log(textColor);
+    const {
+      content,
+    } = attributes;
+
+    // console.log(backgroundColor);
+    // console.log(textColor);
 
     return (
       <div
         className={classnames(className, {
+          'has-text-color': textColor.color,
           'has-background': backgroundColor.color,
           [backgroundColor.class]: backgroundColor.class,
           [textColor.class]: textColor.class,
+          [fontSize.class]: fontSize.class,
         })}
 
         style={{
           backgroundColor: backgroundColor.color,
           color: textColor.color,
+          fontSize: fontSize.size,
         }}
       >
 
         <RichText
           value={ content }
-          onChange={ ( value ) => {
-            setAttributes( {
-              content: value,
-            } );
-          } }
+          onChange={ ( value ) => setAttributes( { content: value } ) }
         />
         <InspectorControls>
+          <PanelBody title='文字サイズ' className="blocks-font-size">
+            <FontSizePicker
+              fallbackFontSize={ fallbackFontSize }
+              value={ fontSize.size }
+              onChange={ setFontSize }
+            />
+          </PanelBody>
           <PanelColorSettings
-            title="'Farbschema"
+            title="色設定"
             colorSettings={[
               {
-                label: 'Textfarbe',
+                label: '背景色',
+                onChange: setBackgroundColor,
+                value: backgroundColor.color,
+                //disableCustomColors: true,
+              },
+              {
+                label: '文字色',
                 onChange: setTextColor,
                 value: textColor.color,
                 //disableCustomColors: true,
               },
-              {
-                label: 'Hintergrundfarbe',
-                onChange: setBackgroundColor,
-                value: backgroundColor.color,
-                //disableCustomColors: true,
-              }
             ]}
           />
         </InspectorControls>
@@ -119,33 +135,70 @@ export default registerBlockType('slug/one-column', {
     backgroundColor: {
       type: 'string',
     },
+    customBackgroundColor: {
+      type: 'string',
+    },
     textColor: {
       type: 'string',
     },
+    customTextColor: {
+      type: 'string',
+    },
+    fontSize: {
+      type: 'string',
+    },
+    customFontSize: {
+      type: 'string',
+    },
   },
+  // supports: {
+  //   className: false,
+  // },
   edit: compose([
     withColors('backgroundColor', {textColor: 'color'}),
+    withFontSizes('fontSize'),
     FallbackStyles,
   ])(OneColumnBlock),
   save: props => {
     const {
       content,
       backgroundColor,
-      textColor,
       customBackgroundColor,
+      textColor,
       customTextColor,
+      fontSize,
+      customFontSize,
     } = props.attributes;
+
+    //console.log(props.attributes);
 
     const textClass = getColorClassName( 'color', textColor );
     const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+    const fontSizeClass = getFontSizeClass( fontSize );
+
+    // console.log(customTextColor);
+    // console.log(customBackgroundColor);
 
     const className = classnames( {
+      'has-text-color': textColor || customTextColor,
+      //[`has-text-color-${textColor}`]: textColor,
       'has-background': backgroundColor || customBackgroundColor,
+      [ fontSizeClass ]: fontSizeClass,
       [ textClass ]: textClass,
       [ backgroundClass ]: backgroundClass,
     } );
+
+    const styles = {
+      backgroundColor: backgroundClass ? undefined : customBackgroundColor,
+      color: textClass ? undefined : customTextColor,
+      fontSize: fontSizeClass ? undefined : customFontSize,
+    };
+
     return (
-      <div className={className}>
+      <div
+        className={className}
+        //style={ styles }
+      >
         <RichText.Content
           value={ content }
         />
