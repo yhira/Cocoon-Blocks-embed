@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
 
-var isBadgeVisible = Number(gbDropdownSettings['isBadgeVisible'] ? gbDropdownSettings['isBadgeVisible'] : 0);
+var isBadgeVisible = Number(gbSettings['isBadgeVisible'] ? gbSettings['isBadgeVisible'] : 0);
 if (isBadgeVisible) {
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( 'バッジ', THEME_NAME ),

@@ -42,7 +42,7 @@ sizes.map((size, index) => {
 });
 
 //ドロップダウン
-var isFontSizeVisible = Number(gbDropdownSettings['isFontSizeVisible'] ? gbDropdownSettings['isFontSizeVisible'] : 0);
+var isFontSizeVisible = Number(gbSettings['isFontSizeVisible'] ? gbSettings['isFontSizeVisible'] : 0);
 if (isFontSizeVisible) {
   registerFormatType( FORMAT_TYPE_NAME, {
     title: __( 'フォントサイズ', THEME_NAME ),

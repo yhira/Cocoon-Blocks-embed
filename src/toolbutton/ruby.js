@@ -14,7 +14,7 @@ const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
 const { SVG, Path } = wp.components;
 
 
-var isRubyVisible = Number(gbDropdownSettings['isRubyVisible'] ? gbDropdownSettings['isRubyVisible'] : 0);
+var isRubyVisible = Number(gbSettings['isRubyVisible'] ? gbSettings['isRubyVisible'] : 0);
 
 if (isRubyVisible) {
   registerFormatType( 'cocoon-blocks/rt', {
