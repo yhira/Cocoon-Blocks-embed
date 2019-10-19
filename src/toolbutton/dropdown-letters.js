@@ -16,9 +16,9 @@ const FORMAT_TYPE_NAME = 'cocoon-blocks/letters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { orderBy } from 'lodash';
 
-//console.log(gbDropdownSettings);
-var isLetterVisible = Number(gbDropdownSettings['isLetterVisible'] ? gbDropdownSettings['isLetterVisible'] : 0);
-// console.log(gbDropdownSettings['isLetterVisible']);
+//console.log(gbSettings);
+var isLetterVisible = Number(gbSettings['isLetterVisible'] ? gbSettings['isLetterVisible'] : 0);
+// console.log(gbSettings['isLetterVisible']);
 // console.log(isLetterVisible);
 if (isLetterVisible) {
   registerFormatType( FORMAT_TYPE_NAME, {
