@@ -40,11 +40,11 @@ registerBlockType( 'cocoon-blocks/balloon-box', {
   edit( { attributes, setAttributes } ) {
     const { content, index } = attributes;
 
-    //console.log(speechBaloons);
+    //console.log(gbSpeechBalloons);
     var balloons = [];
-    speechBaloons.map((balloon, index) => {
+    gbSpeechBalloons.map((balloon, index) => {
       //console.log(balloon);
-      if (speechBaloons[index].visible == '1') {
+      if (gbSpeechBalloons[index].visible == '1') {
         balloons.push({
           value: index,
           label: balloon.title,
@@ -71,24 +71,24 @@ registerBlockType( 'cocoon-blocks/balloon-box', {
 
         <div
           className={
-            "speech-wrap sb-id-" + speechBaloons[index].id +
-            " sbs-" + speechBaloons[index].style +
-            " sbp-" + speechBaloons[index].position +
-            " sbis-" + speechBaloons[index].iconindex +
+            "speech-wrap sb-id-" + gbSpeechBalloons[index].id +
+            " sbs-" + gbSpeechBalloons[index].style +
+            " sbp-" + gbSpeechBalloons[index].position +
+            " sbis-" + gbSpeechBalloons[index].iconindex +
             " cf" +
             BLOCK_CLASS
           }>
           <div className="speech-person">
             <figure className="speech-icon">
               <img
-                src={speechBaloons[index].icon}
-                alt={speechBaloons[index].name}
+                src={gbSpeechBalloons[index].icon}
+                alt={gbSpeechBalloons[index].name}
                 className="speech-icon-image"
               />
             </figure>
             <div className="speech-name">
               <RichText
-                value={ content ? content : speechBaloons[index].name }
+                value={ content ? content : gbSpeechBalloons[index].name }
                 placeholder={DEFAULT_NAME}
                 onChange={ ( value ) => setAttributes( { content: value } ) }
               />
@@ -108,24 +108,24 @@ registerBlockType( 'cocoon-blocks/balloon-box', {
     return (
         <div
           className={
-            "speech-wrap sb-id-" + speechBaloons[index].id +
-            " sbs-" + speechBaloons[index].style +
-            " sbp-" + speechBaloons[index].position +
-            " sbis-" + speechBaloons[index].iconindex +
+            "speech-wrap sb-id-" + gbSpeechBalloons[index].id +
+            " sbs-" + gbSpeechBalloons[index].style +
+            " sbp-" + gbSpeechBalloons[index].position +
+            " sbis-" + gbSpeechBalloons[index].iconindex +
             " cf" +
             BLOCK_CLASS
           }>
           <div className="speech-person">
             <figure className="speech-icon">
               <img
-                src={speechBaloons[index].icon}
-                alt={speechBaloons[index].name}
+                src={gbSpeechBalloons[index].icon}
+                alt={gbSpeechBalloons[index].name}
                 className="speech-icon-image"
               />
             </figure>
             <div className="speech-name">
               <RichText.Content
-                value={ content ? content : speechBaloons[index].name }
+                value={ content ? content : gbSpeechBalloons[index].name }
               />
             </div>
           </div>

@@ -33,7 +33,7 @@ function getClasses(index, style, position, iconstyle) {
 
 function getBalloonIcon(id) {
   //console.log(id);
-  speechBaloons.map((balloon, index) => {
+  gbSpeechBalloons.map((balloon, index) => {
     if (balloon.id == id) {
       //console.log(balloon.icon);
       const i = balloon.icon;
@@ -45,7 +45,7 @@ function getBalloonIcon(id) {
 }
 
 function getBalloonName(id) {
-  speechBaloons.map((balloon, index) => {
+  gbSpeechBalloons.map((balloon, index) => {
     if (balloon.id == id) {
       const n = balloon.name;
       return n;
@@ -100,12 +100,12 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
   edit( { attributes, setAttributes } ) {
     const { id, name, index, style, position, iconstyle, icon, iconid } = attributes;
     let defIcon = '';
-    if (speechBaloons[index]) {
-      defIcon = speechBaloons[index].icon;
+    if (gbSpeechBalloons[index]) {
+      defIcon = gbSpeechBalloons[index].icon;
     }
     let defName = '';
-    if (speechBaloons[index]) {
-      defName = speechBaloons[index].name;
+    if (gbSpeechBalloons[index]) {
+      defName = gbSpeechBalloons[index].name;
     }
 
     const renderIcon = ( obj ) => {
@@ -116,11 +116,11 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
       );
     };
 
-    //console.log(speechBaloons);
+    //console.log(gbSpeechBalloons);
     var balloons = [];
-    speechBaloons.map((balloon, index) => {
+    gbSpeechBalloons.map((balloon, index) => {
       //console.log(balloon);
-      if (speechBaloons[index].visible == '1') {
+      if (gbSpeechBalloons[index].visible == '1') {
         balloons.push({
           value: balloon.id,
           label: balloon.title,
@@ -243,12 +243,12 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
   save( { attributes } ) {
     const { name, index, style, position, iconstyle, icon } = attributes;
     let defIcon = '';
-    if (speechBaloons[index]) {
-      defIcon = speechBaloons[index].icon;
+    if (gbSpeechBalloons[index]) {
+      defIcon = gbSpeechBalloons[index].icon;
     }
     let defName = '';
-    if (speechBaloons[index]) {
-      defName = speechBaloons[index].name;
+    if (gbSpeechBalloons[index]) {
+      defName = gbSpeechBalloons[index].name;
     }
 
     return (

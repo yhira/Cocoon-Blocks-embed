@@ -21,7 +21,7 @@ function getClasses(index, style, position, iconstyle) {
   const classes = classnames(
     {
       [ 'speech-wrap' ]: true,
-      [ `sb-id-${ speechBaloons[index].id }` ]: !! speechBaloons[index].id,
+      [ `sb-id-${ gbSpeechBalloons[index].id }` ]: !! gbSpeechBalloons[index].id,
       [ `sbs-${ style  }` ]: !! style ,
       [ `sbp-${ position  }` ]: !! position ,
       [ `sbis-${ iconstyle  }` ]: !! iconstyle ,
@@ -79,20 +79,20 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
 
     const renderIcon = ( obj ) => {
       // console.log(icon);
-      // console.log(speechBaloons[index].icon);
-      // console.log((icon === speechBaloons[index].icon) ? icon : speechBaloons[index].icon);
+      // console.log(gbSpeechBalloons[index].icon);
+      // console.log((icon === gbSpeechBalloons[index].icon) ? icon : gbSpeechBalloons[index].icon);
       return (
         <Button className="image-button" onClick={ obj.open } style={ { padding: 0 } }>
-          <img src={ icon ? icon : speechBaloons[index].icon } alt={icon ? '' : speechBaloons[index].name} className={ `speech-icon-image wp-image-${ iconid }` } />
+          <img src={ icon ? icon : gbSpeechBalloons[index].icon } alt={icon ? '' : gbSpeechBalloons[index].name} className={ `speech-icon-image wp-image-${ iconid }` } />
         </Button>
       );
     };
 
-    //console.log(speechBaloons);
+    //console.log(gbSpeechBalloons);
     var balloons = [];
-    speechBaloons.map((balloon, index) => {
+    gbSpeechBalloons.map((balloon, index) => {
       //console.log(balloon);
-      if (speechBaloons[index].visible == '1') {
+      if (gbSpeechBalloons[index].visible == '1') {
         balloons.push({
           value: index,
           label: balloon.title,
@@ -197,7 +197,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
             </figure>
             <div className="speech-name">
               <RichText
-                value={ name ? name : speechBaloons[index].name }
+                value={ name ? name : gbSpeechBalloons[index].name }
                 placeholder={DEFAULT_NAME}
                 onChange={ ( value ) => setAttributes( { name: value } ) }
               />
@@ -220,14 +220,14 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box', {
           <div className="speech-person">
             <figure className="speech-icon">
               <img
-                src={icon ? icon : speechBaloons[index].icon}
-                alt={icon ? '' : speechBaloons[index].name}
+                src={icon ? icon : gbSpeechBalloons[index].icon}
+                alt={icon ? '' : gbSpeechBalloons[index].name}
                 className="speech-icon-image"
               />
             </figure>
             <div className="speech-name">
               <RichText.Content
-                value={ name ? name : speechBaloons[index].name }
+                value={ name ? name : gbSpeechBalloons[index].name }
               />
             </div>
           </div>
