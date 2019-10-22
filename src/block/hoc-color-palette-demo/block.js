@@ -82,11 +82,11 @@ class OneColumnBlock extends Component {
           [fontSize.class]: fontSize.class,
         })}
 
-        style={{
-          backgroundColor: backgroundColor.color,
-          color: textColor.color,
-          fontSize: fontSize.size,
-        }}
+        // style={{
+        //   backgroundColor: backgroundColor.color,
+        //   color: textColor.color,
+        //   fontSize: fontSize.size,
+        // }}
       >
 
         <RichText
@@ -172,27 +172,33 @@ export default registerBlockType('slug/one-column', {
 
     //console.log(props.attributes);
 
-    const textClass = getColorClassName( 'color', textColor );
-    const backgroundClass = getColorClassName( 'background-color', backgroundColor );
-    const fontSizeClass = getFontSizeClass( fontSize );
+    // const textClass = getColorClassName( 'color', textColor );
+    // const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+    // const fontSizeClass = getFontSizeClass( fontSize );
 
     // console.log(customTextColor);
     // console.log(customBackgroundColor);
 
+    // const customTextColorClass = customTextColor ? customTextColor.replace('#', '') : null;
+    // const customBackgroundColorClass = customBackgroundColor ? customBackgroundColor.replace('#', '') : null;
+
+
     const className = classnames( {
       'has-text-color': textColor || customTextColor,
-      //[`has-text-color-${textColor}`]: textColor,
-      'has-background': backgroundColor || customBackgroundColor,
-      [ fontSizeClass ]: fontSizeClass,
       [ textClass ]: textClass,
+      'has-background': backgroundColor || customBackgroundColor,
       [ backgroundClass ]: backgroundClass,
+      [ fontSizeClass ]: fontSizeClass,
+      // [`has-${customTextColorClass}-custom-text-color`]: customTextColorClass,
+      // [`has-${customBackgroundColorClass}-custom-background-color`]: customBackgroundColorClass,
+      // [`has-${customFontSize}-custom-font-size`]: customFontSize,
     } );
 
-    const styles = {
-      backgroundColor: backgroundClass ? undefined : customBackgroundColor,
-      color: textClass ? undefined : customTextColor,
-      fontSize: fontSizeClass ? undefined : customFontSize,
-    };
+    // const styles = {
+    //   backgroundColor: backgroundClass ? undefined : customBackgroundColor,
+    //   color: textClass ? undefined : customTextColor,
+    //   fontSize: fontSizeClass ? undefined : customFontSize,
+    // };
 
     return (
       <div
