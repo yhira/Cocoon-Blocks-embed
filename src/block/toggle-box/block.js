@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, getDateID, colorValueToSlug} from '../../helpers.js';
+import {THEME_NAME, BLOCK_CLASS, getDateID, colorValueToSlug} from '../../helpers';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;

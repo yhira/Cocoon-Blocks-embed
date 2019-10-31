@@ -89,14 +89,21 @@ export function isSameBalloon(index, id, icon, style, position, iconstyle) {
 
 
 
-export const btfFallbackStyles = withFallbackStyles((node, ownProps) => {
-  const {textColor, backgroundColor, fontSize, customFontSize} = ownProps.attributes;
+export const fullFallbackStyles = withFallbackStyles((node, ownProps) => {
+  const {
+    textColor,
+    backgroundColor,
+    borderColor,
+    fontSize,
+    customFontSize,
+  } = ownProps.attributes;
   const editableNode = node.querySelector('[contenteditable="true"]');
   //verify if editableNode is available, before using getComputedStyle.
   const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
   return {
     fallbackBackgroundColor: backgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
     fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackBorderColor: borderColor || !computedStyles ? undefined : computedStyles.color,
     fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt( computedStyles.fontSize ) || undefined,
   }
 });

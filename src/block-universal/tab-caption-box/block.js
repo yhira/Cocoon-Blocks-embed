@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, ICONS, getIconClass, colorValueToSlug} from '../../helpers.js';
+import {THEME_NAME, BLOCK_CLASS, ICONS, getIconClass, colorValueToSlug} from '../../helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 

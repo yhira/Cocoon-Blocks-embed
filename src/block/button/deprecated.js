@@ -50,13 +50,19 @@ export const deprecated = [
       const { content, color, size, url, target, isCircle, isShine } = attributes;
       return {
         content: content,
-        //color: color,
-        slug: colorValueToSlug(color),
         size: size,
         url: url,
         target: target,
         isCircle: isCircle,
-        isShine: isShine
+        isShine: isShine,
+        backgroundColor: color,
+        customBackgroundColor: '',
+        textColor: '',
+        customTextColor: '',
+        borderColor: '',
+        customBorderColor: '',
+        fontSize: '',
+        customFontSize: '',
       };
     },
 
