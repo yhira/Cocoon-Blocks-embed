@@ -5,8 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, BUTTON_BLOCK, btfFallbackStyles } from '../../helpers';
-// import { attrs } from './_attrs';
+import { THEME_NAME, BUTTON_BLOCK, fullFallbackStyles } from '../../helpers';
 import { deprecated } from './deprecated';
 import classnames from 'classnames';
 
@@ -28,7 +27,6 @@ const {
 } = wp.editor;
 const {
   PanelBody,
-  //withFallbackStyles,
   PanelColor,
   ColorPalette,
   SelectControl,
@@ -59,11 +57,14 @@ class CocoonButtonBlock extends Component {
       onReplace,
       className,
       backgroundColor,
-      textColor,
       setBackgroundColor,
+      textColor,
       setTextColor,
+      borderColor,
+      setBorderColor,
       fallbackBackgroundColor,
       fallbackTextColor,
+      fallbackBorderColor,
       fallbackFontSize,
       fontSize,
       setFontSize,
@@ -160,6 +161,11 @@ class CocoonButtonBlock extends Component {
                 onChange: setTextColor,
                 value: textColor.color,
               },
+              {
+                label: __( 'ボーダー色', THEME_NAME ),
+                onChange: setBorderColor,
+                value: borderColor.color,
+              },
             ]}
           />
         </InspectorControls>
@@ -173,8 +179,10 @@ class CocoonButtonBlock extends Component {
               [ 'btn-shine' ]: !! isShine,
               'has-text-color': textColor.color,
               'has-background': backgroundColor.color,
+              'has-border-color': borderColor.color,
               [backgroundColor.class]: backgroundColor.class,
               [textColor.class]: textColor.class,
+              [borderColor.class]: borderColor.class,
               [fontSize.class]: fontSize.class,
             })}
             href={ url }
@@ -236,6 +244,12 @@ registerBlockType( 'cocoon-blocks/button-1', {
     customTextColor: {
       type: 'string',
     },
+    borderColor: {
+      type: 'string',
+    },
+    customBorderColor: {
+      type: 'string',
+    },
     fontSize: {
       type: 'string',
     },
@@ -249,9 +263,9 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   edit: compose([
-    withColors('backgroundColor', {textColor: 'color'}),
+    withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color'}),
     withFontSizes('fontSize'),
-    btfFallbackStyles,
+    fullFallbackStyles,
   ])(CocoonButtonBlock),
   save: props => {
     const {
@@ -265,12 +279,15 @@ registerBlockType( 'cocoon-blocks/button-1', {
       customBackgroundColor,
       textColor,
       customTextColor,
+      borderColor,
+      customBorderColor,
       fontSize,
       customFontSize,
     } = props.attributes;
 
-    const textClass = getColorClassName( 'color', textColor );
     const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+    const textClass = getColorClassName( 'color', textColor );
+    const borderClass = getColorClassName( 'border-color', borderColor );
     const fontSizeClass = getFontSizeClass( fontSize );
 
 
@@ -280,9 +297,11 @@ registerBlockType( 'cocoon-blocks/button-1', {
       [ 'btn-circle' ]: !! isCircle,
       [ 'btn-shine' ]: !! isShine,
       'has-text-color': textColor || customTextColor,
-      [ textClass ]: textClass,
       'has-background': backgroundColor || customBackgroundColor,
+      'has-border-color': borderColor || customBorderColor,
+      [ textClass ]: textClass,
       [ backgroundClass ]: backgroundClass,
+      [ borderClass ]: borderClass,
       [ fontSizeClass ]: fontSizeClass,
     } );
 
