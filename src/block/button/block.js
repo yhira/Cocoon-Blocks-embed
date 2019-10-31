@@ -5,81 +5,78 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, BUTTON_BLOCK, getCurrentColorSlug, getCurrentColorCode } from '../../helpers';
+import { THEME_NAME, BUTTON_BLOCK, btfFallbackStyles } from '../../helpers';
 // import { attrs } from './_attrs';
-import { deprecated } from './_deprecated';
+import { deprecated } from './deprecated';
 import classnames from 'classnames';
 
+
 const { __ } = wp.i18n;
-const { merge } = lodash;
-const { registerBlockType } = wp.blocks;
-const { RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
-const { PanelBody, SelectControl, BaseControl, TextControl, ToggleControl } = wp.components;
-const { select } = wp.data;
-const { Fragment } = wp.element;
+const {
+  registerBlockType,
+} = wp.blocks;
+const {
+  InspectorControls,
+  RichText,
+  withColors,
+  getColorClassName,
+  PanelColorSettings,
+  getFontSizeClass,
+  withFontSizes,
+  FontSizePicker,
+  ContrastChecker,
+} = wp.editor;
+const {
+  PanelBody,
+  //withFallbackStyles,
+  PanelColor,
+  ColorPalette,
+  SelectControl,
+  TextControl,
+  ToggleControl
+} = wp.components;
 
-//classの取得
-function getClasses(slug, size, isCircle, isShine) {
-  const classes = classnames(
-    {
-      'btn': true,
-      [ `has-${ slug }` ]: !! slug,
-      [ size ]: size,
-      [ 'btn-circle' ]: !! isCircle,
-      [ 'btn-shine' ]: !! isShine,
-    }
-  );
-  return classes;
-}
+const {
+  Component,
+  Fragment,
+} = wp.element;
 
-registerBlockType( 'cocoon-blocks/button-1', {
+const {
+  compose
+} = wp.compose;
 
-  title: __( 'ボタン', THEME_NAME ),
-  icon: 'embed-generic',
-  category: THEME_NAME + '-block',
-  description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
-  keywords: [ 'button', 'btn' ],
 
-  attributes: {
-    content: {
-      type: 'string',
-      default: __( 'ボタン', THEME_NAME ),
-    },
-    url: {
-      type: 'string',
-      default: '',
-    },
-    target: {
-      type: 'string',
-      default: '_self',
-    },
-    slug: {
-      type: 'string',
-      default: getCurrentColorSlug(keyColor),
-    },
-    size: {
-      type: 'string',
-      default: '',
-    },
-    isCircle: {
-      type: 'boolean',
-      default: false,
-    },
-    isShine: {
-      type: 'boolean',
-      default: false,
-    },
-  },
-  supports: {
-    align: [ 'left', 'center', 'right' ],
-    customClassName: true,
-  },
+class CocoonButtonBlock extends Component {
+  constructor() {
+    super(...arguments);
+  }
 
-  edit( { attributes, setAttributes } ) {
-    const { content, slug, size, url, target, isCircle, isShine } = attributes;
-    // 設定したカラーパレーットを読み込む
-    const colors = select('core/editor').getEditorSettings().colors;
-    //console.log(colors);
+  render() {
+    const {
+      attributes,
+      setAttributes,
+      mergeBlocks,
+      onReplace,
+      className,
+      backgroundColor,
+      textColor,
+      setBackgroundColor,
+      setTextColor,
+      fallbackBackgroundColor,
+      fallbackTextColor,
+      fallbackFontSize,
+      fontSize,
+      setFontSize,
+    } = this.props;
+
+    const {
+      content,
+      size,
+      url,
+      target,
+      isCircle,
+      isShine,
+    } = attributes;
 
     return (
       <Fragment>
@@ -142,30 +139,44 @@ registerBlockType( 'cocoon-blocks/button-1', {
 
           </PanelBody>
 
-          <PanelColorSettings
-            title={ __( '色設定', THEME_NAME ) }
-            initialOpen={ true }
-            colorSettings={ [
-              {
-                value: getCurrentColorCode(colors, slug),
-                onChange: ( value ) => setAttributes( {
-                  slug: getCurrentColorSlug(colors, value)
-                } ),
-                label: __( '背景色', THEME_NAME ),
-              },
-            ] }
-          >
-            <ContrastChecker
-              backgroundColor={ getCurrentColorCode(colors, slug) }
-              textColor={ '#ffffff' } //後に設定
+          <PanelBody title={ __( '文字サイズ', THEME_NAME ) } className="blocks-font-size">
+            <FontSizePicker
+              fallbackFontSize={ fallbackFontSize }
+              value={ fontSize.size }
+              onChange={ setFontSize }
             />
-          </PanelColorSettings>
+          </PanelBody>
 
+          <PanelColorSettings
+            title={ __( '色', THEME_NAME ) }
+            colorSettings={[
+              {
+                label: __( '背景色', THEME_NAME ),
+                onChange: setBackgroundColor,
+                value: backgroundColor.color,
+              },
+              {
+                label: __( '文字色', THEME_NAME ),
+                onChange: setTextColor,
+                value: textColor.color,
+              },
+            ]}
+          />
         </InspectorControls>
 
         <div className={BUTTON_BLOCK}>
           <span
-            className={ getClasses(slug, size, isCircle, isShine) }
+            className={classnames(className, {
+              'btn': true,
+              [ size ]: size,
+              [ 'btn-circle' ]: !! isCircle,
+              [ 'btn-shine' ]: !! isShine,
+              'has-text-color': textColor.color,
+              'has-background': backgroundColor.color,
+              [backgroundColor.class]: backgroundColor.class,
+              [textColor.class]: textColor.class,
+              [fontSize.class]: fontSize.class,
+            })}
             href={ url }
             target={ target }
           >
@@ -178,15 +189,108 @@ registerBlockType( 'cocoon-blocks/button-1', {
 
       </Fragment>
     );
+  }
+}
+
+registerBlockType( 'cocoon-blocks/button-1', {
+
+  title: __( 'ボタン', THEME_NAME ),
+  icon: 'embed-generic',
+  category: THEME_NAME + '-block',
+  description: __( '一般的なリンクボタンを作成します。', THEME_NAME ),
+  keywords: [ 'button', 'btn' ],
+
+  attributes: {
+    content: {
+      type: 'string',
+    },
+    url: {
+      type: 'string',
+      default: '',
+    },
+    target: {
+      type: 'string',
+      default: '_self',
+    },
+    size: {
+      type: 'string',
+      default: '',
+    },
+    isCircle: {
+      type: 'boolean',
+      default: false,
+    },
+    isShine: {
+      type: 'boolean',
+      default: false,
+    },
+    backgroundColor: {
+      type: 'string',
+    },
+    customBackgroundColor: {
+      type: 'string',
+    },
+    textColor: {
+      type: 'string',
+    },
+    customTextColor: {
+      type: 'string',
+    },
+    fontSize: {
+      type: 'string',
+    },
+    customFontSize: {
+      type: 'string',
+    },
+  },
+  supports: {
+    align: [ 'left', 'center', 'right' ],
+    customClassName: true,
   },
 
-  save( { attributes } ) {
-    const { content, slug, size, url, target, isCircle, isShine } = attributes;
+  edit: compose([
+    withColors('backgroundColor', {textColor: 'color'}),
+    withFontSizes('fontSize'),
+    btfFallbackStyles,
+  ])(CocoonButtonBlock),
+  save: props => {
+    const {
+      content,
+      size,
+      url,
+      target,
+      isCircle,
+      isShine,
+      backgroundColor,
+      customBackgroundColor,
+      textColor,
+      customTextColor,
+      fontSize,
+      customFontSize,
+    } = props.attributes;
+
+    const textClass = getColorClassName( 'color', textColor );
+    const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+    const fontSizeClass = getFontSizeClass( fontSize );
+
+
+    const className = classnames( {
+      'btn': true,
+      [ size ]: size,
+      [ 'btn-circle' ]: !! isCircle,
+      [ 'btn-shine' ]: !! isShine,
+      'has-text-color': textColor || customTextColor,
+      [ textClass ]: textClass,
+      'has-background': backgroundColor || customBackgroundColor,
+      [ backgroundClass ]: backgroundClass,
+      [ fontSizeClass ]: fontSizeClass,
+    } );
+
     return (
       <div className={BUTTON_BLOCK}>
         <a
           href={ url }
-          className={ getClasses(slug, size, isCircle, isShine) }
+          className={ className }
           target={ target }
         >
           <RichText.Content
@@ -198,4 +302,4 @@ registerBlockType( 'cocoon-blocks/button-1', {
   },
 
   deprecated: deprecated,
-} );
+});

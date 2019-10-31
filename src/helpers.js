@@ -5,12 +5,28 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-const { __ } = wp.i18n;
-const { Fill, ToolbarButton } = wp.components;
-const { getColorObjectByColorValue, getColorObjectByAttributeValues, getColorClassName } = wp.editor;
-const { displayShortcut } = wp.keycodes;
-const { find } = lodash;
 import classnames from 'classnames';
+
+const { __ } = wp.i18n;
+const {
+  Fill,
+  ToolbarButton,
+  withFallbackStyles,
+} = wp.components;
+const {
+  getColorObjectByColorValue,
+  getColorObjectByAttributeValues,
+  getColorClassName
+} = wp.editor;
+const {
+  displayShortcut
+} = wp.keycodes;
+const {
+  find
+} = lodash;
+const {
+  getComputedStyle
+} = window;
 
 export const THEME_NAME = 'cocoon';
 export const BLOCK_CLASS = ' block-box';
@@ -70,6 +86,20 @@ export function isSameBalloon(index, id, icon, style, position, iconstyle) {
   }
   return false;
 }
+
+
+
+export const btfFallbackStyles = withFallbackStyles((node, ownProps) => {
+  const {textColor, backgroundColor, fontSize, customFontSize} = ownProps.attributes;
+  const editableNode = node.querySelector('[contenteditable="true"]');
+  //verify if editableNode is available, before using getComputedStyle.
+  const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
+  return {
+    fallbackBackgroundColor: backgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
+    fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt( computedStyles.fontSize ) || undefined,
+  }
+});
 
 //現在のカラーパレットのスラッグを取得
 export function getCurrentColorSlug(colors, color){
