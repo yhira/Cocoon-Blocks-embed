@@ -5,12 +5,14 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 import { THEME_NAME, BUTTON_BLOCK, colorValueToSlug, getCurrentColorSlug } from '../../helpers';
-//import { attrs } from './_attrs';
 import classnames from 'classnames';
+import { omit } from 'lodash';
 
 const { __ } = wp.i18n;
 // const { merge } = lodash;
 const { RichText } = wp.editor;
+
+const { createBlock } = wp.blocks;
 
 export const deprecated = [
   {
@@ -44,10 +46,41 @@ export const deprecated = [
         default: false,
       },
     },
+    supports: {
+      align: [ 'left', 'center', 'right' ],
+      customClassName: true,
+    },
 
-    //migrate( { content, color, size, url, target, isCircle, isShine } ) {
     migrate( attributes ) {
       const { content, color, size, url, target, isCircle, isShine } = attributes;
+      //console.log(attributes);
+      //console.log(supports);
+      // return [
+      //   omit( attributes, [ 'title', 'align' ] ),
+      //   [
+      //     createBlock(
+      //       'cocoon-blocks/button-1',
+      //       {
+      //         content: content,
+      //         size: size,
+      //         url: url,
+      //         target: target,
+      //         isCircle: isCircle,
+      //         isShine: isShine,
+      //         backgroundColor: colorValueToSlug(color),
+      //         customBackgroundColor: undefined,
+      //         textColor: undefined,
+      //         customTextColor: undefined,
+      //         borderColor: undefined,
+      //         customBorderColor: undefined,
+      //         fontSize: undefined,
+      //         customFontSize: undefined,
+      //       }
+      //     ),
+      //   ],
+      // ];
+
+
       return {
         content: content,
         size: size,
@@ -55,14 +88,14 @@ export const deprecated = [
         target: target,
         isCircle: isCircle,
         isShine: isShine,
-        backgroundColor: color,
-        customBackgroundColor: '',
-        textColor: '',
-        customTextColor: '',
-        borderColor: '',
-        customBorderColor: '',
-        fontSize: '',
-        customFontSize: '',
+        backgroundColor: colorValueToSlug(color),
+        customBackgroundColor: undefined,
+        textColor: undefined,
+        customTextColor: undefined,
+        borderColor: undefined,
+        customBorderColor: undefined,
+        fontSize: undefined,
+        customFontSize: undefined,
       };
     },
 
