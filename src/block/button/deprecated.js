@@ -53,33 +53,6 @@ export const deprecated = [
 
     migrate( attributes ) {
       const { content, color, size, url, target, isCircle, isShine } = attributes;
-      //console.log(attributes);
-      //console.log(supports);
-      // return [
-      //   omit( attributes, [ 'title', 'align' ] ),
-      //   [
-      //     createBlock(
-      //       'cocoon-blocks/button-1',
-      //       {
-      //         content: content,
-      //         size: size,
-      //         url: url,
-      //         target: target,
-      //         isCircle: isCircle,
-      //         isShine: isShine,
-      //         backgroundColor: colorValueToSlug(color),
-      //         customBackgroundColor: undefined,
-      //         textColor: undefined,
-      //         customTextColor: undefined,
-      //         borderColor: undefined,
-      //         customBorderColor: undefined,
-      //         fontSize: undefined,
-      //         customFontSize: undefined,
-      //       }
-      //     ),
-      //   ],
-      // ];
-
 
       return {
         content: content,
