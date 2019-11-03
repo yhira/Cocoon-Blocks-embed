@@ -45,6 +45,9 @@ export const deprecated = [
         type: 'boolean',
         default: false,
       },
+      align: {
+        type: 'string',
+      },
     },
     supports: {
       align: [ 'left', 'center', 'right' ],
@@ -52,7 +55,7 @@ export const deprecated = [
     },
 
     migrate( attributes ) {
-      const { content, color, size, url, target, isCircle, isShine } = attributes;
+      const { content, color, size, url, target, isCircle, isShine, align } = attributes;
 
       return {
         content: content,
@@ -61,6 +64,7 @@ export const deprecated = [
         target: target,
         isCircle: isCircle,
         isShine: isShine,
+        align: align,
         backgroundColor: colorValueToSlug(color),
         customBackgroundColor: undefined,
         textColor: undefined,
