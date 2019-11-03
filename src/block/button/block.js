@@ -232,6 +232,9 @@ registerBlockType( 'cocoon-blocks/button-1', {
       type: 'boolean',
       default: false,
     },
+    align: {
+      type: 'string',
+    },
     backgroundColor: {
       type: 'string',
     },
