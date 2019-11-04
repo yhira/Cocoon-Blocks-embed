@@ -17,15 +17,11 @@ export const deprecated = [
     attributes: {
       content: {
         type: 'string',
-        default: __( 'ボタン', THEME_NAME ),
+        default: __( 'こちらをクリックしてリンクタグを設定エリア入力してください。この入力は公開ページで反映されません。', THEME_NAME ),
       },
-      url: {
+      tag: {
         type: 'string',
         default: '',
-      },
-      target: {
-        type: 'string',
-        default: '_self',
       },
       color: {
         type: 'string',
@@ -46,6 +42,9 @@ export const deprecated = [
       align: {
         type: 'string',
       },
+      align: {
+        type: 'string',
+      },
     },
     supports: {
       align: [ 'left', 'center', 'right' ],
@@ -53,13 +52,12 @@ export const deprecated = [
     },
 
     migrate( attributes ) {
-      const { content, color, size, url, target, isCircle, isShine, align } = attributes;
+      const { content, tag, color, size, isCircle, isShine, align } = attributes;
 
       return {
         content: content,
+        tag: tag,
         size: size,
-        url: url,
-        target: target,
         isCircle: isCircle,
         isShine: isShine,
         align: align,
@@ -75,27 +73,22 @@ export const deprecated = [
     },
 
     save( { attributes } ) {
-      const { content, color, size, url, target, isCircle, isShine } = attributes;
+      const { color, tag, size, isCircle, isShine } = attributes;
       const classes = classnames(
         {
-          'btn': true,
-          [ `btn-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
+          [ 'btn-wrap' ]: true,
+          [ `btn-wrap-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
           [ size ]: size,
-          [ 'btn-circle' ]: !! isCircle,
-          [ 'btn-shine' ]: !! isShine,
+          [ BUTTON_BLOCK ]: true,
+          [ 'btn-wrap-circle' ]: !! isCircle,
+          [ 'btn-wrap-shine' ]: !! isShine,
         }
       );
       return (
-        <div className={BUTTON_BLOCK}>
-          <a
-            href={ url }
-            className={ classes }
-            target={ target }
-          >
-            <RichText.Content
-              value={ content }
-            />
-          </a>
+        <div className={ classes }>
+          <RichText.Content
+            value={ tag }
+          />
         </div>
       );
     },
