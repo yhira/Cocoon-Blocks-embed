@@ -163,6 +163,7 @@ class CocoonButtonWrapBlock extends Component {
         <div
           className={ classnames(className, {
               [ 'btn-wrap' ]: true,
+              [ 'btn-wrap-block' ]: true,
               [ BUTTON_BLOCK ]: true,
               [ size ]: size,
               [ 'btn-wrap-circle' ]: !! isCircle,
@@ -275,6 +276,7 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
 
     const className = classnames( {
       [ 'btn-wrap' ]: true,
+      [ 'btn-wrap-block' ]: true,
       [ BUTTON_BLOCK ]: true,
       [ size ]: size,
       [ 'btn-wrap-circle' ]: !! isCircle,
