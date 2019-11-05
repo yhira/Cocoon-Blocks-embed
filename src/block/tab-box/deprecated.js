@@ -19,22 +19,27 @@ export const deprecated = [
         type: 'string',
         default: CLICK_POINT_MSG,
       },
-      borderColor: {
+      style: {
+        type: 'string',
+        default: 'bb-check',
+      },
+      color: {
         type: 'string',
         default: '',
       },
     },
 
     migrate( attributes ) {
-      const { content, borderColor } = attributes;
+    const { content, style, color } = attributes;
 
       return {
         content: content,
+        label: style,
         backgroundColor: undefined,
         customBackgroundColor: undefined,
         textColor: undefined,
         customTextColor: undefined,
-        borderColor: colorValueToSlug(borderColor),
+        borderColor: colorValueToSlug(color),
         customBorderColor: undefined,
         fontSize: undefined,
         customFontSize: undefined,
@@ -42,11 +47,13 @@ export const deprecated = [
     },
 
     save( { attributes } ) {
-      const { borderColor } = attributes;
+    const { content, style, color } = attributes;
       const classes = classnames(
         {
           'blank-box': true,
-          [ `bb-${ colorValueToSlug(borderColor) }` ]: !! colorValueToSlug(borderColor),
+          'bb-tab': true,
+          [ style ]: !! style,
+          [ `bb-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
           [ 'block-box' ]: true,
         }
       );

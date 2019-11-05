@@ -74,17 +74,92 @@ class CocoonBlankBoxBlock extends Component {
 
     const {
       content,
+      label,
     } = attributes;
 
     return (
       <Fragment>
         <InspectorControls>
+          <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
+
+            <SelectControl
+              label={ __( 'ラベル', THEME_NAME ) }
+              value={ label }
+              onChange={ ( value ) => setAttributes( { label: value } ) }
+              options={ [
+                {
+                  value: 'bb-check',
+                  label: __( 'チェック', THEME_NAME ),
+                },
+                {
+                  value: 'bb-comment',
+                  label: __( 'コメント', THEME_NAME ),
+                },
+                {
+                  value: 'bb-point',
+                  label: __( 'ポイント', THEME_NAME ),
+                },
+                {
+                  value: 'bb-tips',
+                  label: __( 'ティップス', THEME_NAME ),
+                },
+                {
+                  value: 'bb-hint',
+                  label: __( 'ヒント', THEME_NAME ),
+                },
+                {
+                  value: 'bb-pickup',
+                  label: __( 'ピックアップ', THEME_NAME ),
+                },
+                {
+                  value: 'bb-bookmark',
+                  label: __( 'ブックマーク', THEME_NAME ),
+                },
+                {
+                  value: 'bb-memo',
+                  label: __( 'メモ', THEME_NAME ),
+                },
+                {
+                  value: 'bb-download',
+                  label: __( 'ダウンロード', THEME_NAME ),
+                },
+                {
+                  value: 'bb-break',
+                  label: __( 'ブレイク', THEME_NAME ),
+                },
+                {
+                  value: 'bb-amazon',
+                  label: __( 'Amazon', THEME_NAME ),
+                },
+                {
+                  value: 'bb-ok',
+                  label: __( 'OK', THEME_NAME ),
+                },
+                {
+                  value: 'bb-ng',
+                  label: __( 'NG', THEME_NAME ),
+                },
+                {
+                  value: 'bb-good',
+                  label: __( 'GOOD', THEME_NAME ),
+                },
+                {
+                  value: 'bb-bad',
+                  label: __( 'BAD', THEME_NAME ),
+                },
+                {
+                  value: 'bb-profile',
+                  label: __( 'プロフィール', THEME_NAME ),
+                },
+              ] }
+            />
+          </PanelBody>
 
           <PanelColorSettings
             title={ __( '色', THEME_NAME ) }
             colorSettings={[
               {
-                label: __( 'ボーダー色', THEME_NAME ),
+                label: __( '枠の色', THEME_NAME ),
                 onChange: setBorderColor,
                 value: borderColor.color,
               },
@@ -111,19 +186,21 @@ class CocoonBlankBoxBlock extends Component {
           */}
         </InspectorControls>
 
-        <div
-          className={ classnames(className, {
-              'blank-box': true,
-              'block-box': true,
-              'has-text-color': textColor.color,
-              'has-background': backgroundColor.color,
-              'has-border-color': borderColor.color,
-              [backgroundColor.class]: backgroundColor.class,
-              [textColor.class]: textColor.class,
-              [borderColor.class]: borderColor.class,
-              [fontSize.class]: fontSize.class,
-          }) }
-        >
+        <div className={
+          classnames(className, {
+            'blank-box': true,
+            'bb-tab': true,
+            [ label ]: !! label,
+            'block-box': true,
+            'has-text-color': textColor.color,
+            'has-background': backgroundColor.color,
+            'has-border-color': borderColor.color,
+            [backgroundColor.class]: backgroundColor.class,
+            [textColor.class]: textColor.class,
+            [borderColor.class]: borderColor.class,
+            [fontSize.class]: fontSize.class,
+          })
+         }>
           <span className={'box-block-msg'}>
             <RichText
               value={ content }
@@ -138,18 +215,22 @@ class CocoonBlankBoxBlock extends Component {
   }
 }
 
-registerBlockType( 'cocoon-blocks/blank-box-1', {
+registerBlockType( 'cocoon-blocks/tab-box-1', {
 
-  title: __( '白抜きボックス', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'square']} />,
+  title: __( 'タブボックス', THEME_NAME ),
+  icon: 'category',
   category: THEME_NAME + '-block',
-  description: __( 'コンテンツを囲むだけのブランクボックスを表示します。', THEME_NAME ),
-  keywords: [ 'blank', 'box' ],
+  description: __( 'タブにメッセージ内容を伝えるための文字が書かれているボックスです。', THEME_NAME ),
+  keywords: [ 'tab', 'box' ],
 
   attributes: {
     content: {
       type: 'string',
       default: CLICK_POINT_MSG,
+    },
+    label: {
+      type: 'string',
+      default: 'bb-check',
     },
     backgroundColor: {
       type: 'string',
@@ -184,6 +265,7 @@ registerBlockType( 'cocoon-blocks/blank-box-1', {
   ])(CocoonBlankBoxBlock),
   save: props => {
     const {
+      label,
       backgroundColor,
       customBackgroundColor,
       textColor,
@@ -202,6 +284,8 @@ registerBlockType( 'cocoon-blocks/blank-box-1', {
 
     const className = classnames( {
       'blank-box': true,
+      'bb-tab': true,
+      [ label ]: !! label,
       'block-box': true,
       'has-text-color': textColor || customTextColor,
       'has-background': backgroundColor || customBackgroundColor,

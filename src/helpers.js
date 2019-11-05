@@ -33,6 +33,7 @@ export const BLOCK_CLASS = ' block-box';
 export const BUTTON_BLOCK = 'button-block';
 export const LAYOUT_BLOCK_CLASS = 'layout-box';
 export const PARAGRAPH_CLASS = ' paragraph';
+export const CLICK_POINT_MSG = __( 'こちらをクリックして設定変更。この入力は公開ページで反映されません。', THEME_NAME );
 
 //日時をもとにしたID作成
 export function getDateID(){
