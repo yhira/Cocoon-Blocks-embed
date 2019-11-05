@@ -73,7 +73,7 @@ export const deprecated = [
     },
 
     save( { attributes } ) {
-      const { color, tag, size, isCircle, isShine } = attributes;
+      const { content, tag, color, size, isCircle, isShine, align } = attributes;
       const classes = classnames(
         {
           [ 'btn-wrap' ]: true,
