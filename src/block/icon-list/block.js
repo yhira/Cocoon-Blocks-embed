@@ -5,11 +5,10 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, CLICK_POINT_MSG, fullFallbackStyles } from '../../helpers';
+import { THEME_NAME, LIST_ICONS } from '../../helpers';
 import { deprecated } from './deprecated';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-
 
 const { __ } = wp.i18n;
 const {
@@ -32,8 +31,9 @@ const {
   PanelColor,
   ColorPalette,
   SelectControl,
-  TextareaControl,
-  ToggleControl
+  BaseControl,
+  Button,
+  withFallbackStyles,
 } = wp.components;
 
 const {
@@ -45,8 +45,34 @@ const {
   compose
 } = wp.compose;
 
+const {
+  times,
+} = lodash;
 
-class CocoonTabBoxBlock extends Component {
+const ALLOWED_BLOCKS = [ 'core/list' ];
+
+const FallbackStyles = withFallbackStyles((node, ownProps) => {
+  const {
+    textColor,
+    backgroundColor,
+    borderColor,
+    iconColor,
+    fontSize,
+    customFontSize,
+  } = ownProps.attributes;
+  const editableNode = node.querySelector('[contenteditable="true"]');
+  //verify if editableNode is available, before using getComputedStyle.
+  const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
+  return {
+    fallbackBackgroundColor: backgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
+    fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackBorderColor: borderColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackIconColor: iconColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt( computedStyles.fontSize ) || undefined,
+  }
+});
+
+class CocoonIconListBoxBlock extends Component {
   constructor() {
     super(...arguments);
   }
@@ -64,17 +90,20 @@ class CocoonTabBoxBlock extends Component {
       setTextColor,
       borderColor,
       setBorderColor,
+      iconColor,
+      setIconColor,
       fallbackBackgroundColor,
       fallbackTextColor,
       fallbackBorderColor,
+      fallbackIconColor,
       fallbackFontSize,
       fontSize,
       setFontSize,
     } = this.props;
 
     const {
-      content,
-      label,
+      title,
+      icon,
     } = attributes;
 
     return (
@@ -82,84 +111,35 @@ class CocoonTabBoxBlock extends Component {
         <InspectorControls>
           <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
 
-            <SelectControl
-              label={ __( 'ラベル', THEME_NAME ) }
-              value={ label }
-              onChange={ ( value ) => setAttributes( { label: value } ) }
-              options={ [
-                {
-                  value: 'bb-check',
-                  label: __( 'チェック', THEME_NAME ),
-                },
-                {
-                  value: 'bb-comment',
-                  label: __( 'コメント', THEME_NAME ),
-                },
-                {
-                  value: 'bb-point',
-                  label: __( 'ポイント', THEME_NAME ),
-                },
-                {
-                  value: 'bb-tips',
-                  label: __( 'ティップス', THEME_NAME ),
-                },
-                {
-                  value: 'bb-hint',
-                  label: __( 'ヒント', THEME_NAME ),
-                },
-                {
-                  value: 'bb-pickup',
-                  label: __( 'ピックアップ', THEME_NAME ),
-                },
-                {
-                  value: 'bb-bookmark',
-                  label: __( 'ブックマーク', THEME_NAME ),
-                },
-                {
-                  value: 'bb-memo',
-                  label: __( 'メモ', THEME_NAME ),
-                },
-                {
-                  value: 'bb-download',
-                  label: __( 'ダウンロード', THEME_NAME ),
-                },
-                {
-                  value: 'bb-break',
-                  label: __( 'ブレイク', THEME_NAME ),
-                },
-                {
-                  value: 'bb-amazon',
-                  label: __( 'Amazon', THEME_NAME ),
-                },
-                {
-                  value: 'bb-ok',
-                  label: __( 'OK', THEME_NAME ),
-                },
-                {
-                  value: 'bb-ng',
-                  label: __( 'NG', THEME_NAME ),
-                },
-                {
-                  value: 'bb-good',
-                  label: __( 'GOOD', THEME_NAME ),
-                },
-                {
-                  value: 'bb-bad',
-                  label: __( 'BAD', THEME_NAME ),
-                },
-                {
-                  value: 'bb-profile',
-                  label: __( 'プロフィール', THEME_NAME ),
-                },
-              ] }
-            />
+            <BaseControl label={ __( 'アイコン', THEME_NAME ) }>
+              <div className="icon-setting-buttons">
+                { times( LIST_ICONS.length, ( index ) => {
+                  return (
+                    <Button
+                      isDefault
+                      isPrimary={ icon === LIST_ICONS[index].value }
+                      className={LIST_ICONS[index].label}
+                      onClick={ () => {
+                        setAttributes( { icon: LIST_ICONS[index].value } );
+                      } }
+                    >
+                    </Button>
+                  );
+                } ) }
+              </div>
+            </BaseControl>
           </PanelBody>
 
           <PanelColorSettings
             title={ __( '色', THEME_NAME ) }
             colorSettings={[
               {
-                label: __( '枠の色', THEME_NAME ),
+                label: __( 'アイコン色', THEME_NAME ),
+                onChange: setIconColor,
+                value: iconColor.color,
+              },
+              {
+                label: __( 'ボーダー色', THEME_NAME ),
                 onChange: setBorderColor,
                 value: borderColor.color,
               },
@@ -188,26 +168,35 @@ class CocoonTabBoxBlock extends Component {
 
         <div className={
           classnames(className, {
+            'iconlist-box': true,
             'blank-box': true,
-            'bb-tab': true,
-            [ label ]: !! label,
+            [ icon ]: !! icon,
             'block-box': true,
             'has-text-color': textColor.color,
             'has-background': backgroundColor.color,
             'has-border-color': borderColor.color,
+            'has-icon-color': iconColor.color,
             [backgroundColor.class]: backgroundColor.class,
             [textColor.class]: textColor.class,
             [borderColor.class]: borderColor.class,
+            [iconColor.class]: iconColor.class,
             [fontSize.class]: fontSize.class,
           })
          }>
-          <span className={'box-block-msg'}>
+          <div className="iconlist-title">
             <RichText
-              value={ content }
-              placeholder={ CLICK_POINT_MSG }
-            />
-          </span>
-          <InnerBlocks />
+                value={ title }
+                placeholder={__( 'タイトルがある場合は入力', THEME_NAME )}
+                onChange={ ( value ) => setAttributes( { title: value } ) }
+              />
+          </div>
+          <InnerBlocks
+          template={[
+              [ 'core/list' ]
+          ]}
+          templateLock="all"
+          allowedBlocks={ ALLOWED_BLOCKS }
+           />
         </div>
 
       </Fragment>
@@ -215,22 +204,22 @@ class CocoonTabBoxBlock extends Component {
   }
 }
 
-registerBlockType( 'cocoon-blocks/tab-box-1', {
+registerBlockType( 'cocoon-blocks/iconlist-box', {
 
-  title: __( 'タブボックス', THEME_NAME ),
-  icon: 'category',
+  title: __( 'アイコンリスト', THEME_NAME ),
+  icon: <FontAwesomeIcon icon={['far', 'list-alt']} />,
   category: THEME_NAME + '-block',
-  description: __( 'タブにメッセージ内容を伝えるための文字が書かれているボックスです。', THEME_NAME ),
-  keywords: [ 'tab', 'box' ],
+  description: __( 'リストポイントにアイコンを適用した非順序リストです。', THEME_NAME ),
+  keywords: [ 'icon', 'list', 'box' ],
 
   attributes: {
-    content: {
+    title: {
       type: 'string',
-      default: CLICK_POINT_MSG,
+      default: '',
     },
-    label: {
+    icon: {
       type: 'string',
-      default: 'bb-check',
+      default: 'list-caret-right',
     },
     backgroundColor: {
       type: 'string',
@@ -250,6 +239,12 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
     customBorderColor: {
       type: 'string',
     },
+    iconColor: {
+      type: 'string',
+    },
+    customIconColor: {
+      type: 'string',
+    },
     fontSize: {
       type: 'string',
     },
@@ -259,19 +254,22 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
   },
 
   edit: compose([
-    withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color'}),
+    withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color', iconColor: 'icon-color'}),
     withFontSizes('fontSize'),
-    fullFallbackStyles,
-  ])(CocoonTabBoxBlock),
+    FallbackStyles,
+  ])(CocoonIconListBoxBlock),
   save: props => {
     const {
-      label,
+      title,
+      icon,
       backgroundColor,
       customBackgroundColor,
       textColor,
       customTextColor,
       borderColor,
       customBorderColor,
+      iconColor,
+      customIconColor,
       fontSize,
       customFontSize,
     } = props.attributes;
@@ -279,25 +277,33 @@ registerBlockType( 'cocoon-blocks/tab-box-1', {
     const backgroundClass = getColorClassName( 'background-color', backgroundColor );
     const textClass = getColorClassName( 'color', textColor );
     const borderClass = getColorClassName( 'border-color', borderColor );
+    const iconClass = getColorClassName( 'icon-color', iconColor );
     const fontSizeClass = getFontSizeClass( fontSize );
 
 
     const className = classnames( {
+      'iconlist-box': true,
       'blank-box': true,
-      'bb-tab': true,
-      [ label ]: !! label,
+      [ icon ]: !! icon,
       'block-box': true,
       'has-text-color': textColor || customTextColor,
       'has-background': backgroundColor || customBackgroundColor,
       'has-border-color': borderColor || customBorderColor,
+      'has-icon-color': iconColor || customIconColor,
       [ textClass ]: textClass,
       [ backgroundClass ]: backgroundClass,
       [ borderClass ]: borderClass,
+      [ iconClass ]: iconClass,
       [ fontSizeClass ]: fontSizeClass,
     } );
 
     return (
       <div className={ className }>
+        <div className="iconlist-title">
+          <RichText.Content
+            value={ title }
+          />
+        </div>
         <InnerBlocks.Content />
       </div>
     );
