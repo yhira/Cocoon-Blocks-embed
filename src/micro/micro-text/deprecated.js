@@ -9,7 +9,7 @@ import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { RichText } = wp.editor;
-const DEFAULT_MSG = __( 'マイクロコピーバルーン', THEME_NAME );
+const DEFAULT_MSG = __( 'マイクロコピーテキスト', THEME_NAME );
 const MICRO_COPY_CLASS = 'micro-copy';
 
 export const deprecated = [
@@ -23,14 +23,6 @@ export const deprecated = [
         type: 'string',
         default: 'micro-top',
       },
-      color: {
-        type: 'string',
-        default: '',
-      },
-      isCircle: {
-        type: 'boolean',
-        default: false,
-      },
       align: {
         type: 'string',
       },
@@ -41,14 +33,13 @@ export const deprecated = [
     },
 
     migrate( attributes ) {
-      const { content, style, color, isCircle, align } = attributes;
+      const { content, style, align } = attributes;
 
       return {
         content: content,
         type: style,
-        isCircle: isCircle,
         align: align,
-        backgroundColor: colorValueToSlug(color),
+        backgroundColor: undefined,
         customBackgroundColor: undefined,
         textColor: undefined,
         customTextColor: undefined,
@@ -60,14 +51,11 @@ export const deprecated = [
     },
 
     save( { attributes } ) {
-      const { content, style, color, isCircle, align } = attributes;
+      const { content, style, align } = attributes;
       const classes = classnames(
         {
-          [ 'micro-balloon' ]: true,
-          [ style ]: !! style,
-          [ `mc-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
-          [ 'mc-circle' ]: !! isCircle,
           [ MICRO_COPY_CLASS ]: true,
+          [ style ]: !! style,
           [ 'block-box' ]: true,
         }
       );

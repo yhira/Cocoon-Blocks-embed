@@ -33,7 +33,6 @@ const {
   PanelColor,
   ColorPalette,
   SelectControl,
-  ToggleControl
 } = wp.components;
 
 const {
@@ -45,10 +44,10 @@ const {
   compose
 } = wp.compose;
 
-const DEFAULT_MSG = __( 'マイクロコピーバルーン', THEME_NAME );
+const DEFAULT_MSG = __( 'マイクロコピーテキスト', THEME_NAME );
 const MICRO_COPY_CLASS = 'micro-copy';
 
-class CocoonMicroBalloonBlock extends Component {
+class CocoonMicroTextBlock extends Component {
   constructor() {
     super(...arguments);
   }
@@ -77,7 +76,6 @@ class CocoonMicroBalloonBlock extends Component {
     const {
       content,
       type,
-      isCircle,
     } = attributes;
 
     return (
@@ -101,32 +99,26 @@ class CocoonMicroBalloonBlock extends Component {
               ] }
             />
 
-            <ToggleControl
-              label={ __( '円形にする', THEME_NAME ) }
-              checked={ isCircle }
-              onChange={ ( value ) => setAttributes( { isCircle: value } ) }
-            />
-
           </PanelBody>
 
           <PanelColorSettings
             title={ __( '色', THEME_NAME ) }
             colorSettings={[
               {
-                label: __( '背景色', THEME_NAME ),
-                onChange: setBackgroundColor,
-                value: backgroundColor.color,
-              },
-              {
                 label: __( '文字色', THEME_NAME ),
                 onChange: setTextColor,
                 value: textColor.color,
               },
-              {
-                label: __( 'ボーダー色', THEME_NAME ),
-                onChange: setBorderColor,
-                value: borderColor.color,
-              },
+              // {
+              //   label: __( '背景色', THEME_NAME ),
+              //   onChange: setBackgroundColor,
+              //   value: backgroundColor.color,
+              // },
+              // {
+              //   label: __( 'ボーダー色', THEME_NAME ),
+              //   onChange: setBorderColor,
+              //   value: borderColor.color,
+              // },
             ]}
           />
           {/*
@@ -142,18 +134,16 @@ class CocoonMicroBalloonBlock extends Component {
 
         <div className={
           classnames(className, {
-            [ 'micro-balloon' ]: true,
-            [ type ]: !! type,
-            [ 'mc-circle' ]: !! isCircle,
             [ MICRO_COPY_CLASS ]: true,
+            [ type ]: !! type,
             [ 'block-box' ]: true,
             'has-text-color': textColor.color,
-            'has-background': backgroundColor.color,
-            'has-border-color': borderColor.color,
-            [backgroundColor.class]: backgroundColor.class,
+            // 'has-background': backgroundColor.color,
+            // 'has-border-color': borderColor.color,
+            // [backgroundColor.class]: backgroundColor.class,
             [textColor.class]: textColor.class,
-            [borderColor.class]: borderColor.class,
-            [fontSize.class]: fontSize.class,
+            // [borderColor.class]: borderColor.class,
+            // [fontSize.class]: fontSize.class,
           })
          }>
           <RichText
@@ -167,13 +157,13 @@ class CocoonMicroBalloonBlock extends Component {
   }
 }
 
-registerBlockType( 'cocoon-blocks/micro-balloon-2', {
+registerBlockType( 'cocoon-blocks/micro-text', {
 
-  title: __( 'マイクロバルーン', THEME_NAME ),
-  icon: 'admin-comments',
+  title: __( 'マイクロテキスト', THEME_NAME ),
+  icon: 'editor-textcolor',
   category: THEME_NAME + '-micro',
-  description: __( 'コンバージョンリンク（ボタン）の直上もしくは直下にテキストバルーン表示して、コンバージョン率アップを図るためのマイクロコピーです。', THEME_NAME ),
-  keywords: [ 'micro', 'copy', 'balloon' ],
+  description: __( 'コンバージョンリンク（ボタン）の直上もしくは直下に小さくテキスト表示して、コンバージョン率アップを図るためのマイクロコピーです。', THEME_NAME ),
+  keywords: [ 'micro', 'copy', 'text' ],
 
   attributes: {
     content: {
@@ -183,10 +173,6 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
     type: {
       type: 'string',
       default: 'micro-top',
-    },
-    isCircle: {
-      type: 'boolean',
-      default: false,
     },
     align: {
       type: 'string',
@@ -225,12 +211,11 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
     withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color'}),
     withFontSizes('fontSize'),
     fullFallbackStyles,
-  ])(CocoonMicroBalloonBlock),
+  ])(CocoonMicroTextBlock),
   save: props => {
     const {
       content,
       type,
-      isCircle,
       backgroundColor,
       customBackgroundColor,
       textColor,
@@ -248,18 +233,16 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
 
 
     const className = classnames( {
-      [ 'micro-balloon' ]: true,
-      [ type ]: !! type,
-      [ 'mc-circle' ]: !! isCircle,
       [ MICRO_COPY_CLASS ]: true,
+      [ type ]: !! type,
       [ 'block-box' ]: true,
       'has-text-color': textColor || customTextColor,
-      'has-background': backgroundColor || customBackgroundColor,
-      'has-border-color': borderColor || customBorderColor,
+      // 'has-background': backgroundColor || customBackgroundColor,
+      // 'has-border-color': borderColor || customBorderColor,
       [ textClass ]: textClass,
-      [ backgroundClass ]: backgroundClass,
-      [ borderClass ]: borderClass,
-      [ fontSizeClass ]: fontSizeClass,
+      // [ backgroundClass ]: backgroundClass,
+      // [ borderClass ]: borderClass,
+      // [ fontSizeClass ]: fontSizeClass,
     } );
 
     return (
