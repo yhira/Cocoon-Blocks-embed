@@ -211,6 +211,7 @@ registerBlockType( 'cocoon-blocks/button-1', {
   attributes: {
     content: {
       type: 'string',
+      default: __( 'ボタン', THEME_NAME ),
     },
     url: {
       type: 'string',
