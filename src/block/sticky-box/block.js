@@ -62,20 +62,20 @@ registerBlockType( 'cocoon-blocks/sticky-box', {
   //         return createBlock( 'cocoon-blocks/tab-box-1', attributes );
   //       },
   //     },
-  //     // {
-  //     //   type: 'block',
-  //     //   blocks: [ 'cocoon-blocks/icon-box' ],
-  //     //   transform: ( attributes ) => {
-  //     //     return createBlock( 'cocoon-blocks/icon-box', attributes );
-  //     //   },
-  //     // },
-  //     // {
-  //     //   type: 'block',
-  //     //   blocks: [ 'cocoon-blocks/info-box' ],
-  //     //   transform: ( attributes ) => {
-  //     //     return createBlock( 'cocoon-blocks/info-box', attributes );
-  //     //   },
-  //     // },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/icon-box' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/icon-box', attributes );
+  //       },
+  //     },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/info-box' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/info-box', attributes );
+  //       },
+  //     },
   //   ],
   // },
 

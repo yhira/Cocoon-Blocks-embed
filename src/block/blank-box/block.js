@@ -7,6 +7,7 @@
 
 import { THEME_NAME, CLICK_POINT_MSG, fullFallbackStyles } from '../../helpers';
 import { deprecated } from './deprecated';
+import { transforms } from './transforms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
@@ -220,4 +221,6 @@ registerBlockType( 'cocoon-blocks/blank-box-1', {
   },
 
   deprecated: deprecated,
+
+  //transforms: transforms,
 });

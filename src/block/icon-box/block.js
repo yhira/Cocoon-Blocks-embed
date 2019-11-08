@@ -50,29 +50,29 @@ registerBlockType( 'cocoon-blocks/icon-box', {
   //     {
   //       type: 'block',
   //       blocks: [ 'cocoon-blocks/sticky-box' ],
-  //       transform: ( attributes ) => {
-  //         return createBlock( 'cocoon-blocks/sticky-box', attributes );
+  //       transform: ( { content } ) => {
+  //         return createBlock( 'cocoon-blocks/sticky-box', { content } );
   //       },
   //     },
   //     {
   //       type: 'block',
   //       blocks: [ 'cocoon-blocks/blank-box-1' ],
-  //       transform: ( attributes ) => {
-  //         return createBlock( 'cocoon-blocks/blank-box-1', attributes );
+  //       transform: ( { content } ) => {
+  //         return createBlock( 'cocoon-blocks/blank-box-1', { content } );
   //       },
   //     },
   //     {
   //       type: 'block',
   //       blocks: [ 'cocoon-blocks/tab-box-1' ],
-  //       transform: ( attributes ) => {
-  //         return createBlock( 'cocoon-blocks/tab-box-1', attributes );
+  //       transform: ( { content } ) => {
+  //         return createBlock( 'cocoon-blocks/tab-box-1', { content } );
   //       },
   //     },
   //     {
   //       type: 'block',
   //       blocks: [ 'cocoon-blocks/info-box' ],
-  //       transform: ( attributes ) => {
-  //         return createBlock( 'cocoon-blocks/info-box', attributes );
+  //       transform: ( { content } ) => {
+  //         return createBlock( 'cocoon-blocks/info-box', { content } );
   //       },
   //     },
   //   ],
