@@ -433,6 +433,245 @@ export const ICONS = [
 
 
 
+
+// export const LABEL_ICONS = [
+//   {
+//     value: '',
+//     label: 'fab-none',
+//   },
+//   {
+//     value: 'fa-info-circle',
+//     label: __( 'fab-info-circle', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-question-circle',
+//     label: __( 'fab-question-circle', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-exclamation-circle',
+//     label: __( 'fab-exclamation-circle', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-pencil',
+//     label: __( 'fab-pencil', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-edit',
+//     label: __( 'fab-edit', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-comment',
+//     label: __( 'fab-comment', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-ok',
+//     label: __( 'fab-ok', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-bad',
+//     label: __( 'fab-bad', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-thumbs-up',
+//     label: __( 'fab-thumbs-up', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-thumbs-down',
+//     label: __( 'fab-thumbs-down', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-check',
+//     label: __( 'fab-check', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-star',
+//     label: __( 'fab-star', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-bell',
+//     label: __( 'fab-bell', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-trophy',
+//     label: __( 'fab-trophy', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-lightbulb',
+//     label: __( 'fab-lightbulb', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-graduation-cap',
+//     label: __( 'fab-graduation-cap', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-bolt',
+//     label: __( 'fab-bolt', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-bookmark',
+//     label: __( 'fab-bookmark', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-book',
+//     label: __( 'fab-book', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-download',
+//     label: __( 'fab-download', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-coffee',
+//     label: __( 'fab-coffee', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-amazon',
+//     label: __( 'fab-amazon', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-user',
+//     label: __( 'fab-user', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-envelope',
+//     label: __( 'fab-envelope', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-flag',
+//     label: __( 'fab-flag', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-ban',
+//     label: __( 'fab-ban', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-calendar',
+//     label: __( 'fab-calendar', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-clock',
+//     label: __( 'fab-clock', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-cutlery',
+//     label: __( 'fab-cutlery', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-heart',
+//     label: __( 'fab-heart', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-camera',
+//     label: __( 'fab-camera', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-search',
+//     label: __( 'fab-search', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-file-text',
+//     label: __( 'fab-file-text', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-folder',
+//     label: __( 'fab-folder', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-tag',
+//     label: __( 'fab-tag', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-car',
+//     label: __( 'fab-car', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-truck',
+//     label: __( 'fab-truck', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-bicycle',
+//     label: __( 'fab-bicycle', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-motorcycle',
+//     label: __( 'fab-motorcycle', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-bus',
+//     label: __( 'fab-bus', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-plane',
+//     label: __( 'fab-plane', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-train',
+//     label: __( 'fab-train', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-subway',
+//     label: __( 'fab-subway', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-taxi',
+//     label: __( 'fab-taxi', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-ship',
+//     label: __( 'fab-ship', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-jpy',
+//     label: __( 'fab-jpy', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-usd',
+//     label: __( 'fab-usd', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-eur',
+//     label: __( 'fab-eur', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-btc',
+//     label: __( 'fab-btc', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-apple',
+//     label: __( 'fab-apple', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-android',
+//     label: __( 'fab-android', THEME_NAME ),
+//   },
+//   {
+//     value: 'fa-wordpress',
+//     label: __( 'fab-wordpress', THEME_NAME ),
+//   },
+// ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LIST_ICONS = [
   {
     value: 'list-caret-right',
