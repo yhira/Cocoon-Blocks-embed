@@ -130,6 +130,7 @@ registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
             <InnerBlocks />
           </div>
         </div>
+
       </Fragment>
     );
   },

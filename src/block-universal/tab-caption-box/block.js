@@ -46,10 +46,10 @@ const {
   compose
 } = wp.compose;
 
-const CAPTION_BOX_CLASS = 'caption-box';
+const CAPTION_BOX_CLASS = 'tab-caption-box';
 const DEFAULT_MSG = __( '見出し', THEME_NAME );
 
-class CocoonCaptionBoxBlock extends Component {
+class CocoonTabCaptionBoxBlock extends Component {
   constructor() {
     super(...arguments);
   }
@@ -147,19 +147,19 @@ class CocoonCaptionBoxBlock extends Component {
               [fontSize.class]: fontSize.class,
           }) }>
           <div className={
-            classnames('caption-box-label', 'block-box-label', 'box-label', icon)
+          classnames('tab-caption-box-label', 'block-box-label', 'box-label', icon)
           }>
-            <div className={
-              classnames('caption-box-label-text', 'block-box-label-text', 'box-label-text')
+            <span className={
+            classnames('tab-caption-box-label-text', 'block-box-label-text', 'box-label-text')
             }>
               <RichText
                 value={ content }
                 onChange={ ( value ) => setAttributes( { content: value } ) }
                 placeholder={ DEFAULT_MSG }
               />
-            </div>
+            </span>
           </div>
-          <div className={classnames('caption-box-content', 'block-box-content', 'box-content')}>
+          <div className={classnames('tab-caption-box-content', 'block-box-content', 'box-content')}>
             <InnerBlocks />
           </div>
         </div>
@@ -169,13 +169,13 @@ class CocoonCaptionBoxBlock extends Component {
   }
 }
 
-registerBlockType( 'cocoon-blocks/caption-box-1', {
+registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
 
-  title: __( '見出しボックス', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'window-maximize']} />,
+  title: __( 'タブ見出しボックス', THEME_NAME ),
+  icon: <FontAwesomeIcon icon={['fas', 'folder']} />,
   category: THEME_NAME + '-universal-block',
-  description: __( 'ボックス「見出し」を入力できる汎用ボックスです。', THEME_NAME ),
-  keywords: [ 'caption', 'box' ],
+  description: __( 'ボックスに「タブ見出し」を入力できる汎用ボックスです。', THEME_NAME ),
+  keywords: [ 'tab', 'caption', 'box' ],
 
   attributes: {
     content: {
@@ -215,7 +215,7 @@ registerBlockType( 'cocoon-blocks/caption-box-1', {
     withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color'}),
     withFontSizes('fontSize'),
     fullFallbackStyles,
-  ])(CocoonCaptionBoxBlock),
+  ])(CocoonTabCaptionBoxBlock),
   save: props => {
     const {
       content,
@@ -250,17 +250,17 @@ registerBlockType( 'cocoon-blocks/caption-box-1', {
     return (
       <div className={ className }>
         <div className={
-          classnames('caption-box-label', 'block-box-label', 'box-label', icon)
+          classnames('tab-caption-box-label', 'block-box-label', 'box-label', icon)
         }>
-          <div className={
-            classnames('caption-box-label-text', 'block-box-label-text', 'box-label-text')
+          <span className={
+            classnames('tab-caption-box-label-text', 'block-box-label-text', 'box-label-text')
           }>
             <RichText.Content
               value={ content }
             />
-          </div>
+          </span>
         </div>
-        <div className={classnames('caption-box-content', 'block-box-content', 'box-content')}>
+        <div className={classnames('tab-caption-box-content', 'block-box-content', 'box-content')}>
           <InnerBlocks.Content />
         </div>
       </div>
