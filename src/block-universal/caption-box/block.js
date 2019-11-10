@@ -149,7 +149,7 @@ class CocoonCaptionBoxBlock extends Component {
           <div className={
             classnames('caption-box-label', 'block-box-label', 'box-label', icon)
           }>
-            <div className={
+            <span className={
               classnames('caption-box-label-text', 'block-box-label-text', 'box-label-text')
             }>
               <RichText
@@ -157,7 +157,7 @@ class CocoonCaptionBoxBlock extends Component {
                 onChange={ ( value ) => setAttributes( { content: value } ) }
                 placeholder={ DEFAULT_MSG }
               />
-            </div>
+            </span>
           </div>
           <div className={classnames('caption-box-content', 'block-box-content', 'box-content')}>
             <InnerBlocks />
@@ -252,13 +252,13 @@ registerBlockType( 'cocoon-blocks/caption-box-1', {
         <div className={
           classnames('caption-box-label', 'block-box-label', 'box-label', icon)
         }>
-          <div className={
+          <span className={
             classnames('caption-box-label-text', 'block-box-label-text', 'box-label-text')
           }>
             <RichText.Content
               value={ content }
             />
-          </div>
+          </span>
         </div>
         <div className={classnames('caption-box-content', 'block-box-content', 'box-content')}>
           <InnerBlocks.Content />
