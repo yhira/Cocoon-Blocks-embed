@@ -134,9 +134,9 @@ class CocoonMicroTextBlock extends Component {
 
         <div className={
           classnames(className, {
+            [ 'micro-text' ]: true,
             [ MICRO_COPY_CLASS ]: true,
             [ type ]: !! type,
-            [ 'block-box' ]: true,
             'has-text-color': textColor.color,
             // 'has-background': backgroundColor.color,
             // 'has-border-color': borderColor.color,
@@ -233,9 +233,9 @@ registerBlockType( 'cocoon-blocks/micro-text', {
 
 
     const className = classnames( {
+      [ 'micro-text' ]: true,
       [ MICRO_COPY_CLASS ]: true,
       [ type ]: !! type,
-      [ 'block-box' ]: true,
       'has-text-color': textColor || customTextColor,
       // 'has-background': backgroundColor || customBackgroundColor,
       // 'has-border-color': borderColor || customBorderColor,
