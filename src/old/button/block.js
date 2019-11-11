@@ -89,7 +89,7 @@ registerBlockType( 'cocoon-blocks/button', {
             />
 
             <SelectControl
-              label={ __( '色', THEME_NAME ) }
+              label={ __( '色設定', THEME_NAME ) }
               value={ color }
               onChange={ ( value ) => setAttributes( { color: value } ) }
               options={ [

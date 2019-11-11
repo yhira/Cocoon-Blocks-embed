@@ -117,7 +117,7 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
               {
                 value: color,
                 onChange: ( value ) => setAttributes( { color: value } ),
-                label: __( '色', THEME_NAME ),
+                label: __( '色設定', THEME_NAME ),
               },
             ] }
           >

@@ -131,7 +131,7 @@ class CocoonIconListBoxBlock extends Component {
           </PanelBody>
 
           <PanelColorSettings
-            title={ __( '色', THEME_NAME ) }
+            title={ __( '色設定', THEME_NAME ) }
             colorSettings={[
               {
                 label: __( 'アイコン色', THEME_NAME ),

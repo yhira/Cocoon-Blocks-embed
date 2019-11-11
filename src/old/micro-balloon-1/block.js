@@ -77,7 +77,7 @@ registerBlockType( 'cocoon-blocks/micro-balloon-1', {
             />
 
             <SelectControl
-              label={ __( '色', THEME_NAME ) }
+              label={ __( '色設定', THEME_NAME ) }
               value={ color }
               onChange={ ( value ) => setAttributes( { color: value } ) }
               options={ [

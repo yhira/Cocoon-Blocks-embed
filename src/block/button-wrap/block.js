@@ -134,7 +134,7 @@ class CocoonButtonWrapBlock extends Component {
           </PanelBody>
 
           <PanelColorSettings
-            title={ __( '色', THEME_NAME ) }
+            title={ __( '色設定', THEME_NAME ) }
             colorSettings={[
               {
                 label: __( '背景色', THEME_NAME ),

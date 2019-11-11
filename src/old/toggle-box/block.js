@@ -55,7 +55,7 @@ registerBlockType( 'cocoon-blocks/toggle-box', {
           <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
 
             <SelectControl
-              label={ __( '色', THEME_NAME ) }
+              label={ __( '色設定', THEME_NAME ) }
               value={ color }
               onChange={ ( value ) => setAttributes( { color: value } ) }
               options={ [

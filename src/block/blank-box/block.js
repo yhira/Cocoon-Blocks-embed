@@ -82,7 +82,7 @@ class CocoonBlankBoxBlock extends Component {
         <InspectorControls>
 
           <PanelColorSettings
-            title={ __( '色', THEME_NAME ) }
+            title={ __( '色設定', THEME_NAME ) }
             colorSettings={[
               {
                 label: __( 'ボーダー色', THEME_NAME ),
