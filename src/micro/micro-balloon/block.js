@@ -182,8 +182,6 @@ class CocoonMicroBalloonBlock extends Component {
             <RichText
               value={ content }
               onChange={ ( value ) => setAttributes( { content: value } ) }
-              tagName="span"
-              class="micro-balloon-text micro-text"
             />
           </span>
         </div>
@@ -297,8 +295,6 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
           { icon && <span class={classnames('micro-balloon-icon', 'micro-icon', icon)}></span> }
           <RichText.Content
             value={ content }
-            tagName="span"
-            class="micro-balloon-text micro-text"
           />
         </span>
       </div>
