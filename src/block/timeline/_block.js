@@ -16,10 +16,6 @@ const { PanelBody, RangeControl } = wp.components;
 const { Fragment } = wp.element;
 import memoize from 'memize';
 import { times } from 'lodash';
-//lodashの不具合対応
-//TypeError: _.contains is not a function対策
-//https://github.com/mgonto/restangular/issues/1294
-_.contains = _.includes;
 
 //this.activateMode is not a function対策
 //https://wpdevelopment.courses/how-to-fix-activatemode-is-not-a-function-error-in-gutenberg/
