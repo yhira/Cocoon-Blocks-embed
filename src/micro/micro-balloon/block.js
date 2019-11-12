@@ -5,13 +5,14 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, fullFallbackStyles } from '../../helpers';
+import { THEME_NAME, ICONS, fullFallbackStyles } from '../../helpers';
 import { deprecated } from './deprecated';
 import { transforms } from './transforms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
 
+const { times } = lodash;
 const { __ } = wp.i18n;
 const {
   registerBlockType,
@@ -33,7 +34,9 @@ const {
   PanelColor,
   ColorPalette,
   SelectControl,
-  ToggleControl
+  ToggleControl,
+  BaseControl,
+  Button,
 } = wp.components;
 
 const {
@@ -78,6 +81,7 @@ class CocoonMicroBalloonBlock extends Component {
       content,
       type,
       isCircle,
+      icon,
     } = attributes;
 
     return (
@@ -106,6 +110,24 @@ class CocoonMicroBalloonBlock extends Component {
               checked={ isCircle }
               onChange={ ( value ) => setAttributes( { isCircle: value } ) }
             />
+
+            <BaseControl label={ __( 'アイコン', THEME_NAME ) }>
+              <div className="icon-setting-buttons">
+                { times( ICONS.length, ( index ) => {
+                  return (
+                    <Button
+                      isDefault
+                      isPrimary={ icon === ICONS[index].value }
+                      className={ICONS[index].label}
+                      onClick={ () => {
+                        setAttributes( { icon: ICONS[index].value } );
+                      } }
+                    >
+                    </Button>
+                  );
+                } ) }
+              </div>
+            </BaseControl>
 
           </PanelBody>
 
@@ -155,10 +177,15 @@ class CocoonMicroBalloonBlock extends Component {
             [fontSize.class]: fontSize.class,
           })
          }>
-          <RichText
-            value={ content }
-            onChange={ ( value ) => setAttributes( { content: value } ) }
-          />
+          <span class="micro-balloon-content micro-content">
+            { icon && <span class={classnames('micro-balloon-icon', 'micro-icon', icon)}></span> }
+            <RichText
+              value={ content }
+              onChange={ ( value ) => setAttributes( { content: value } ) }
+              tagName="span"
+              class="micro-balloon-text micro-text"
+            />
+          </span>
         </div>
 
       </Fragment>
@@ -186,6 +213,9 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
     isCircle: {
       type: 'boolean',
       default: false,
+    },
+    icon: {
+      type: 'string',
     },
     align: {
       type: 'string',
@@ -230,6 +260,7 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
       content,
       type,
       isCircle,
+      icon,
       backgroundColor,
       customBackgroundColor,
       textColor,
@@ -261,10 +292,15 @@ registerBlockType( 'cocoon-blocks/micro-balloon-2', {
     } );
 
     return (
-      <div className={ className } data-block-version="2.0">
-        <RichText.Content
-          value={ content }
-        />
+      <div className={ className }>
+        <span class="micro-balloon-content micro-content">
+          { icon && <span class={classnames('micro-balloon-icon', 'micro-icon', icon)}></span> }
+          <RichText.Content
+            value={ content }
+            tagName="span"
+            class="micro-balloon-text micro-text"
+          />
+        </span>
       </div>
     );
   },
