@@ -96,6 +96,7 @@ function cocoon_blocks_cgb_editor_assets() { // phpcs:ignore
     'isTemplateVisible' => $is_templates_visible,
     'isAffiliateVisible' => $is_affiliates_visible,
     'isRankingVisible' => $is_rankings_visible,
+    'siteIconFont' => get_site_icon_font_class(),
     'isDebugMode' => DEBUG_MODE,
   );
 
@@ -237,8 +238,10 @@ function cocoon_editor_color_palette_setup() {
     $colors = get_cocoon_editor_color_palette_colors();
     // カラーパレットの設定
     add_theme_support('editor-color-palette', $colors);
-    // 自由色選択を無効
+    // カスタム色を無効
     add_theme_support('disable-custom-colors');
+    // カスタムフォントサイズを無効
+    add_theme_support('disable-custom-font-sizes');
     return $colors;
 }
 endif;

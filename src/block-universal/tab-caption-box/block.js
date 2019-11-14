@@ -5,80 +5,86 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, ICONS, getIconClass, colorValueToSlug} from '../../helpers.js';
+import { THEME_NAME, ICONS, fullFallbackStyles } from '../../helpers';
+import { deprecated } from './deprecated';
+import { transforms } from './transforms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
 const { times } = lodash;
 const { __ } = wp.i18n;
-const { registerBlockType, createBlock } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker } = wp.editor;
-const { PanelBody, SelectControl, BaseControl, Button } = wp.components;
-const { Fragment } = wp.element;
+const {
+  registerBlockType,
+} = wp.blocks;
+const {
+  InspectorControls,
+  InnerBlocks,
+  RichText,
+  withColors,
+  getColorClassName,
+  PanelColorSettings,
+  getFontSizeClass,
+  withFontSizes,
+  FontSizePicker,
+  ContrastChecker,
+} = wp.editor;
+const {
+  PanelBody,
+  PanelColor,
+  ColorPalette,
+  SelectControl,
+  BaseControl,
+  Button,
+} = wp.components;
+
+const {
+  Component,
+  Fragment,
+} = wp.element;
+
+const {
+  compose
+} = wp.compose;
+
 const CAPTION_BOX_CLASS = 'tab-caption-box';
 const DEFAULT_MSG = __( '見出し', THEME_NAME );
 
-//classの取得
-function getClasses(color) {
-  const classes = classnames(
-    {
-      [ CAPTION_BOX_CLASS ]: true,
-      [ `tcb-${ colorValueToSlug(color) }` ]: !! colorValueToSlug(color),
-      [ 'block-box' ]: true,
-    }
-  );
-  return classes;
-}
+class CocoonTabCaptionBoxBlock extends Component {
+  constructor() {
+    super(...arguments);
+  }
 
-registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
+  render() {
+    const {
+      attributes,
+      setAttributes,
+      mergeBlocks,
+      onReplace,
+      className,
+      backgroundColor,
+      setBackgroundColor,
+      textColor,
+      setTextColor,
+      borderColor,
+      setBorderColor,
+      fallbackBackgroundColor,
+      fallbackTextColor,
+      fallbackBorderColor,
+      fallbackFontSize,
+      fontSize,
+      setFontSize,
+    } = this.props;
 
-  title: __( 'タブ見出しボックス', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['fas', 'folder']} />,
-  category: THEME_NAME + '-universal-block',
-  description: __( 'ボックスに「タブ見出し」を入力できる汎用ボックスです。', THEME_NAME ),
-  keywords: [ 'tab', 'caption', 'box' ],
-
-  attributes: {
-    content: {
-      type: 'string',
-      default: DEFAULT_MSG,
-    },
-    color: {
-      type: 'string',
-      default: '',
-    },
-    icon: {
-      type: 'string',
-      default: '',
-    },
-  },
-  transforms: {
-    to: [
-      {
-        type: 'block',
-        blocks: [ 'cocoon-blocks/caption-box-1' ],
-        transform: ( attributes ) => {
-          return createBlock( 'cocoon-blocks/caption-box-1', attributes );
-        },
-      },
-      {
-        type: 'block',
-        blocks: [ 'cocoon-blocks/label-box-1' ],
-        transform: ( attributes ) => {
-          return createBlock( 'cocoon-blocks/label-box-1', attributes );
-        },
-      },
-    ],
-  },
-
-  edit( { attributes, setAttributes } ) {
-    const { content, color, icon } = attributes;
+    const {
+      content,
+      icon,
+    } = attributes;
 
     return (
       <Fragment>
         <InspectorControls>
-          <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
 
+          <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
             <BaseControl label={ __( 'アイコン', THEME_NAME ) }>
               <div className="icon-setting-buttons">
                 { times( ICONS.length, ( index ) => {
@@ -96,29 +102,56 @@ registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
                 } ) }
               </div>
             </BaseControl>
-
           </PanelBody>
 
           <PanelColorSettings
             title={ __( '色設定', THEME_NAME ) }
-            initialOpen={ true }
-            colorSettings={ [
+            colorSettings={[
               {
-                value: color,
-                onChange: ( value ) => setAttributes( { color: value } ),
-                label: __( '色', THEME_NAME ),
+                label: __( '枠の色', THEME_NAME ),
+                onChange: setBorderColor,
+                value: borderColor.color,
               },
-            ] }
-          >
-            <ContrastChecker
-              color={ color }
+              {
+                label: __( '背景色', THEME_NAME ),
+                onChange: setBackgroundColor,
+                value: backgroundColor.color,
+              },
+              {
+                label: __( '文字色', THEME_NAME ),
+                onChange: setTextColor,
+                value: textColor.color,
+              },
+            ]}
+          />
+          {/*
+          <PanelBody title={ __( '文字サイズ', THEME_NAME ) } className="blocks-font-size">
+            <FontSizePicker
+              fallbackFontSize={ fallbackFontSize }
+              value={ fontSize.size }
+              onChange={ setFontSize }
             />
-          </PanelColorSettings>
+          </PanelBody>
+          */}
         </InspectorControls>
 
-        <div className={ getClasses(color) }>
-          <div className={'tab-caption-box-label block-box-label' + getIconClass(icon)}>
-            <span className={'tab-caption-box-label-text block-box-label-text'}>
+        <div className={ classnames(className, {
+              [ CAPTION_BOX_CLASS ]: true,
+              'block-box': true,
+              'has-text-color': textColor.color,
+              'has-background': backgroundColor.color,
+              'has-border-color': borderColor.color,
+              [backgroundColor.class]: backgroundColor.class,
+              [textColor.class]: textColor.class,
+              [borderColor.class]: borderColor.class,
+              [fontSize.class]: fontSize.class,
+          }) }>
+          <div className={
+          classnames('tab-caption-box-label', 'block-box-label', 'box-label', icon)
+          }>
+            <span className={
+            classnames('tab-caption-box-label-text', 'block-box-label-text', 'box-label-text')
+            }>
               <RichText
                 value={ content }
                 onChange={ ( value ) => setAttributes( { content: value } ) }
@@ -126,29 +159,115 @@ registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
               />
             </span>
           </div>
-          <div className="tab-caption-box-content">
+          <div className={classnames('tab-caption-box-content', 'block-box-content', 'box-content')}>
             <InnerBlocks />
           </div>
         </div>
+
       </Fragment>
     );
+  }
+}
+
+registerBlockType( 'cocoon-blocks/tab-caption-box-1', {
+
+  title: __( 'タブ見出しボックス', THEME_NAME ),
+  icon: <FontAwesomeIcon icon={['fas', 'folder']} />,
+  category: THEME_NAME + '-universal-block',
+  description: __( 'ボックスに「タブ見出し」を入力できる汎用ボックスです。', THEME_NAME ),
+  keywords: [ 'tab', 'caption', 'box' ],
+
+  attributes: {
+    content: {
+      type: 'string',
+      default: DEFAULT_MSG,
+    },
+    icon: {
+      type: 'string',
+    },
+    backgroundColor: {
+      type: 'string',
+    },
+    customBackgroundColor: {
+      type: 'string',
+    },
+    textColor: {
+      type: 'string',
+    },
+    customTextColor: {
+      type: 'string',
+    },
+    borderColor: {
+      type: 'string',
+    },
+    customBorderColor: {
+      type: 'string',
+    },
+    fontSize: {
+      type: 'string',
+    },
+    customFontSize: {
+      type: 'string',
+    },
   },
 
-  save( { attributes } ) {
-    const { content, color, icon } = attributes;
+  edit: compose([
+    withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color'}),
+    withFontSizes('fontSize'),
+    fullFallbackStyles,
+  ])(CocoonTabCaptionBoxBlock),
+  save: props => {
+    const {
+      content,
+      icon,
+      backgroundColor,
+      customBackgroundColor,
+      textColor,
+      customTextColor,
+      borderColor,
+      customBorderColor,
+      fontSize,
+      customFontSize,
+    } = props.attributes;
+
+    const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+    const textClass = getColorClassName( 'color', textColor );
+    const borderClass = getColorClassName( 'border-color', borderColor );
+    const fontSizeClass = getFontSizeClass( fontSize );
+
+    const className = classnames( {
+      [ CAPTION_BOX_CLASS ]: true,
+      'block-box': true,
+      'has-text-color': textColor || customTextColor,
+      'has-background': backgroundColor || customBackgroundColor,
+      'has-border-color': borderColor || customBorderColor,
+      [ textClass ]: textClass,
+      [ backgroundClass ]: backgroundClass,
+      [ borderClass ]: borderClass,
+      [ fontSizeClass ]: fontSizeClass,
+    } );
+
     return (
-      <div className={ getClasses(color) }>
-        <div className={'tab-caption-box-label block-box-label' + getIconClass(icon)}>
-          <span className={'tab-caption-box-label-text block-box-label-text'}>
+      <div className={ className }>
+        <div className={
+          classnames('tab-caption-box-label', 'block-box-label', 'box-label', icon)
+        }>
+          <span className={
+            classnames('tab-caption-box-label-text', 'block-box-label-text', 'box-label-text')
+          }>
             <RichText.Content
               value={ content }
             />
           </span>
         </div>
-        <div className="tab-caption-box-content">
+        <div className={classnames('tab-caption-box-content', 'block-box-content', 'box-content')}>
           <InnerBlocks.Content />
         </div>
       </div>
     );
-  }
-} );
+  },
+
+  deprecated: deprecated,
+
+  transforms: transforms,
+});

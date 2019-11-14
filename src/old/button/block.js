@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import {THEME_NAME, BLOCK_CLASS} from '../../helpers';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
@@ -89,7 +89,7 @@ registerBlockType( 'cocoon-blocks/button', {
             />
 
             <SelectControl
-              label={ __( '色', THEME_NAME ) }
+              label={ __( '色設定', THEME_NAME ) }
               value={ color }
               onChange={ ( value ) => setAttributes( { color: value } ) }
               options={ [

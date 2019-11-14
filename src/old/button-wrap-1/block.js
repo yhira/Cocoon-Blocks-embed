@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, BUTTON_BLOCK, colorValueToSlug} from '../../helpers.js';
+import { THEME_NAME, BUTTON_BLOCK, colorValueToSlug} from '../../helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
@@ -123,7 +123,7 @@ registerBlockType( 'cocoon-blocks/button-wrap-1', {
               {
                 value: color,
                 onChange: ( value ) => setAttributes( { color: value } ),
-                label: __( '色', THEME_NAME ),
+                label: __( '色設定', THEME_NAME ),
               },
             ] }
           >

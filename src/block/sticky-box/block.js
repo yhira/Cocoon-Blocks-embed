@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS} from '../../helpers.js';
+import {THEME_NAME, CLICK_POINT_MSG, BLOCK_CLASS} from '../../helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
@@ -14,7 +14,6 @@ const { registerBlockType, createBlock } = wp.blocks;
 const { InnerBlocks, RichText, InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, BaseControl } = wp.components;
 const { Fragment } = wp.element;
-const DEFAULT_MSG = __( 'こちらをクリックして設定変更。この入力は公開ページで反映されません。', THEME_NAME );
 
 //classの取得
 function getClasses(style) {
@@ -40,7 +39,7 @@ registerBlockType( 'cocoon-blocks/sticky-box', {
   attributes: {
     content: {
       type: 'string',
-      default: DEFAULT_MSG,
+      default: CLICK_POINT_MSG,
     },
     style: {
       type: 'string',
@@ -63,20 +62,20 @@ registerBlockType( 'cocoon-blocks/sticky-box', {
   //         return createBlock( 'cocoon-blocks/tab-box-1', attributes );
   //       },
   //     },
-  //     // {
-  //     //   type: 'block',
-  //     //   blocks: [ 'cocoon-blocks/icon-box' ],
-  //     //   transform: ( attributes ) => {
-  //     //     return createBlock( 'cocoon-blocks/icon-box', attributes );
-  //     //   },
-  //     // },
-  //     // {
-  //     //   type: 'block',
-  //     //   blocks: [ 'cocoon-blocks/info-box' ],
-  //     //   transform: ( attributes ) => {
-  //     //     return createBlock( 'cocoon-blocks/info-box', attributes );
-  //     //   },
-  //     // },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/icon-box' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/icon-box', attributes );
+  //       },
+  //     },
+  //     {
+  //       type: 'block',
+  //       blocks: [ 'cocoon-blocks/info-box' ],
+  //       transform: ( attributes ) => {
+  //         return createBlock( 'cocoon-blocks/info-box', attributes );
+  //       },
+  //     },
   //   ],
   // },
 
@@ -123,7 +122,7 @@ registerBlockType( 'cocoon-blocks/sticky-box', {
           <span className={'box-block-msg'}>
             <RichText
               value={ content }
-              placeholder={ DEFAULT_MSG }
+              placeholder={ CLICK_POINT_MSG }
             />
           </span>
           <InnerBlocks />

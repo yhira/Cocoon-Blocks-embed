@@ -5,62 +5,86 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import {THEME_NAME, BLOCK_CLASS, getBalloonClasses, isSameBalloon} from '../../helpers.js';
+import { THEME_NAME, CLICK_POINT_MSG, fullFallbackStyles, getBalloonClasses, isSameBalloon } from '../../helpers';
+import { deprecated } from './deprecated';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
+
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, MediaUpload, InspectorControls } = wp.editor;
-const { Button, PanelBody, SelectControl, BaseControl } = wp.components;
-const { Fragment } = wp.element;
+const {
+  registerBlockType,
+} = wp.blocks;
+const {
+  InspectorControls,
+  InnerBlocks,
+  RichText,
+  withColors,
+  getColorClassName,
+  PanelColorSettings,
+  getFontSizeClass,
+  withFontSizes,
+  FontSizePicker,
+  ContrastChecker,
+  MediaUpload,
+} = wp.editor;
+const {
+  PanelBody,
+  PanelColor,
+  ColorPalette,
+  SelectControl,
+  Button,
+} = wp.components;
+
+const {
+  Component,
+  Fragment,
+} = wp.element;
+
+const {
+  compose
+} = wp.compose;
+
 const DEFAULT_NAME = __( '未入力', THEME_NAME );
 
-registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
+class CocoonBalloonBoxBlock extends Component {
+  constructor() {
+    super(...arguments);
+  }
 
-  title: __( '吹き出し', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'comment']} />,
-  category: THEME_NAME + '-block',
-  description: __( '登録されている吹き出しのオプションを変更できます。', THEME_NAME ),
-  keywords: [ 'balloon', 'box' ],
+  render() {
+    const {
+      attributes,
+      setAttributes,
+      mergeBlocks,
+      onReplace,
+      className,
+      backgroundColor,
+      setBackgroundColor,
+      textColor,
+      setTextColor,
+      borderColor,
+      setBorderColor,
+      fallbackBackgroundColor,
+      fallbackTextColor,
+      fallbackBorderColor,
+      fallbackFontSize,
+      fontSize,
+      setFontSize,
+    } = this.props;
 
-  attributes: {
-    name: {
-      type: 'string',
-      default: '',
-    },
-    index: {
-      type: 'string',
-      default: '0',
-    },
-    id: {
-      type: 'string',
-      default: '',
-    },
-    icon: {
-      type: 'string',
-      default: '',
-    },
-    style: {
-      type: 'string',
-      default: 'stn',
-    },
-    position: {
-      type: 'string',
-      default: 'l',
-    },
-    iconstyle: {
-      type: 'string',
-      default: 'cb',
-    },
-    iconid: {
-      type: 'number',
-      default: 0,
-    },
-  },
+    var {
+      name,
+      index,
+      id,
+      icon,
+      style,
+      position,
+      iconstyle,
+      iconid,
+    } = attributes;
 
-  edit( { attributes, setAttributes } ) {
-    var { name, index, id, icon, style, position, iconstyle, iconid } = attributes;
+
     //新規作成時
     if (!icon && index == '0' && gbSpeechBalloons[0]) {
         id = gbSpeechBalloons[0].id;
@@ -73,6 +97,7 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
         }
         setAttributes( { name: name, index: index, id: id, icon: icon, style: style, position: position, iconstyle: iconstyle } );
     }
+
     //新規作成以外
     if (gbSpeechBalloons[index]) {
       if (isSameBalloon(index, id, icon, style, position, iconstyle)) {
@@ -90,9 +115,6 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
     }
 
     const renderIcon = ( obj ) => {
-      // console.log(icon);
-      // console.log(gbSpeechBalloons[index].icon);
-      // console.log((icon === gbSpeechBalloons[index].icon) ? icon : gbSpeechBalloons[index].icon);
       return (
         <Button className="image-button" onClick={ obj.open } style={ { padding: 0 } }>
           <img src={ icon ? icon : gbSpeechBalloons[index].icon } alt={icon ? '' : gbSpeechBalloons[index].name} className={ `speech-icon-image wp-image-${ iconid }` } />
@@ -100,7 +122,6 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
       );
     };
 
-    //console.log(gbSpeechBalloons);
     var balloons = [];
     gbSpeechBalloons.map((balloon, index) => {
       //console.log(balloon);
@@ -111,7 +132,6 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
         });
       }
     });
-    //console.log(balloons);
 
     return (
       <Fragment>
@@ -197,7 +217,38 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
             />
 
           </PanelBody>
+
+          <PanelColorSettings
+            title={ __( '吹き出し色設定', THEME_NAME ) }
+            colorSettings={[
+              {
+                label: __( '背景色', THEME_NAME ),
+                onChange: setBackgroundColor,
+                value: backgroundColor.color,
+              },
+              {
+                label: __( '文字色', THEME_NAME ),
+                onChange: setTextColor,
+                value: textColor.color,
+              },
+              {
+                label: __( 'ボーダー色', THEME_NAME ),
+                onChange: setBorderColor,
+                value: borderColor.color,
+              },
+            ]}
+          />
+          {/*
+          <PanelBody title={ __( '文字サイズ', THEME_NAME ) } className="blocks-font-size">
+            <FontSizePicker
+              fallbackFontSize={ fallbackFontSize }
+              value={ fontSize.size }
+              onChange={ setFontSize }
+            />
+          </PanelBody>
+          */}
         </InspectorControls>
+
 
         <div
           className={ getBalloonClasses(id, style, position, iconstyle) }>
@@ -222,38 +273,156 @@ registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
               />
             </div>
           </div>
-          <div className="speech-balloon">
+          <div className={ classnames(className, {
+              'speech-balloon': true,
+              'has-text-color': textColor.color,
+              'has-background': backgroundColor.color,
+              'has-border-color': borderColor.color,
+              [backgroundColor.class]: backgroundColor.class,
+              [textColor.class]: textColor.class,
+              [borderColor.class]: borderColor.class,
+              [fontSize.class]: fontSize.class,
+          }) }>
             <InnerBlocks />
           </div>
         </div>
 
       </Fragment>
     );
+  }
+}
+
+registerBlockType( 'cocoon-blocks/balloon-ex-box-1', {
+
+  title: __( '吹き出し', THEME_NAME ),
+  icon: <FontAwesomeIcon icon={['far', 'comment']} />,
+  category: THEME_NAME + '-block',
+  description: __( '登録されている吹き出しのオプションを変更できます。', THEME_NAME ),
+  keywords: [ 'balloon', 'box' ],
+
+  attributes: {
+    name: {
+      type: 'string',
+      default: '',
+    },
+    index: {
+      type: 'string',
+      default: '0',
+    },
+    id: {
+      type: 'string',
+      default: '',
+    },
+    icon: {
+      type: 'string',
+      default: '',
+    },
+    style: {
+      type: 'string',
+      default: 'stn',
+    },
+    position: {
+      type: 'string',
+      default: 'l',
+    },
+    iconstyle: {
+      type: 'string',
+      default: 'cb',
+    },
+    iconid: {
+      type: 'number',
+      default: 0,
+    },
+    backgroundColor: {
+      type: 'string',
+    },
+    customBackgroundColor: {
+      type: 'string',
+    },
+    textColor: {
+      type: 'string',
+    },
+    customTextColor: {
+      type: 'string',
+    },
+    borderColor: {
+      type: 'string',
+    },
+    customBorderColor: {
+      type: 'string',
+    },
+    fontSize: {
+      type: 'string',
+    },
+    customFontSize: {
+      type: 'string',
+    },
   },
 
-  save( { attributes } ) {
-    const { name, index, id, icon, style, position, iconstyle } = attributes;
+  edit: compose([
+    withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color'}),
+    withFontSizes('fontSize'),
+    fullFallbackStyles,
+  ])(CocoonBalloonBoxBlock),
+  save: props => {
+    const {
+      name,
+      index,
+      id,
+      icon,
+      style,
+      position,
+      iconstyle,
+      iconid,
+      backgroundColor,
+      customBackgroundColor,
+      textColor,
+      customTextColor,
+      borderColor,
+      customBorderColor,
+      fontSize,
+      customFontSize,
+    } = props.attributes;
+
+    const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+    const textClass = getColorClassName( 'color', textColor );
+    const borderClass = getColorClassName( 'border-color', borderColor );
+    const fontSizeClass = getFontSizeClass( fontSize );
+
+    const className = classnames( {
+      'speech-balloon': true,
+      'has-text-color': textColor || customTextColor,
+      'has-background': backgroundColor || customBackgroundColor,
+      'has-border-color': borderColor || customBorderColor,
+      [ textClass ]: textClass,
+      [ backgroundClass ]: backgroundClass,
+      [ borderClass ]: borderClass,
+      [ fontSizeClass ]: fontSizeClass,
+    } );
+
     return (
-        <div
-          className={ getBalloonClasses(id, style, position, iconstyle) }>
-          <div className="speech-person">
-            <figure className="speech-icon">
-              <img
-                src={ icon }
-                alt={ name }
-                className="speech-icon-image"
-              />
-            </figure>
-            <div className="speech-name">
-              <RichText.Content
-                value={ name }
-              />
-            </div>
-          </div>
-          <div className="speech-balloon">
-            <InnerBlocks.Content />
+      <div
+        className={ getBalloonClasses(id, style, position, iconstyle) }>
+        <div className="speech-person">
+          <figure className="speech-icon">
+            <img
+              src={ icon }
+              alt={ name }
+              className="speech-icon-image"
+            />
+          </figure>
+          <div className="speech-name">
+            <RichText.Content
+              value={ name }
+            />
           </div>
         </div>
+        <div className={ className }>
+          <InnerBlocks.Content />
+        </div>
+      </div>
     );
-  }
-} );
+  },
+
+  //deprecated: deprecated,
+});

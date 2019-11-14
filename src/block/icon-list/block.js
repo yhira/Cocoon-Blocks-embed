@@ -5,68 +5,107 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, BLOCK_CLASS, LIST_ICONS, colorValueToSlug } from '../../helpers.js';
+import { THEME_NAME, LIST_ICONS } from '../../helpers';
+import { deprecated } from './deprecated';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
-const { times } = lodash;
 const { __ } = wp.i18n;
-//const { applyFormat, removeFormat, getActiveFormat } = window.wp.richText;
-const { registerBlockType } = wp.blocks;
-const { InnerBlocks, RichText, InspectorControls, PanelColorSettings, ContrastChecker/*, getColorObjectByColorValue*/ } = wp.editor;
-const { PanelBody, SelectControl, BaseControl, Button } = wp.components;
-//const { select } = wp.data;
-const { Fragment } = wp.element;
+const {
+  registerBlockType,
+} = wp.blocks;
+const {
+  InspectorControls,
+  InnerBlocks,
+  RichText,
+  withColors,
+  getColorClassName,
+  PanelColorSettings,
+  getFontSizeClass,
+  withFontSizes,
+  FontSizePicker,
+  ContrastChecker,
+} = wp.editor;
+const {
+  PanelBody,
+  PanelColor,
+  ColorPalette,
+  SelectControl,
+  BaseControl,
+  Button,
+  withFallbackStyles,
+} = wp.components;
+
+const {
+  Component,
+  Fragment,
+} = wp.element;
+
+const {
+  compose
+} = wp.compose;
+
+const {
+  times,
+} = lodash;
+
 const ALLOWED_BLOCKS = [ 'core/list' ];
 
-//classの取得
-function getClasses(icon, iconColor, borderColor) {
-  const classes = classnames(
-    {
-      'iconlist-box': true,
-      [ icon ]: !! icon,
-      [ `iic-${ colorValueToSlug(iconColor) }` ]: !! colorValueToSlug(iconColor),
-      [ `blank-box bb-${ colorValueToSlug(borderColor) }` ]: !! colorValueToSlug(borderColor),
-      [ 'block-box' ]: true,
-    }
-  );
-  return classes;
-}
+const FallbackStyles = withFallbackStyles((node, ownProps) => {
+  const {
+    textColor,
+    backgroundColor,
+    borderColor,
+    iconColor,
+    fontSize,
+    customFontSize,
+  } = ownProps.attributes;
+  const editableNode = node.querySelector('[contenteditable="true"]');
+  //verify if editableNode is available, before using getComputedStyle.
+  const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
+  return {
+    fallbackBackgroundColor: backgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
+    fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackBorderColor: borderColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackIconColor: iconColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt( computedStyles.fontSize ) || undefined,
+  }
+});
 
-registerBlockType( 'cocoon-blocks/iconlist-box', {
+class CocoonIconListBoxBlock extends Component {
+  constructor() {
+    super(...arguments);
+  }
 
-  title: __( 'アイコンリスト', THEME_NAME ),
-  icon: <FontAwesomeIcon icon={['far', 'list-alt']} />,
-  category: THEME_NAME + '-block',
-  description: __( 'リストポイントにアイコンを適用した非順序リストです。', THEME_NAME ),
-  keywords: [ 'icon', 'list', 'box' ],
+  render() {
+    const {
+      attributes,
+      setAttributes,
+      mergeBlocks,
+      onReplace,
+      className,
+      backgroundColor,
+      setBackgroundColor,
+      textColor,
+      setTextColor,
+      borderColor,
+      setBorderColor,
+      iconColor,
+      setIconColor,
+      fallbackBackgroundColor,
+      fallbackTextColor,
+      fallbackBorderColor,
+      fallbackIconColor,
+      fallbackFontSize,
+      fontSize,
+      setFontSize,
+    } = this.props;
 
-  attributes: {
-    title: {
-      type: 'string',
-      default: '',
-    },
-    iconColor: {
-      type: 'string',
-      default: '',
-    },
-    borderColor: {
-      type: 'string',
-      default: '',
-    },
-    icon: {
-      type: 'string',
-      default: 'list-caret-right',
-    },
-  },
+    const {
+      title,
+      icon,
+    } = attributes;
 
-  edit( { attributes, setAttributes } ) {
-    const { title, icon, iconColor, borderColor } = attributes;
-    //console.log(borderColor);
-
-    // const borderColorStyles = {
-    //   borderColor: borderColor || undefined,
-    // };
     return (
       <Fragment>
         <InspectorControls>
@@ -93,31 +132,57 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
 
           <PanelColorSettings
             title={ __( '色設定', THEME_NAME ) }
-            initialOpen={ true }
-            colorSettings={ [
+            colorSettings={[
               {
-                value: iconColor,
-                onChange: ( value ) => setAttributes( { iconColor: value } ),
                 label: __( 'アイコン色', THEME_NAME ),
+                onChange: setIconColor,
+                value: iconColor.color,
               },
               {
-                value: borderColor,
-                onChange: ( value ) => setAttributes( { borderColor: value } ),
                 label: __( 'ボーダー色', THEME_NAME ),
+                onChange: setBorderColor,
+                value: borderColor.color,
               },
-            ] }
-          >
-          <ContrastChecker
-            iconColor={ iconColor }
-            borderColor={ borderColor }
+              {
+                label: __( '背景色', THEME_NAME ),
+                onChange: setBackgroundColor,
+                value: backgroundColor.color,
+              },
+              {
+                label: __( '文字色', THEME_NAME ),
+                onChange: setTextColor,
+                value: textColor.color,
+              },
+            ]}
           />
-          </PanelColorSettings>
-
+          {/*
+          <PanelBody title={ __( '文字サイズ', THEME_NAME ) } className="blocks-font-size">
+            <FontSizePicker
+              fallbackFontSize={ fallbackFontSize }
+              value={ fontSize.size }
+              onChange={ setFontSize }
+            />
+          </PanelBody>
+          */}
         </InspectorControls>
-        <div
-          className={ getClasses(icon, iconColor, borderColor) }
-          //style={ borderColorStyles }
-        >
+
+        <div className={
+          classnames(className, {
+            'iconlist-box': true,
+            'blank-box': true,
+            [ icon ]: !! icon,
+            'block-box': true,
+            'has-text-color': textColor.color,
+            'has-background': backgroundColor.color,
+            'has-border-color': borderColor.color,
+            'has-icon-color': iconColor.color,
+            [backgroundColor.class]: backgroundColor.class,
+            [textColor.class]: textColor.class,
+            [borderColor.class]: borderColor.class,
+            [iconColor.class]: iconColor.class,
+            [fontSize.class]: fontSize.class,
+          })
+         }>
           <div className="iconlist-title">
             <RichText
                 value={ title }
@@ -133,15 +198,107 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
           allowedBlocks={ ALLOWED_BLOCKS }
            />
         </div>
+
       </Fragment>
     );
+  }
+}
+
+registerBlockType( 'cocoon-blocks/iconlist-box', {
+
+  title: __( 'アイコンリスト', THEME_NAME ),
+  icon: <FontAwesomeIcon icon={['far', 'list-alt']} />,
+  category: THEME_NAME + '-block',
+  description: __( 'リストポイントにアイコンを適用した非順序リストです。', THEME_NAME ),
+  keywords: [ 'icon', 'list', 'box' ],
+
+  attributes: {
+    title: {
+      type: 'string',
+      default: '',
+    },
+    icon: {
+      type: 'string',
+      default: 'list-caret-right',
+    },
+    backgroundColor: {
+      type: 'string',
+    },
+    customBackgroundColor: {
+      type: 'string',
+    },
+    textColor: {
+      type: 'string',
+    },
+    customTextColor: {
+      type: 'string',
+    },
+    borderColor: {
+      type: 'string',
+    },
+    customBorderColor: {
+      type: 'string',
+    },
+    iconColor: {
+      type: 'string',
+    },
+    customIconColor: {
+      type: 'string',
+    },
+    fontSize: {
+      type: 'string',
+    },
+    customFontSize: {
+      type: 'string',
+    },
   },
 
-  save( { attributes } ) {
-    const { title, icon, iconColor, borderColor } = attributes;
+  edit: compose([
+    withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color', iconColor: 'icon-color'}),
+    withFontSizes('fontSize'),
+    FallbackStyles,
+  ])(CocoonIconListBoxBlock),
+  save: props => {
+    const {
+      title,
+      icon,
+      backgroundColor,
+      customBackgroundColor,
+      textColor,
+      customTextColor,
+      borderColor,
+      customBorderColor,
+      iconColor,
+      customIconColor,
+      fontSize,
+      customFontSize,
+    } = props.attributes;
+
+    const backgroundClass = getColorClassName( 'background-color', backgroundColor );
+    const textClass = getColorClassName( 'color', textColor );
+    const borderClass = getColorClassName( 'border-color', borderColor );
+    const iconClass = getColorClassName( 'icon-color', iconColor );
+    const fontSizeClass = getFontSizeClass( fontSize );
+
+
+    const className = classnames( {
+      'iconlist-box': true,
+      'blank-box': true,
+      [ icon ]: !! icon,
+      'block-box': true,
+      'has-text-color': textColor || customTextColor,
+      'has-background': backgroundColor || customBackgroundColor,
+      'has-border-color': borderColor || customBorderColor,
+      'has-icon-color': iconColor || customIconColor,
+      [ textClass ]: textClass,
+      [ backgroundClass ]: backgroundClass,
+      [ borderClass ]: borderClass,
+      [ iconClass ]: iconClass,
+      [ fontSizeClass ]: fontSizeClass,
+    } );
 
     return (
-      <div className={ getClasses(icon, iconColor, borderColor) }>
+      <div className={ className }>
         <div className="iconlist-title">
           <RichText.Content
             value={ title }
@@ -150,5 +307,7 @@ registerBlockType( 'cocoon-blocks/iconlist-box', {
         <InnerBlocks.Content />
       </div>
     );
-  }
-} );
+  },
+
+  deprecated: deprecated,
+});
