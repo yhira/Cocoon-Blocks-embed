@@ -1035,6 +1035,10 @@ export const CODE_LANGUAGES = [
     label: __( '自動判別', THEME_NAME ),
   },
   {
+    value: 'nohighlight',
+    label: __( 'ハイライト表示しない', THEME_NAME ),
+  },
+  {
     value: 'plaintext',
     label: __( 'プレーンテキスト', THEME_NAME ),
   },
