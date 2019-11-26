@@ -131,6 +131,22 @@ export function getCurrentColorCode(colors, slug){
   return color;
 }
 
+//HTMLエスケープ
+export function htmlEscape(str) {
+  if (!str) return;
+  return str.replace(/[<>&"'`]/g, function(match) {
+    const escape = {
+      '<': '&lt;',
+      '>': '&gt;',
+      '&': '&amp;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '`': '&#x60;'
+    };
+    return escape[match];
+  });
+}
+
 //色からスラッグを取得
 export function colorValueToSlug(color){
   switch (color) {
@@ -1012,5 +1028,632 @@ export function RankingToolbarButton( { name, shortcutType, shortcutCharacter, .
   );
 }
 
+
+export const CODE_LANGUAGES = [
+  {
+    value: 'auto',
+    label: __( '自動判別', THEME_NAME ),
+  },
+  {
+    value: 'plaintext',
+    label: __( 'プレーンテキスト', THEME_NAME ),
+  },
+  {
+    value: '1c',
+    label: __( '1C', THEME_NAME ),
+  },
+  {
+    value: 'abnf',
+    label: __( 'ABNF', THEME_NAME ),
+  },
+  {
+    value: 'accesslog',
+    label: __( 'Access logs', THEME_NAME ),
+  },
+  {
+    value: 'ada',
+    label: __( 'Ada', THEME_NAME ),
+  },
+  {
+    value: 'armasm',
+    label: __( 'ARM assembler', THEME_NAME ),
+  },
+  {
+    value: 'avrasm',
+    label: __( 'AVR assembler', THEME_NAME ),
+  },
+  {
+    value: 'actionscript',
+    label: __( 'ActionScript', THEME_NAME ),
+  },
+  {
+    value: 'apache',
+    label: __( 'Apache', THEME_NAME ),
+  },
+  {
+    value: 'applescript',
+    label: __( 'AppleScript', THEME_NAME ),
+  },
+  {
+    value: 'asciidoc',
+    label: __( 'AsciiDoc', THEME_NAME ),
+  },
+  {
+    value: 'aspectj',
+    label: __( 'AspectJ', THEME_NAME ),
+  },
+  {
+    value: 'autohotkey',
+    label: __( 'AutoHotkey', THEME_NAME ),
+  },
+  {
+    value: 'autoit',
+    label: __( 'AutoIt', THEME_NAME ),
+  },
+  {
+    value: 'awk',
+    label: __( 'Awk', THEME_NAME ),
+  },
+  {
+    value: 'axapta',
+    label: __( 'Axapta', THEME_NAME ),
+  },
+  {
+    value: 'bash',
+    label: __( 'Bash', THEME_NAME ),
+  },
+  {
+    value: 'basic',
+    label: __( 'Basic', THEME_NAME ),
+  },
+  {
+    value: 'bnf',
+    label: __( 'BNF', THEME_NAME ),
+  },
+  {
+    value: 'brainfuck',
+    label: __( 'Brainfuck', THEME_NAME ),
+  },
+  {
+    value: 'cs',
+    label: __( 'C#', THEME_NAME ),
+  },
+  {
+    value: 'cpp',
+    label: __( 'C++', THEME_NAME ),
+  },
+  {
+    value: 'cal',
+    label: __( 'C/AL', THEME_NAME ),
+  },
+  {
+    value: 'cos',
+    label: __( 'Cache Object Script', THEME_NAME ),
+  },
+  {
+    value: 'cmake',
+    label: __( 'CMake', THEME_NAME ),
+  },
+  {
+    value: 'coq',
+    label: __( 'Coq', THEME_NAME ),
+  },
+  {
+    value: 'csp',
+    label: __( 'CSP', THEME_NAME ),
+  },
+  {
+    value: 'css',
+    label: __( 'CSS', THEME_NAME ),
+  },
+  {
+    value: 'capnproto',
+    label: __( 'Cap’n Proto', THEME_NAME ),
+  },
+  {
+    value: 'clojure',
+    label: __( 'Clojure', THEME_NAME ),
+  },
+  {
+    value: 'coffeescript',
+    label: __( 'CoffeeScript', THEME_NAME ),
+  },
+  {
+    value: 'crmsh',
+    label: __( 'Crmsh', THEME_NAME ),
+  },
+  {
+    value: 'crystal',
+    label: __( 'Crystal', THEME_NAME ),
+  },
+  {
+    value: 'd',
+    label: __( 'D', THEME_NAME ),
+  },
+  {
+    value: 'dns',
+    label: __( 'DNS Zone file', THEME_NAME ),
+  },
+  {
+    value: 'dos',
+    label: __( 'DOS', THEME_NAME ),
+  },
+  {
+    value: 'dart',
+    label: __( 'Dart', THEME_NAME ),
+  },
+  {
+    value: 'delphi',
+    label: __( 'Delphi', THEME_NAME ),
+  },
+  {
+    value: 'diff',
+    label: __( 'Diff', THEME_NAME ),
+  },
+  {
+    value: 'django',
+    label: __( 'Django', THEME_NAME ),
+  },
+  {
+    value: 'dockerfile',
+    label: __( 'Dockerfile', THEME_NAME ),
+  },
+  {
+    value: 'dsconfig',
+    label: __( 'dsconfig', THEME_NAME ),
+  },
+  {
+    value: 'dts',
+    label: __( 'DTS (Device Tree)', THEME_NAME ),
+  },
+  {
+    value: 'dust',
+    label: __( 'Dust', THEME_NAME ),
+  },
+  {
+    value: 'ebnf',
+    label: __( 'EBNF', THEME_NAME ),
+  },
+  {
+    value: 'elixir',
+    label: __( 'Elixir', THEME_NAME ),
+  },
+  {
+    value: 'elm',
+    label: __( 'Elm', THEME_NAME ),
+  },
+  {
+    value: 'erlang',
+    label: __( 'Erlang', THEME_NAME ),
+  },
+  {
+    value: 'excel',
+    label: __( 'Excel', THEME_NAME ),
+  },
+  {
+    value: 'fsharp',
+    label: __( 'F#', THEME_NAME ),
+  },
+  {
+    value: 'fix',
+    label: __( 'FIX', THEME_NAME ),
+  },
+  {
+    value: 'fortran',
+    label: __( 'Fortran', THEME_NAME ),
+  },
+  {
+    value: 'gcode',
+    label: __( 'G-Code', THEME_NAME ),
+  },
+  {
+    value: 'gams',
+    label: __( 'Gams', THEME_NAME ),
+  },
+  {
+    value: 'gauss',
+    label: __( 'GAUSS', THEME_NAME ),
+  },
+  {
+    value: 'gherkin',
+    label: __( 'Gherkin', THEME_NAME ),
+  },
+  {
+    value: 'go',
+    label: __( 'Go', THEME_NAME ),
+  },
+  {
+    value: 'golo',
+    label: __( 'Golo', THEME_NAME ),
+  },
+  {
+    value: 'gradle',
+    label: __( 'Gradle', THEME_NAME ),
+  },
+  {
+    value: 'groovy',
+    label: __( 'Groovy', THEME_NAME ),
+  },
+  {
+    value: 'html',
+    label: __( 'HTML', THEME_NAME ),
+  },
+  {
+    value: 'http',
+    label: __( 'HTTP', THEME_NAME ),
+  },
+  {
+    value: 'haml',
+    label: __( 'Haml', THEME_NAME ),
+  },
+  {
+    value: 'handlebars',
+    label: __( 'Handlebars', THEME_NAME ),
+  },
+  {
+    value: 'haskell',
+    label: __( 'Haskell', THEME_NAME ),
+  },
+  {
+    value: 'haxe',
+    label: __( 'Haxe', THEME_NAME ),
+  },
+  {
+    value: 'hy',
+    label: __( 'Hy', THEME_NAME ),
+  },
+  {
+    value: 'ini',
+    label: __( 'Ini', THEME_NAME ),
+  },
+  {
+    value: 'inform7',
+    label: __( 'Inform7', THEME_NAME ),
+  },
+  {
+    value: 'irpf90',
+    label: __( 'IRPF90', THEME_NAME ),
+  },
+  {
+    value: 'json',
+    label: __( 'JSON', THEME_NAME ),
+  },
+  {
+    value: 'java',
+    label: __( 'Java', THEME_NAME ),
+  },
+  {
+    value: 'javascript',
+    label: __( 'JavaScript', THEME_NAME ),
+  },
+  {
+    value: 'leaf',
+    label: __( 'Leaf', THEME_NAME ),
+  },
+  {
+    value: 'lasso',
+    label: __( 'Lasso', THEME_NAME ),
+  },
+  {
+    value: 'less',
+    label: __( 'Less', THEME_NAME ),
+  },
+  {
+    value: 'ldif',
+    label: __( 'LDIF', THEME_NAME ),
+  },
+  {
+    value: 'lisp',
+    label: __( 'Lisp', THEME_NAME ),
+  },
+  {
+    value: 'livecodeserver',
+    label: __( 'LiveCode Server', THEME_NAME ),
+  },
+  {
+    value: 'livescript',
+    label: __( 'LiveScript', THEME_NAME ),
+  },
+  {
+    value: 'lua',
+    label: __( 'Lua', THEME_NAME ),
+  },
+  {
+    value: 'makefile',
+    label: __( 'Makefile', THEME_NAME ),
+  },
+  {
+    value: 'markdown',
+    label: __( 'Markdown', THEME_NAME ),
+  },
+  {
+    value: 'mathematica',
+    label: __( 'Mathematica', THEME_NAME ),
+  },
+  {
+    value: 'matlab',
+    label: __( 'Matlab', THEME_NAME ),
+  },
+  {
+    value: 'maxima',
+    label: __( 'Maxima', THEME_NAME ),
+  },
+  {
+    value: 'mel',
+    label: __( 'Maya Embedded Language', THEME_NAME ),
+  },
+  {
+    value: 'mercury',
+    label: __( 'Mercury', THEME_NAME ),
+  },
+  {
+    value: 'mizar',
+    label: __( 'Mizar', THEME_NAME ),
+  },
+  {
+    value: 'mojolicious',
+    label: __( 'Mojolicious', THEME_NAME ),
+  },
+  {
+    value: 'monkey',
+    label: __( 'Monkey', THEME_NAME ),
+  },
+  {
+    value: 'moonscript',
+    label: __( 'Moonscript', THEME_NAME ),
+  },
+  {
+    value: 'n1ql',
+    label: __( 'N1QL', THEME_NAME ),
+  },
+  {
+    value: 'nsis',
+    label: __( 'NSIS', THEME_NAME ),
+  },
+  {
+    value: 'nginx',
+    label: __( 'Nginx', THEME_NAME ),
+  },
+  {
+    value: 'nimrod',
+    label: __( 'Nimrod', THEME_NAME ),
+  },
+  {
+    value: 'nix',
+    label: __( 'Nix', THEME_NAME ),
+  },
+  {
+    value: 'ocaml',
+    label: __( 'OCaml', THEME_NAME ),
+  },
+  {
+    value: 'objectivec',
+    label: __( 'Objective C', THEME_NAME ),
+  },
+  {
+    value: 'glsl',
+    label: __( 'OpenGL Shading Language', THEME_NAME ),
+  },
+  {
+    value: 'openscad',
+    label: __( 'OpenSCAD', THEME_NAME ),
+  },
+  {
+    value: 'ruleslanguage',
+    label: __( 'Oracle Rules Language', THEME_NAME ),
+  },
+  {
+    value: 'oxygene',
+    label: __( 'Oxygene', THEME_NAME ),
+  },
+  {
+    value: 'pf',
+    label: __( 'PF', THEME_NAME ),
+  },
+  {
+    value: 'php',
+    label: __( 'PHP', THEME_NAME ),
+  },
+  {
+    value: 'parser3',
+    label: __( 'Parser3', THEME_NAME ),
+  },
+  {
+    value: 'perl',
+    label: __( 'Perl', THEME_NAME ),
+  },
+  {
+    value: 'pony',
+    label: __( 'Pony', THEME_NAME ),
+  },
+  {
+    value: 'powershell',
+    label: __( 'PowerShell', THEME_NAME ),
+  },
+  {
+    value: 'processing',
+    label: __( 'Processing', THEME_NAME ),
+  },
+  {
+    value: 'prolog',
+    label: __( 'Prolog', THEME_NAME ),
+  },
+  {
+    value: 'protobuf',
+    label: __( 'Protocol Buffers', THEME_NAME ),
+  },
+  {
+    value: 'puppet',
+    label: __( 'Puppet', THEME_NAME ),
+  },
+  {
+    value: 'python',
+    label: __( 'Python', THEME_NAME ),
+  },
+  {
+    value: 'profile',
+    label: __( 'Python profiler results', THEME_NAME ),
+  },
+  {
+    value: 'k',
+    label: __( 'Q', THEME_NAME ),
+  },
+  {
+    value: 'qml',
+    label: __( 'QML', THEME_NAME ),
+  },
+  {
+    value: 'r',
+    label: __( 'R', THEME_NAME ),
+  },
+  {
+    value: 'rib',
+    label: __( 'RenderMan RIB', THEME_NAME ),
+  },
+  {
+    value: 'rsl',
+    label: __( 'RenderMan RSL', THEME_NAME ),
+  },
+  {
+    value: 'graph',
+    label: __( 'Roboconf', THEME_NAME ),
+  },
+  {
+    value: 'ruby',
+    label: __( 'Ruby', THEME_NAME ),
+  },
+  {
+    value: 'rust',
+    label: __( 'Rust', THEME_NAME ),
+  },
+  {
+    value: 'scss',
+    label: __( 'SCSS', THEME_NAME ),
+  },
+  {
+    value: 'sql',
+    label: __( 'SQL', THEME_NAME ),
+  },
+  {
+    value: 'p21',
+    label: __( 'STEP Part 21', THEME_NAME ),
+  },
+  {
+    value: 'scala',
+    label: __( 'Scala', THEME_NAME ),
+  },
+  {
+    value: 'scheme',
+    label: __( 'Scheme', THEME_NAME ),
+  },
+  {
+    value: 'scilab',
+    label: __( 'Scilab', THEME_NAME ),
+  },
+  {
+    value: 'shell',
+    label: __( 'Shell', THEME_NAME ),
+  },
+  {
+    value: 'smali',
+    label: __( 'Smali', THEME_NAME ),
+  },
+  {
+    value: 'smalltalk',
+    label: __( 'Smalltalk', THEME_NAME ),
+  },
+  {
+    value: 'stan',
+    label: __( 'Stan', THEME_NAME ),
+  },
+  {
+    value: 'stata',
+    label: __( 'Stata', THEME_NAME ),
+  },
+  {
+    value: 'stylus',
+    label: __( 'Stylus', THEME_NAME ),
+  },
+  {
+    value: 'subunit',
+    label: __( 'SubUnit', THEME_NAME ),
+  },
+  {
+    value: 'swift',
+    label: __( 'Swift', THEME_NAME ),
+  },
+  {
+    value: 'tap',
+    label: __( 'Test Anything Protocol', THEME_NAME ),
+  },
+  {
+    value: 'tcl',
+    label: __( 'Tcl', THEME_NAME ),
+  },
+  {
+    value: 'tex',
+    label: __( 'TeX', THEME_NAME ),
+  },
+  {
+    value: 'thrift',
+    label: __( 'Thrift', THEME_NAME ),
+  },
+  {
+    value: 'tp',
+    label: __( 'TP', THEME_NAME ),
+  },
+  {
+    value: 'twig',
+    label: __( 'Twig', THEME_NAME ),
+  },
+  {
+    value: 'typescript',
+    label: __( 'TypeScript', THEME_NAME ),
+  },
+  {
+    value: 'vbnet',
+    label: __( 'VB.Net', THEME_NAME ),
+  },
+  {
+    value: 'vbscript',
+    label: __( 'VBScript', THEME_NAME ),
+  },
+  {
+    value: 'vhdl',
+    label: __( 'VHDL', THEME_NAME ),
+  },
+  {
+    value: 'vala',
+    label: __( 'Vala', THEME_NAME ),
+  },
+  {
+    value: 'verilog',
+    label: __( 'Verilog', THEME_NAME ),
+  },
+  {
+    value: 'vim',
+    label: __( 'Vim Script', THEME_NAME ),
+  },
+  {
+    value: 'x86asm',
+    label: __( 'x86 Assembly', THEME_NAME ),
+  },
+  {
+    value: 'xl',
+    label: __( 'XL', THEME_NAME ),
+  },
+  {
+    value: 'xml',
+    label: __( 'XML', THEME_NAME ),
+  },
+  {
+    value: 'xpath',
+    label: __( 'XQuery', THEME_NAME ),
+  },
+  {
+    value: 'zephir',
+    label: __( 'Zephir', THEME_NAME ),
+  },
+];
 
 

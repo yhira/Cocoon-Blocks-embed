@@ -20,6 +20,7 @@ import './block/toggle-box/block.js';
 import './block/search-box/block.js';
 import './block/timeline/block.js';
 import './block/icon-list/block.js';
+import './block/code-box/block.js';
 // import './block/hoc-color-palette-demo/block.js';
 
 //汎用ブロック
@@ -75,7 +76,7 @@ import './toolbutton/green.js';
 import './toolbutton/bold-green.js';
 import './toolbutton/keyboard-key.js';
 import './toolbutton/ruby.js';
-// import './toolbutton/html.js';
+//import './toolbutton/html.js';
 
 //マーカー
 import './toolbutton/marker-yellow.js';

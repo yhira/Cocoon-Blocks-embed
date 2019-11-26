@@ -23,6 +23,7 @@ registerFormatType( 'cocoon-blocks/html', {
       let html = '';
       html = window.prompt( __( 'HTMLを入力してください。', THEME_NAME ) ) || value.text.substr( value.start, value.end -value.start );
       value = insert( value, html, value.start, value.end );
+      //console.log(value);
       return onChange( value );
     };
 
