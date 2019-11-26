@@ -1031,7 +1031,7 @@ export function RankingToolbarButton( { name, shortcutType, shortcutCharacter, .
 
 export const CODE_LANGUAGES = [
   {
-    value: 'auto',
+    value: '',
     label: __( '自動判別', THEME_NAME ),
   },
   {

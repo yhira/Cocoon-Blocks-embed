@@ -145,6 +145,7 @@ class CocoonCodeBlock extends Component {
               'code-box': true,
               'block-box': true,
               [ language ]: !! language,
+              'auto': ! language,
               'has-text-color': textColor.color,
               'has-background': backgroundColor.color,
               'has-border-color': borderColor.color,
@@ -190,7 +191,6 @@ registerBlockType( 'cocoon-blocks/code-box', {
     },
     language: {
       type: 'string',
-      default: 'auto',
     },
     backgroundColor: {
       type: 'string',
@@ -247,6 +247,7 @@ registerBlockType( 'cocoon-blocks/code-box', {
       'code-box': true,
       'block-box': true,
        [ language ]: !! language,
+      'auto': ! language,
       'has-text-color': textColor || customTextColor,
       'has-background': backgroundColor || customBackgroundColor,
       'has-border-color': borderColor || customBorderColor,
