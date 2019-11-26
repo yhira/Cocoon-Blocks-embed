@@ -96,6 +96,7 @@ class CocoonCodeBlock extends Component {
 
     return (
       <Fragment>
+        {/*
         <InspectorControls>
           <PanelColorSettings
             title={ __( '色設定（無ハイライト用）', THEME_NAME ) }
@@ -117,7 +118,6 @@ class CocoonCodeBlock extends Component {
               },
             ]}
           />
-          {/*
           <PanelBody title={ __( '文字サイズ', THEME_NAME ) } className="blocks-font-size">
             <FontSizePicker
               fallbackFontSize={ fallbackFontSize }
@@ -125,8 +125,8 @@ class CocoonCodeBlock extends Component {
               onChange={ setFontSize }
             />
           </PanelBody>
-          */}
         </InspectorControls>
+        */}
 
         <SelectControl
           label={ __( '言語', THEME_NAME ) }
