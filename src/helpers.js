@@ -210,7 +210,13 @@ export function colorValueToSlug(color){
     case '#333333':
       return 'black';
       break;
+    case '#333':
+      return 'black';
+      break;
     case '#ffffff':
+      return 'white';
+      break;
+    case '#fff':
       return 'white';
       break;
     default:
