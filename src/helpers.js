@@ -147,16 +147,14 @@ export function htmlEscape(str) {
   });
 }
 
-//コードブロックエスケープ
-export function codeBlockEscape(str) {
-  //HTMLエスケープ
-  str = htmlEscape(str);
-  //ショートコードエスケープ
-  str = str.replace(/\[[^<>&\/\[\]\x00-\x20=]+.*?\]/g, '[$&]');
-  // //URLをタグで囲む
-  // str = str.replace(/(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<span>$&</span>');
-  return str;
-}
+// //コードブロックエスケープ
+// export function codeBlockEscape(str) {
+//   //HTMLエスケープ
+//   str = htmlEscape(str);
+//   //ショートコードエスケープ
+//   str = str.replace(/\[[^<>&\/\[\]\x00-\x20=]+.*?\]/g, '[$&]');
+//   return str;
+// }
 
 //色からスラッグを取得
 export function colorValueToSlug(color){
