@@ -5,7 +5,7 @@
  * @license: http://www.gnu.org/licenses/gpl-2.0.html GPL v2 or later
  */
 
-import { THEME_NAME, CLICK_POINT_MSG, fullFallbackStyles, htmlEscape, CODE_LANGUAGES } from '../../helpers';
+import { THEME_NAME, CLICK_POINT_MSG, fullFallbackStyles, codeBlockEscape, CODE_LANGUAGES } from '../../helpers';
 import { deprecated } from './deprecated';
 import { transforms } from './transforms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -261,7 +261,7 @@ registerBlockType( 'cocoon-blocks/code-box', {
       <RichText.Content
         tagName="pre"
         className={ className }
-        value={ htmlEscape(content) }
+        value={ codeBlockEscape(content) }
         aria-label={ getCssToLabelName(language) }
       />
     );
