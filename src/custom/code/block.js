@@ -30,14 +30,14 @@ const isValidBlockType = ( name ) => {
 };
 
 export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
-  let selectOption = '';
+  let languageValue = '';
 
   return ( props ) => {
     // isValidBlockType で指定したブロックが選択されたら表示
     if ( isValidBlockType( props.name ) && props.isSelected ) {
       // すでにオプション選択されていたら
       if (props.attributes.language) {
-        selectOption = props.attributes.language;
+        languageValue = props.attributes.language;
       }
       return (
         <Fragment>
@@ -45,10 +45,9 @@ export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
           <InspectorControls>
             <PanelBody title={ __( '言語設定', THEME_NAME ) } initialOpen={ false } className="language-controle">
               <SelectControl
-                selected={ selectOption }
+                value={ languageValue }
                 options={ CODE_LANGUAGES }
-                onChange={ ( changeOption ) => {
-                  let newClassName = changeOption;
+                onChange={ ( value ) => {                  let newClassName = value;
                   // 高度な設定で入力している場合は追加する
                   if (props.attributes.className) {
                     // 付与されているclassを取り出す
@@ -57,18 +56,18 @@ export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
                     inputClassName = inputClassName.split(' ');
                     // 選択されていたオプションの値を削除
                     let filterClassName = inputClassName.filter(function(name) {
-                      return name !== selectOption;
+                      return name !== languageValue;
                     });
                     // 新しく選択したオプションを追加
-                    filterClassName.push(changeOption);
+                    filterClassName.push(value);
                     // 配列を文字列に
                     newClassName = filterClassName.join(' ');
                   }
 
-                  selectOption = changeOption;
+                  languageValue = value;
                   props.setAttributes({
                     className: newClassName,
-                    language: changeOption
+                    language: value
                   });
                 } }
               />
@@ -79,7 +78,7 @@ export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
     }
     return <BlockEdit { ...props } />;
   };
-}, 'addMyCustomBlockControls' );
+}, 'addCustomCodeBlockControls' );
 addFilter( 'editor.BlockEdit', 'cocoon-blocks/code-control', addBlockControl );
 
 export function addAttribute( settings ) {
@@ -96,6 +95,7 @@ addFilter( 'blocks.registerBlockType', 'cocoon-blocks/code-add-attr', addAttribu
 
 export function addSaveProps( extraProps, blockType, attributes ) {
   if ( isValidBlockType( blockType.name ) ) {
+    //console.log(attributes);
     // なしを選択した場合はlanguage削除
     if (attributes.language === '') {
       delete attributes.language;
