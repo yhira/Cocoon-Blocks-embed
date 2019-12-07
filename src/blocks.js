@@ -20,6 +20,7 @@ import './block/toggle-box/block.js';
 import './block/search-box/block.js';
 import './block/timeline/block.js';
 import './block/icon-list/block.js';
+import './custom/code/block.js';
 //import './block/code-box/block.js';
 // import './block/hoc-color-palette-demo/block.js';
 
